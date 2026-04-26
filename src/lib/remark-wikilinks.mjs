@@ -1,0 +1,122 @@
+import { existsSync, readdirSync } from 'node:fs';
+import { extname, join, relative, sep } from 'node:path';
+
+const CONTENT_ROOT = join(process.cwd(), 'src', 'content');
+const SECTIONS = ['memo', 'articles', 'self-practice'];
+const WIKILINK_PATTERN = /\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g;
+
+function withoutExtension(path) {
+  return path.slice(0, -extname(path).length);
+}
+
+function routeFor(section, filePath) {
+  const slug = withoutExtension(relative(join(CONTENT_ROOT, section), filePath))
+    .split(sep)
+    .join('/');
+
+  return `/${section}/${slug.replace(/\/index$/, '')}/`;
+}
+
+function walkMarkdownFiles(dir) {
+  if (!existsSync(dir)) return [];
+
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return walkMarkdownFiles(path);
+    if (entry.isFile() && ['.md', '.mdx'].includes(extname(entry.name))) return [path];
+    return [];
+  });
+}
+
+function addAlias(index, key, href) {
+  const normalizedKey = key.replace(/\\/g, '/').replace(/^\//, '').replace(/\.(md|mdx)$/i, '');
+  if (!normalizedKey) return;
+
+  const existing = index.get(normalizedKey);
+  if (!existing) {
+    index.set(normalizedKey, href);
+    return;
+  }
+
+  if (existing !== href) index.set(normalizedKey, null);
+}
+
+function buildWikiLinkIndex() {
+  const index = new Map();
+
+  for (const section of SECTIONS) {
+    for (const filePath of walkMarkdownFiles(join(CONTENT_ROOT, section))) {
+      const slug = withoutExtension(relative(join(CONTENT_ROOT, section), filePath))
+        .split(sep)
+        .join('/');
+      const href = routeFor(section, filePath);
+      const basename = slug.split('/').at(-1);
+
+      addAlias(index, `${section}/${slug}`, href);
+      addAlias(index, slug, href);
+      addAlias(index, basename, href);
+    }
+  }
+
+  return index;
+}
+
+function wikiLinkNodes(value, index) {
+  const nodes = [];
+  let lastIndex = 0;
+
+  for (const match of value.matchAll(WIKILINK_PATTERN)) {
+    const [raw, target, label] = match;
+    const matchIndex = match.index ?? 0;
+    const href = index.get(target.trim().replace(/\\/g, '/'));
+
+    if (!href) continue;
+
+    if (matchIndex > lastIndex) {
+      nodes.push({ type: 'text', value: value.slice(lastIndex, matchIndex) });
+    }
+
+    nodes.push({
+      type: 'link',
+      url: href,
+      title: null,
+      children: [{ type: 'text', value: (label ?? target).trim() }],
+    });
+
+    lastIndex = matchIndex + raw.length;
+  }
+
+  if (nodes.length === 0) return null;
+  if (lastIndex < value.length) nodes.push({ type: 'text', value: value.slice(lastIndex) });
+
+  return nodes;
+}
+
+function visit(node, index) {
+  if (!node || !Array.isArray(node.children)) return;
+
+  for (let i = 0; i < node.children.length; i += 1) {
+    const child = node.children[i];
+
+    if (child.type === 'text') {
+      const replacement = wikiLinkNodes(child.value, index);
+      if (replacement) {
+        node.children.splice(i, 1, ...replacement);
+        i += replacement.length - 1;
+      }
+      continue;
+    }
+
+    if (!['link', 'linkReference', 'definition'].includes(child.type)) {
+      visit(child, index);
+    }
+  }
+}
+
+export default function remarkWikiLinks() {
+  const index = buildWikiLinkIndex();
+
+  return (tree) => {
+    visit(tree, index);
+  };
+}
