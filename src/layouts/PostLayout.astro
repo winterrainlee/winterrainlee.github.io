@@ -5,7 +5,7 @@ import BaseLayout from './BaseLayout.astro';
 import { formatDate } from '../lib/content';
 
 interface Props {
-  post: CollectionEntry<'articles'> | CollectionEntry<'bookshelf'> | CollectionEntry<'thoughts'> | CollectionEntry<'talks'>;
+  post: CollectionEntry<'memo'> | CollectionEntry<'articles'>;
 }
 
 const { post } = Astro.props;
@@ -13,7 +13,7 @@ const { Content } = await render(post);
 const description = post.data.description ?? post.data.title;
 ---
 
-<BaseLayout title={`${post.data.title} | winterrainlee`} description={description}>
+<BaseLayout title={`${post.data.title} | 겨울비`} description={description}>
   <article>
     <header class="mb-9">
       <p class="mb-3 text-sm text-[var(--muted)]">{formatDate(post.data.date)}</p>

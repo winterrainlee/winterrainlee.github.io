@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = 'winterrainlee | blog',
-  description = 'blog',
+  title = '겨울비 | blog',
+  description = '끄적이는 것을 좋아하는 개인의 단상과 정리된 생각',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -24,7 +24,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="robots" content="index,follow" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="winterrainlee" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="겨울비" href="/feed.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=Source+Code+Pro&display=swap" />
@@ -32,7 +32,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="winterrainlee" />
+    <meta property="og:site_name" content="겨울비" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
   </head>
@@ -45,6 +45,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <a href="/feed.xml" class="no-underline">RSS</a>
       <span class="mx-2">/</span>
       <a href="https://github.com/winterrainlee" class="no-underline">GitHub</a>
+      <span class="mx-2">/</span>
+      <a href="https://twitter.com/winterrain_lee" class="no-underline">Twitter</a>
     </footer>
     <SearchModal />
   </body>

@@ -1,19 +1,15 @@
 import { getCollection } from 'astro:content';
 
-export type Section = 'articles' | 'bookshelf' | 'thoughts' | 'talks';
+export type Section = 'memo' | 'articles';
 
 export const sectionLabels: Record<Section, string> = {
+  memo: 'Memo',
   articles: 'Articles',
-  bookshelf: 'Bookshelf',
-  thoughts: 'Thoughts',
-  talks: 'Talks',
 };
 
 export const sectionPaths: Record<Section, string> = {
+  memo: '/memo/',
   articles: '/articles/',
-  bookshelf: '/bookshelf/',
-  thoughts: '/thought/',
-  talks: '/talks/',
 };
 
 export async function getPublished(section: Section) {
@@ -41,7 +37,7 @@ export function formatDate(date: Date) {
 }
 
 export function postPath(section: Section, slug: string) {
-  return section === 'thoughts' ? `/posts/${slug}/` : `/posts/${slug}/`;
+  return `/${section}/${slug}/`;
 }
 
 export function entrySlug(post: { id?: string; slug?: string }) {

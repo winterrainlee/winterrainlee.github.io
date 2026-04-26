@@ -5,8 +5,8 @@ export async function GET(context) {
   const posts = await getAllPublished();
 
   return rss({
-    title: 'winterrainlee',
-    description: 'blog',
+    title: '겨울비',
+    description: '끄적이는 것을 좋아하는 개인의 단상과 정리된 생각',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,

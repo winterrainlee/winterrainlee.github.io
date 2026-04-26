@@ -6,7 +6,8 @@ import { getPublished } from '../../lib/content';
 const posts = await getPublished('articles');
 ---
 
-<BaseLayout title="Articles | winterrainlee" description="Long-form writing">
+<BaseLayout title="Articles | 겨울비" description="생각을 정리해서 쓴 글">
   <h1 class="serif mb-6 text-4xl">Articles</h1>
+  <p class="mb-8 text-[var(--muted)]">생각을 조금 더 오래 붙잡아 정리해서 쓴 글입니다.</p>
   <PostList posts={posts} section="articles" />
 </BaseLayout>

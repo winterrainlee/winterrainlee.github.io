@@ -19,20 +19,7 @@ const writing = (base: string) =>
     schema: writingSchema,
   });
 
-const timeline = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/timeline' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    description: z.string().optional(),
-    link: z.string().url().optional(),
-  }),
-});
-
 export const collections = {
   articles: writing('./src/content/articles'),
-  bookshelf: writing('./src/content/bookshelf'),
-  thoughts: writing('./src/content/thoughts'),
-  talks: writing('./src/content/talks'),
-  timeline,
+  memo: writing('./src/content/memo'),
 };

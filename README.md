@@ -2,6 +2,11 @@
 
 Astro 기반 개인 블로그입니다. GitHub Pages 메인 저장소(`winterrainlee.github.io`)에 배포하도록 구성되어 있습니다.
 
+카테고리는 두 가지입니다.
+
+- `memo`: 짧게 남긴 단상
+- `articles`: 생각을 정리해서 쓴 글
+
 ## 개발
 
 ```bash
