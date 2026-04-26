@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { entrySlug } from '../../lib/content';
+
+type PracticePost = CollectionEntry<'self-practice'>;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('self-practice', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: entrySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: PracticePost };
+---
+
+<PostLayout post={post} />

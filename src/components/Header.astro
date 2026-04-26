@@ -1,8 +1,7 @@
 ---
-const nav = [
-  { href: '/memo/', label: 'Memo' },
-  { href: '/articles/', label: 'Articles' },
-  { href: '/about/', label: '소개' },
+const postItems = [
+  { href: '/articles/', label: 'Article' },
+  { href: '/self-practice/', label: 'Self-Practice' },
 ];
 ---
 
@@ -11,8 +10,21 @@ const nav = [
     <a href="/" class="serif text-[2rem] font-bold leading-none no-underline">겨울비</a>
     <span class="ml-1 text-sm text-[var(--muted)]">blog</span>
     <nav class="mt-3 flex items-center justify-between gap-4">
-      <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        {nav.map((item) => <a href={item.href} class="no-underline">{item.label}</a>)}
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <a href="/timeline/" class="no-underline">Timeline</a>
+        <a href="/memo/" class="no-underline">Memo</a>
+        <div class="nav-dropdown" id="post-dropdown">
+          <button class="nav-dropdown-trigger" id="post-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Post
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            {postItems.map((item) => <a href={item.href} class="nav-dropdown-item">{item.label}</a>)}
+          </div>
+        </div>
+        <a href="/about/" class="no-underline">소개</a>
       </div>
       <button id="search-open" class="grid h-8 w-8 shrink-0 place-items-center rounded border border-[var(--line)] bg-white/60 text-[var(--ink)]" aria-label="Search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -23,3 +35,20 @@ const nav = [
     </nav>
   </div>
 </header>
+
+<script>
+  const dropdown = document.getElementById('post-dropdown');
+  const trigger = document.getElementById('post-dropdown-trigger');
+
+  trigger?.addEventListener('click', () => {
+    const isOpen = dropdown?.classList.toggle('open') ?? false;
+    trigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!dropdown?.contains(event.target as Node)) {
+      dropdown?.classList.remove('open');
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

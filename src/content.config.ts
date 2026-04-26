@@ -22,4 +22,5 @@ const writing = (base: string) =>
 export const collections = {
   articles: writing('./src/content/articles'),
   memo: writing('./src/content/memo'),
+  'self-practice': writing('./src/content/self-practice'),
 };

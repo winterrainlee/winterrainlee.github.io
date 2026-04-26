@@ -5,7 +5,7 @@ import BaseLayout from './BaseLayout.astro';
 import { formatDate } from '../lib/content';
 
 interface Props {
-  post: CollectionEntry<'memo'> | CollectionEntry<'articles'>;
+  post: CollectionEntry<'memo'> | CollectionEntry<'articles'> | CollectionEntry<'self-practice'>;
 }
 
 const { post } = Astro.props;

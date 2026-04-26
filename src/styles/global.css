@@ -164,3 +164,69 @@ img {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.45rem);
+  z-index: 45;
+  display: none;
+  min-width: 9.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.98);
+  box-shadow: 0 14px 40px rgba(37, 37, 37, 0.12);
+  padding: 0.35rem;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+  display: grid;
+}
+
+.nav-dropdown-item {
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-dropdown-item:hover {
+  background: var(--soft);
+}
+
+.timeline-rail {
+  position: relative;
+}
+
+.timeline-rail::before {
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0;
+  left: 7.25rem;
+  width: 1px;
+  background: var(--line);
+  content: "";
+}
+
+@media (max-width: 640px) {
+  .timeline-rail::before {
+    left: 0.35rem;
+  }
+}
