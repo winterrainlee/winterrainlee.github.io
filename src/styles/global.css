@@ -95,6 +95,29 @@ img {
   color: inherit;
 }
 
+.prose dl {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1.4em 0;
+  font-family: "PT Sans", system-ui, sans-serif;
+  font-size: 0.98rem;
+}
+
+.prose dl > div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.prose dt {
+  color: var(--muted);
+}
+
+.prose dd {
+  margin: 0;
+}
+
 .search-modal {
   position: fixed;
   inset: 0;
