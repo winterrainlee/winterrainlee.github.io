@@ -295,6 +295,169 @@ npm run build
 
 이 과정에서 `dist/pagefind/` 검색 인덱스가 다시 생성된다. 별도의 검색 서버는 없다.
 
+## 추천 앱과 작업 환경
+
+이 블로그는 VS Code만으로도 충분히 관리할 수 있다. 다만 글쓰기, Git 관리, 평소 메모를 나누어 생각하면 다음 조합이 가장 편하다.
+
+```text
+VS Code: 글 작성, 파일 관리, Markdown 미리보기, 로컬 서버 실행
+GitHub Desktop: 변경 사항 확인, commit, push
+Obsidian: 초안, 단상, 블로그 글 작성
+```
+
+### VS Code로 관리하기
+
+VS Code에서는 이 폴더를 열면 된다.
+
+```text
+/Users/kioku/Documents/Blog
+```
+
+Markdown 미리보기:
+
+```text
+Cmd + Shift + V
+```
+
+편집 화면 옆에 미리보기:
+
+```text
+Cmd + K, V
+```
+
+개발 서버 실행:
+
+```bash
+npm run dev
+```
+
+VS Code의 Source Control 탭에서도 변경 파일 확인, stage, commit이 가능하다. 터미널에 익숙하지 않다면 GitHub Desktop을 같이 쓰는 편이 더 편하다.
+
+### GitHub Desktop으로 배포하기
+
+GitHub Desktop은 Git 명령어를 외우지 않고도 변경 사항을 보고 commit/push할 수 있는 앱이다.
+
+추천 흐름:
+
+1. VS Code나 Obsidian에서 글을 쓴다.
+2. GitHub Desktop을 연다.
+3. 바뀐 파일을 확인한다.
+4. commit 메시지를 쓴다.
+5. `Commit to main`을 누른다.
+6. `Push origin`을 누른다.
+
+GitHub Desktop은 “발행 버튼”처럼 생각하면 된다.
+
+### Obsidian으로 관리하기
+
+기존 개인 Obsidian vault와 블로그 글을 섞지 않는 편이 좋다. 이 블로그 폴더 자체를 별도 vault로 추가하는 방식을 추천한다.
+
+블로그 vault 경로:
+
+```text
+/Users/kioku/Documents/Blog
+```
+
+Obsidian에서 추가하는 방법:
+
+1. Obsidian을 연다.
+2. 현재 vault 이름을 누른다.
+3. `Manage vaults...` 또는 `Open another vault`를 선택한다.
+4. `Open folder as vault`를 누른다.
+5. `/Users/kioku/Documents/Blog` 폴더를 선택한다.
+
+이렇게 하면 기존 개인 vault는 사적인 생각 창고로 두고, Blog vault는 공개 글 작업실로 쓸 수 있다.
+
+Obsidian에서 새 글을 만들 때도 위치가 중요하다.
+
+```text
+src/content/memo/
+src/content/articles/
+src/content/self-practice/
+```
+
+아무 폴더에 만든 노트는 블로그에 올라가지 않는다. 반드시 `src/content/...` 아래에 있어야 한다.
+
+## 카테고리 추가하기
+
+나중에 새 카테고리를 추가하려면 “콘텐츠 폴더 + Astro 컬렉션 + 페이지 + 네비게이션”을 함께 추가해야 한다.
+
+예를 들어 `reading` 카테고리를 추가한다고 하면 다음 순서로 진행한다.
+
+### 1. 폴더 만들기
+
+```text
+src/content/reading/
+src/pages/reading/
+```
+
+### 2. 컬렉션 등록하기
+
+`src/content.config.ts`에 추가한다.
+
+```ts
+export const collections = {
+  articles: writing('./src/content/articles'),
+  memo: writing('./src/content/memo'),
+  'self-practice': writing('./src/content/self-practice'),
+  reading: writing('./src/content/reading'),
+};
+```
+
+### 3. 카테고리 정보 등록하기
+
+`src/lib/content.ts`의 `Section`, `sectionLabels`, `sectionPaths`에 추가한다.
+
+```ts
+export type Section = 'memo' | 'articles' | 'self-practice' | 'reading';
+
+export const sectionLabels: Record<Section, string> = {
+  memo: 'Memo',
+  articles: 'Article',
+  'self-practice': 'Self-Practice',
+  reading: 'Reading',
+};
+
+export const sectionPaths: Record<Section, string> = {
+  memo: '/memo/',
+  articles: '/articles/',
+  'self-practice': '/self-practice/',
+  reading: '/reading/',
+};
+```
+
+### 4. 목록 페이지와 글 상세 페이지 만들기
+
+기존 `src/pages/self-practice/index.astro`와 `src/pages/self-practice/[...slug].astro`를 복사해서 `reading`에 맞게 바꾼다.
+
+```text
+src/pages/reading/index.astro
+src/pages/reading/[...slug].astro
+```
+
+### 5. 네비게이션에 추가하기
+
+`src/components/Header.astro`의 `postItems`에 추가한다.
+
+```ts
+const postItems = [
+  { href: '/articles/', label: 'Article' },
+  { href: '/self-practice/', label: 'Self-Practice' },
+  { href: '/reading/', label: 'Reading' },
+];
+```
+
+상단 메뉴에 직접 노출하고 싶으면 `Post` 드롭다운이 아니라 Header의 일반 링크 영역에 넣으면 된다.
+
+### 6. 빌드하고 배포하기
+
+```bash
+npm run build
+git add .
+git commit -m "Add reading category"
+git push
+```
+
 ## 포털형 블로그와 다른 점
 
 | 포털형/설치형 블로그 | 이 블로그 |
