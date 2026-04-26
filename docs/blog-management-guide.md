@@ -56,7 +56,7 @@ src/content/articles/
 URL 예시:
 
 ```text
-https://winterrainlee.github.io/articles/hello-blog/
+https://winterrainlee.github.io/articles/article-intro/
 ```
 
 ### Self-Practice
