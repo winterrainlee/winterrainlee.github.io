@@ -4,13 +4,13 @@
 
 :root {
   color-scheme: light;
-  --ink: #252525;
-  --muted: #777;
-  --line: #e8e1d8;
-  --paper: #fffdf8;
-  --soft: #f4efe7;
-  --accent: #146c75;
-  --accent-2: #9b3d2e;
+  --ink: #202a31;
+  --muted: #687680;
+  --line: #d9e5eb;
+  --paper: #f7fbfd;
+  --soft: #eaf3f7;
+  --accent: #2f6f8f;
+  --accent-2: #9a6257;
 }
 
 * {
@@ -21,16 +21,16 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(250, 247, 240, 0.98)),
-    radial-gradient(circle at 20% 0%, rgba(20, 108, 117, 0.08), transparent 30%),
-    radial-gradient(circle at 80% 10%, rgba(155, 61, 46, 0.07), transparent 28%);
+    linear-gradient(180deg, rgba(247, 251, 253, 0.96), rgba(241, 247, 250, 0.98)),
+    radial-gradient(circle at 18% 0%, rgba(47, 111, 143, 0.09), transparent 30%),
+    radial-gradient(circle at 82% 9%, rgba(154, 98, 87, 0.06), transparent 28%);
   color: var(--ink);
   font-family: "PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 a {
   color: inherit;
-  text-decoration-color: rgba(20, 108, 117, 0.35);
+  text-decoration-color: rgba(47, 111, 143, 0.35);
   text-underline-offset: 0.18em;
 }
 
@@ -50,6 +50,52 @@ img {
 .site-shell {
   width: min(715px, 90vw);
   margin: 0 auto;
+}
+
+.site-header {
+  color: #e8f2f7;
+}
+
+.site-header-panel {
+  margin-inline: -1rem;
+  border: 1px solid rgba(188, 213, 226, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(21, 42, 57, 0.92), rgba(26, 58, 77, 0.86)),
+    rgba(20, 38, 52, 0.88);
+  box-shadow: 0 16px 44px rgba(18, 33, 45, 0.18);
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(18px);
+}
+
+.site-header-brand:hover,
+.site-header nav a:hover,
+.nav-dropdown-trigger:hover {
+  color: #ffffff;
+}
+
+.site-header-kicker {
+  color: #a9bfca;
+}
+
+.site-header nav {
+  color: #c7d7df;
+}
+
+.site-search-button {
+  border: 1px solid rgba(199, 215, 223, 0.28);
+  background: rgba(232, 242, 247, 0.08);
+  color: #e8f2f7;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.site-search-button:hover {
+  border-color: rgba(232, 242, 247, 0.48);
+  background: rgba(232, 242, 247, 0.14);
+  color: #ffffff;
 }
 
 .prose {
@@ -74,7 +120,7 @@ img {
 
 .prose code {
   border-radius: 4px;
-  background: #eee7dc;
+  background: #e8f0f4;
   padding: 0.12rem 0.28rem;
   font-family: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.88em;
@@ -84,9 +130,9 @@ img {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #1f2528;
+  background: #172127;
   padding: 1rem;
-  color: #f7f3eb;
+  color: #f4f8fa;
 }
 
 .prose pre code {
@@ -132,7 +178,7 @@ img {
 .search-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(32, 28, 24, 0.25);
+  background: rgba(24, 34, 42, 0.28);
   backdrop-filter: blur(8px);
 }
 
@@ -140,10 +186,10 @@ img {
   position: relative;
   width: min(620px, calc(100vw - 28px));
   margin: 12vh auto 0;
-  border: 1px solid rgba(37, 37, 37, 0.12);
+  border: 1px solid rgba(32, 42, 49, 0.12);
   border-radius: 8px;
-  background: rgba(255, 253, 248, 0.98);
-  box-shadow: 0 24px 80px rgba(37, 37, 37, 0.18);
+  background: rgba(247, 251, 253, 0.98);
+  box-shadow: 0 24px 80px rgba(32, 42, 49, 0.18);
 }
 
 .search-input {
@@ -210,11 +256,13 @@ img {
   z-index: 45;
   display: none;
   min-width: 9.5rem;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(199, 215, 223, 0.22);
   border-radius: 8px;
-  background: rgba(255, 253, 248, 0.98);
-  box-shadow: 0 14px 40px rgba(37, 37, 37, 0.12);
+  background: rgba(22, 43, 57, 0.97);
+  box-shadow: 0 14px 40px rgba(18, 33, 45, 0.22);
   padding: 0.35rem;
+  color: #dce9ef;
+  backdrop-filter: blur(18px);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -231,7 +279,8 @@ img {
 }
 
 .nav-dropdown-item:hover {
-  background: var(--soft);
+  background: rgba(232, 242, 247, 0.1);
+  color: #ffffff;
 }
 
 .timeline-rail {
@@ -249,6 +298,13 @@ img {
 }
 
 @media (max-width: 640px) {
+  .site-header-panel {
+    margin-inline: -1.25rem;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
   .timeline-rail::before {
     left: 0.35rem;
   }
