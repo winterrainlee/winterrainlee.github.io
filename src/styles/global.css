@@ -105,10 +105,31 @@ img {
 }
 
 .prose h2,
-.prose h3 {
+.prose h3,
+.prose h4 {
   margin-top: 2.1em;
+  margin-bottom: 0.65em;
   font-family: "PT Sans", system-ui, sans-serif;
+  font-weight: 700;
   line-height: 1.25;
+}
+
+.prose h2 {
+  font-size: 1.55rem;
+}
+
+.prose h3 {
+  font-size: 1.28rem;
+}
+
+.prose h4 {
+  font-size: 1.1rem;
+}
+
+.prose hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
 }
 
 .prose p,
