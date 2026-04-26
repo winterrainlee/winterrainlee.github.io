@@ -20,6 +20,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   background:
     linear-gradient(180deg, rgba(247, 251, 253, 0.96), rgba(241, 247, 250, 0.98)),
     radial-gradient(circle at 18% 0%, rgba(47, 111, 143, 0.09), transparent 30%),
@@ -48,7 +49,7 @@ img {
 }
 
 .site-shell {
-  width: min(715px, 90vw);
+  width: min(715px, calc(100% - 2rem));
   margin: 0 auto;
 }
 
@@ -255,6 +256,60 @@ img {
   font-size: 0.9rem;
 }
 
+.guestbook-input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(247, 251, 253, 0.72);
+  padding: 0.72rem 0.8rem;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 400;
+  outline: 0;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.guestbook-input::placeholder {
+  color: rgba(104, 118, 128, 0.72);
+}
+
+.guestbook-input:focus {
+  border-color: rgba(47, 111, 143, 0.62);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 0 3px rgba(47, 111, 143, 0.1);
+}
+
+.guestbook-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+}
+
+.guestbook-submit {
+  min-height: 2.5rem;
+  border: 1px solid rgba(47, 111, 143, 0.38);
+  border-radius: 8px;
+  background: var(--accent);
+  padding: 0.55rem 1.1rem;
+  color: #f7fbfd;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.guestbook-submit:hover {
+  border-color: var(--accent);
+  background: #255d78;
+  transform: translateY(-1px);
+}
+
 .nav-dropdown {
   position: relative;
 }
@@ -319,8 +374,13 @@ img {
 }
 
 @media (max-width: 640px) {
+  .site-header {
+    width: 100%;
+    padding-top: 0 !important;
+  }
+
   .site-header-panel {
-    margin-inline: -1.25rem;
+    margin-inline: 0;
     border-right: 0;
     border-left: 0;
     border-radius: 0;

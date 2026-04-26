@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entries = [
+  {
+    name: '겨울비',
+    date: '2026.04.27',
+    body: '오며가며 남긴 말들이 조용히 쌓이는 곳이면 좋겠습니다.',
+    isSecret: false,
+  },
+  {
+    name: '익명',
+    date: '2026.04.26',
+    body: '',
+    isSecret: true,
+  },
+];
+---
+
+<BaseLayout title="Guestbook | 겨울비" description="겨울비 블로그 방명록">
+  <section class="mb-10">
+    <p class="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--accent-2)]">Guestbook</p>
+    <h1 class="serif m-0 text-4xl leading-tight">방명록</h1>
+    <p class="mt-4 leading-relaxed text-[var(--muted)]">
+      잠깐 들른 마음도 오래 남을 수 있게, 짧은 인사를 남겨주세요.
+    </p>
+  </section>
+
+  <section class="rounded-lg border border-[var(--line)] bg-white/55 p-5">
+    <form class="grid gap-4" id="guestbook-form">
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="grid gap-2 text-sm font-bold">
+          이름
+          <input
+            class="guestbook-input"
+            type="text"
+            name="name"
+            autocomplete="name"
+            maxlength="24"
+            placeholder="익명"
+            required
+          />
+        </label>
+        <label class="grid gap-2 text-sm font-bold">
+          비밀번호
+          <input
+            class="guestbook-input"
+            type="password"
+            name="password"
+            autocomplete="new-password"
+            minlength="4"
+            maxlength="80"
+            placeholder="비밀글 확인용"
+            required
+          />
+        </label>
+      </div>
+
+      <label class="grid gap-2 text-sm font-bold">
+        글
+        <textarea
+          class="guestbook-input min-h-36 resize-y leading-relaxed"
+          name="body"
+          maxlength="1000"
+          placeholder="여기에 남겨주세요."
+          required></textarea>
+      </label>
+
+      <div class="flex flex-col gap-3 border-t border-[var(--line)] pt-4 sm:flex-row sm:items-center sm:justify-between">
+        <label class="inline-flex items-center gap-2 text-sm text-[var(--muted)]">
+          <input class="guestbook-checkbox" type="checkbox" name="isSecret" />
+          비밀글
+        </label>
+        <button class="guestbook-submit" type="submit">남기기</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="mt-12">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">Messages</h2>
+      <span class="text-sm text-[var(--muted)]">{entries.length} notes</span>
+    </div>
+
+    <div class="grid gap-3">
+      {entries.map((entry) => (
+        <article class="rounded-lg border border-[var(--line)] bg-white/45 p-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="serif text-xl">{entry.name}</h3>
+            <time class="text-sm text-[var(--muted)]">{entry.date}</time>
+          </div>
+          {entry.isSecret ? (
+            <div class="mt-4 rounded border border-dashed border-[var(--line)] bg-[var(--soft)] px-3 py-3 text-sm text-[var(--muted)]">
+              비밀글입니다.
+            </div>
+          ) : (
+            <p class="mt-4 whitespace-pre-line leading-relaxed">{entry.body}</p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

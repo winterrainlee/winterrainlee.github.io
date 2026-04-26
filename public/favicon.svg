@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="겨울비">
+  <rect width="512" height="512" fill="#f7fbfd"/>
+  <circle cx="256" cy="256" r="188" fill="#eaf3f7" stroke="#d9e5eb" stroke-width="14"/>
+  <text
+    x="256"
+    y="284"
+    fill="#202a31"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="184"
+    font-weight="700"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >冬</text>
+</svg>
