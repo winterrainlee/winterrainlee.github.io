@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { entrySlug, type Section } from '../../lib/content';
+
+type AnyPost = CollectionEntry<'articles'> | CollectionEntry<'bookshelf'> | CollectionEntry<'thoughts'> | CollectionEntry<'talks'>;
+
+export async function getStaticPaths() {
+  const sections: Section[] = ['articles', 'bookshelf', 'thoughts', 'talks'];
+  const groups = await Promise.all(
+    sections.map(async (section) => {
+      const posts = await getCollection(section, ({ data }) => !data.draft);
+      return posts.map((post) => ({
+        params: { slug: entrySlug(post) },
+        props: { post },
+      }));
+    }),
+  );
+
+  return groups.flat();
+}
+
+const { post } = Astro.props as { post: AnyPost };
+---
+
+<PostLayout post={post} />

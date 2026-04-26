@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { entrySlug, formatDate, postPath, type Section } from '../lib/content';
+
+interface Props {
+  posts: Array<CollectionEntry<Section> & { section?: Section }>;
+  section: Section;
+}
+
+const { posts, section } = Astro.props;
+---
+
+<div class="grid gap-4">
+  {posts.map((post) => (
+    <a href={postPath(section, entrySlug(post))} class="block rounded-lg border border-[var(--line)] bg-white/45 p-4 no-underline transition hover:-translate-y-0.5 hover:border-[var(--accent)]">
+      <div class="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">{formatDate(post.data.date)}</div>
+      <h2 class="serif mt-2 text-2xl">{post.data.title}</h2>
+      {post.data.description && <p class="mt-2 text-sm leading-relaxed text-[var(--muted)]">{post.data.description}</p>}
+    </a>
+  ))}
+</div>

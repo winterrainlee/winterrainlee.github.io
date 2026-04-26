@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  post: CollectionEntry<'articles'> | CollectionEntry<'bookshelf'> | CollectionEntry<'thoughts'> | CollectionEntry<'talks'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const description = post.data.description ?? post.data.title;
+---
+
+<BaseLayout title={`${post.data.title} | winterrainlee`} description={description}>
+  <article>
+    <header class="mb-9">
+      <p class="mb-3 text-sm text-[var(--muted)]">{formatDate(post.data.date)}</p>
+      <h1 class="serif m-0 text-4xl leading-tight">{post.data.title}</h1>
+      {post.data.description && <p class="mt-4 text-lg leading-relaxed text-[var(--muted)]">{post.data.description}</p>}
+      {post.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => <span class="rounded border border-[var(--line)] px-2 py-1 text-xs text-[var(--muted)]">{tag}</span>)}
+        </div>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import Header from '../components/Header.astro';
+import SearchModal from '../components/SearchModal.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'winterrainlee | devlog',
+  description = 'devlog',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="winterrainlee" href="/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=Source+Code+Pro&display=swap" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="winterrainlee" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <main class="site-shell py-10" data-pagefind-body>
+      <slot />
+    </main>
+    <footer class="site-shell pb-10 text-center text-sm text-[var(--muted)]">
+      <a href="/feed.xml" class="no-underline">RSS</a>
+      <span class="mx-2">/</span>
+      <a href="https://github.com/winterrainlee" class="no-underline">GitHub</a>
+    </footer>
+    <SearchModal />
+  </body>
+</html>
