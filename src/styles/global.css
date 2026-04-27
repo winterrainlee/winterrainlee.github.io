@@ -140,6 +140,24 @@ img {
   margin: 1.1em 0;
 }
 
+.prose figure {
+  margin: 1.25rem 0 1.5rem;
+}
+
+.prose figure img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.prose figcaption {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .prose code {
   border-radius: 4px;
   background: #e8f0f4;

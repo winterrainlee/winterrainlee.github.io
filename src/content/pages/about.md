@@ -5,7 +5,22 @@ description: 겨울비 소개
 
 # _겨울비冬雨_
 
-공존과 꾸준함을 연습하고 싶어 블로그를 해본다.
+<figure>
+  <img
+    src="/images/about-chatgpt-5-5-960.jpg"
+    srcset="/images/about-chatgpt-5-5-480.jpg 480w, /images/about-chatgpt-5-5-960.jpg 960w"
+    sizes="(max-width: 640px) 100vw, 640px"
+    alt="초록색 픽셀 캐릭터가 물 위를 걷는 일러스트"
+    width="960"
+    height="960"
+    loading="eager"
+    decoding="async"
+  />
+  <figcaption>(produced by ChatGPT 5.5)</figcaption>
+</figure>
+
+휘적휘적 걷는 사람. a wanderer with curiosity. 
+n번째 블로그 연습 중.
 
 ## Favorites
 
@@ -26,11 +41,11 @@ description: 겨울비 소개
 
 <dl>
   <div>
-    <dt>GitHub</dt>
-    <dd><a href="https://github.com/winterrainlee">winterrainlee</a></dd>
-  </div>
-  <div>
     <dt>Twitter</dt>
     <dd><a href="https://twitter.com/winterrain_lee">winterrain_lee</a></dd>
+  </div>
+  <div>
+    <dt>GitHub</dt>
+    <dd><a href="https://github.com/winterrainlee">winterrainlee</a></dd>
   </div>
 </dl>

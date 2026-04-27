@@ -1,17 +1,16 @@
 ---
 home:
   description: |-
-    흘려보내기 아쉬운 단상은 memo에, 조금 더 오래 붙잡아 정리한 생각은 articles에 둡니다.
-    직접 만져보며 익히는 것들은 self-practice에 따로 모읍니다.
+    휘적휘적 걷는 사람. a wanderer with curiosity
 memo:
-  description: 짧게 남긴 단상
-  intro: 지나가는 마음, 문장, 장면을 짧게 붙잡아 둔 단상입니다.
+  description: 짧게, 빠르게
+  intro: 메모니까. 생각나는 거 아무렇게나 적을 예정. 조금 긴 트위터.
 articles:
   description: 생각을 정리해서 쓴 글
   intro: 여러 사안에 대한 생각을 조금 더 오래 붙잡아 정리해서 쓴 글입니다.
 selfPractice:
   description: 이것저것 연습하며 남긴 기록
-  intro: AI agent, automation, 이 블로그처럼 직접 만져보고 연습하며 배운 것들을 정리합니다.
+  intro: AI agent, automation, 그 밖에도 내가 연습하고 패턴을 찾고 싶은 모든 것들
 timeline:
   description: 겨울비의 글을 시간순으로 보는 타임라인
   intro: 모든 글들을 시간 순으로 볼 수 있습니다.
