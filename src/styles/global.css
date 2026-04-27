@@ -310,6 +310,59 @@ img {
   transform: translateY(-1px);
 }
 
+.guestbook-danger {
+  min-height: 2.5rem;
+  border: 1px solid rgba(154, 98, 87, 0.34);
+  border-radius: 8px;
+  background: rgba(154, 98, 87, 0.08);
+  padding: 0.55rem 1.1rem;
+  color: var(--accent-2);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.guestbook-danger:hover {
+  border-color: rgba(154, 98, 87, 0.58);
+  background: rgba(154, 98, 87, 0.14);
+  transform: translateY(-1px);
+}
+
+.guestbook-reply {
+  margin-top: 1rem;
+  border-left: 3px solid rgba(154, 98, 87, 0.42);
+  border-radius: 0 8px 8px 0;
+  background: rgba(234, 243, 247, 0.72);
+  padding: 0.85rem 1rem;
+}
+
+.guestbook-secret-reply {
+  margin-top: 1rem;
+  border: 1px dashed rgba(154, 98, 87, 0.36);
+  border-radius: 8px;
+  background: rgba(234, 243, 247, 0.5);
+  padding: 0.75rem 0.9rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.guestbook-secret-reply-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.guestbook-secret-reply-button:hover {
+  color: var(--accent);
+}
+
 .nav-dropdown {
   position: relative;
 }

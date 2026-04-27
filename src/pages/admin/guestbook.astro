@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+---
+
+<BaseLayout title="Guestbook Admin | 겨울비" description="방명록 답글 관리">
+  <section class="mb-10">
+    <p class="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[var(--accent-2)]">Admin</p>
+    <h1 class="serif m-0 text-4xl leading-tight">방명록 답글</h1>
+    <p class="mt-4 leading-relaxed text-[var(--muted)]">
+      남겨진 글을 확인하고 답글을 저장합니다.
+    </p>
+  </section>
+
+  <section class="rounded-lg border border-[var(--line)] bg-white/55 p-5">
+    <label class="grid gap-2 text-sm font-bold">
+      관리자 비밀번호
+      <input
+        class="guestbook-input"
+        id="admin-secret"
+        type="password"
+        autocomplete="current-password"
+        placeholder="ADMIN_REPLY_SECRET"
+      />
+    </label>
+    <div class="mt-4 flex flex-wrap items-center gap-2">
+      <button class="guestbook-submit" id="admin-login" type="button">로그인</button>
+      <button class="guestbook-danger hidden" id="admin-logout" type="button">로그아웃</button>
+    </div>
+    <p class="mt-3 text-sm text-[var(--muted)]" id="admin-status" role="status">비밀번호로 로그인하면 이 브라우저 세션 동안 유지됩니다.</p>
+  </section>
+
+  <section class="mt-8">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">Messages</h2>
+      <button class="guestbook-submit" id="reload-entries" type="button">새로고침</button>
+    </div>
+    <div class="grid gap-3" id="admin-entry-list">
+      <p class="rounded-lg border border-[var(--line)] bg-white/45 p-4 text-sm text-[var(--muted)]">방명록을 불러오는 중입니다.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ supabaseUrl, supabaseKey }}>
+  const secretInput = document.getElementById('admin-secret');
+  const status = document.getElementById('admin-status');
+  const list = document.getElementById('admin-entry-list');
+  const reloadButton = document.getElementById('reload-entries');
+  const loginButton = document.getElementById('admin-login');
+  const logoutButton = document.getElementById('admin-logout');
+
+  const adminListEndpoint = `${supabaseUrl}/functions/v1/list-guestbook-admin`;
+  const replyEndpoint = `${supabaseUrl}/functions/v1/reply-guestbook`;
+  const deleteEndpoint = `${supabaseUrl}/functions/v1/delete-guestbook`;
+  const sessionKey = 'winterrain.guestbook.adminSecret';
+
+  const functionHeaders = (adminSecret) => ({
+    apikey: supabaseKey,
+    Authorization: `Bearer ${supabaseKey}`,
+    'Content-Type': 'application/json',
+    'x-admin-reply-secret': adminSecret,
+  });
+
+  const setStatus = (message, isError = false) => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle('text-[var(--accent-2)]', isError);
+  };
+
+  const setLoggedIn = (isLoggedIn) => {
+    loginButton?.classList.toggle('hidden', isLoggedIn);
+    logoutButton?.classList.toggle('hidden', !isLoggedIn);
+  };
+
+  const readError = async (response, fallback) => {
+    try {
+      const result = await response.json();
+      return result.error || result.message || result.detail || fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
+  const getAdminSecret = () => secretInput?.value ?? '';
+
+  const saveAdminSecret = (adminSecret) => {
+    sessionStorage.setItem(sessionKey, adminSecret);
+    setLoggedIn(true);
+  };
+
+  const clearAdminSecret = () => {
+    sessionStorage.removeItem(sessionKey);
+    if (secretInput) secretInput.value = '';
+    setLoggedIn(false);
+  };
+
+  const formatDate = (dateText) => {
+    if (!dateText) return '';
+    return new Intl.DateTimeFormat('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(new Date(dateText));
+  };
+
+  const renderEntries = (entries) => {
+    if (!list) return;
+    list.replaceChildren();
+
+    if (entries.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'rounded-lg border border-[var(--line)] bg-white/45 p-4 text-sm text-[var(--muted)]';
+      empty.textContent = '아직 남겨진 글이 없습니다.';
+      list.append(empty);
+      return;
+    }
+
+    entries.forEach((entry) => {
+      const article = document.createElement('article');
+      article.className = 'rounded-lg border border-[var(--line)] bg-white/45 p-4';
+
+      const header = document.createElement('div');
+      header.className = 'flex flex-wrap items-baseline justify-between gap-2';
+
+      const title = document.createElement('h3');
+      title.className = 'serif text-xl';
+      title.textContent = entry.name;
+
+      const time = document.createElement('time');
+      time.className = 'text-sm text-[var(--muted)]';
+      time.dateTime = entry.created_at;
+      time.textContent = formatDate(entry.created_at);
+
+      header.append(title, time);
+      article.append(header);
+
+      const message = document.createElement('div');
+      message.className = entry.is_secret
+        ? 'mt-4 rounded border border-dashed border-[var(--line)] bg-[var(--soft)] px-3 py-3 whitespace-pre-line leading-relaxed'
+        : 'mt-4 whitespace-pre-line leading-relaxed';
+      message.textContent = entry.body ?? '';
+      article.append(message);
+
+      const form = document.createElement('form');
+      form.className = 'mt-4 grid gap-3 border-t border-[var(--line)] pt-4';
+
+      const label = document.createElement('label');
+      label.className = 'grid gap-2 text-sm font-bold';
+      label.textContent = entry.is_secret ? '비밀글 답글' : '답글';
+
+      const textarea = document.createElement('textarea');
+      textarea.className = 'guestbook-input min-h-28 resize-y leading-relaxed';
+      textarea.maxLength = 1000;
+      textarea.value = entry.owner_reply ?? '';
+      textarea.placeholder = entry.is_secret ? '작성자가 비밀번호를 입력하면 볼 수 있는 답글입니다.' : '공개로 보일 답글입니다.';
+
+      label.append(textarea);
+
+      const actions = document.createElement('div');
+      actions.className = 'flex flex-wrap items-center justify-between gap-3';
+
+      const hint = document.createElement('span');
+      hint.className = 'text-sm text-[var(--muted)]';
+      hint.textContent = entry.owner_replied_at ? `마지막 답글 ${formatDate(entry.owner_replied_at)}` : '아직 답글 없음';
+
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'flex flex-wrap items-center gap-2';
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'guestbook-danger';
+      deleteButton.type = 'button';
+      deleteButton.textContent = '삭제';
+
+      const button = document.createElement('button');
+      button.className = 'guestbook-submit';
+      button.type = 'submit';
+      button.textContent = '저장';
+
+      buttonGroup.append(deleteButton, button);
+      actions.append(hint, buttonGroup);
+      form.append(label, actions);
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const adminSecret = getAdminSecret();
+
+        if (!adminSecret) {
+          setStatus('관리자 비밀번호를 입력해주세요.', true);
+          return;
+        }
+
+        button.setAttribute('disabled', 'true');
+        setStatus('답글을 저장하는 중입니다.');
+
+        try {
+          const response = await fetch(replyEndpoint, {
+            method: 'POST',
+            headers: functionHeaders(adminSecret),
+            body: JSON.stringify({
+              id: entry.id,
+              owner_reply: textarea.value,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(await readError(response, '답글을 저장하지 못했습니다.'));
+          }
+
+          saveAdminSecret(adminSecret);
+          setStatus('답글을 저장했습니다.');
+          await loadEntries();
+        } catch (error) {
+          setStatus(error instanceof Error ? error.message : '문제가 생겼습니다.', true);
+        } finally {
+          button.removeAttribute('disabled');
+        }
+      });
+
+      deleteButton.addEventListener('click', async () => {
+        const adminSecret = getAdminSecret();
+
+        if (!adminSecret) {
+          setStatus('관리자 비밀번호를 입력해주세요.', true);
+          return;
+        }
+
+        const confirmed = window.confirm(`${entry.name}님의 방명록 글을 삭제할까요? 이 작업은 되돌릴 수 없습니다.`);
+
+        if (!confirmed) return;
+
+        deleteButton.setAttribute('disabled', 'true');
+        button.setAttribute('disabled', 'true');
+        setStatus('글을 삭제하는 중입니다.');
+
+        try {
+          const response = await fetch(deleteEndpoint, {
+            method: 'POST',
+            headers: functionHeaders(adminSecret),
+            body: JSON.stringify({
+              id: entry.id,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(await readError(response, '글을 삭제하지 못했습니다.'));
+          }
+
+          saveAdminSecret(adminSecret);
+          setStatus('글을 삭제했습니다.');
+          await loadEntries();
+        } catch (error) {
+          setStatus(error instanceof Error ? error.message : '문제가 생겼습니다.', true);
+        } finally {
+          deleteButton.removeAttribute('disabled');
+          button.removeAttribute('disabled');
+        }
+      });
+
+      article.append(form);
+      list.append(article);
+    });
+  };
+
+  const loadEntries = async () => {
+    const adminSecret = getAdminSecret();
+
+    if (!adminSecret) {
+      renderEntries([]);
+      setStatus('관리자 비밀번호로 로그인해주세요.', true);
+      return;
+    }
+
+    const response = await fetch(adminListEndpoint, {
+      headers: functionHeaders(adminSecret),
+    });
+
+    if (!response.ok) {
+      throw new Error(await readError(response, '방명록을 불러오지 못했습니다.'));
+    }
+
+    saveAdminSecret(adminSecret);
+    renderEntries(await response.json());
+  };
+
+  loginButton?.addEventListener('click', () => {
+    loadEntries()
+      .then(() => setStatus('로그인했습니다.'))
+      .catch((error) => {
+        clearAdminSecret();
+        renderEntries([]);
+        setStatus(error instanceof Error ? error.message : '로그인하지 못했습니다.', true);
+      });
+  });
+
+  logoutButton?.addEventListener('click', () => {
+    clearAdminSecret();
+    renderEntries([]);
+    setStatus('로그아웃했습니다.');
+  });
+
+  reloadButton?.addEventListener('click', () => {
+    loadEntries()
+      .then(() => setStatus('새로고침했습니다.'))
+      .catch((error) => setStatus(error instanceof Error ? error.message : '불러오지 못했습니다.', true));
+  });
+
+  const savedSecret = sessionStorage.getItem(sessionKey);
+
+  if (savedSecret && secretInput) {
+    secretInput.value = savedSecret;
+    setLoggedIn(true);
+    loadEntries().catch((error) => {
+      clearAdminSecret();
+      renderEntries([]);
+      setStatus(error instanceof Error ? error.message : '불러오지 못했습니다.', true);
+    });
+  } else {
+    setLoggedIn(false);
+    renderEntries([]);
+  }
+</script>

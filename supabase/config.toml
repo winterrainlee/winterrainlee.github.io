@@ -1,0 +1,17 @@
+[functions.notify_guestbook]
+verify_jwt = false
+
+[functions.reply_guestbook]
+verify_jwt = false
+
+[functions.create_guestbook]
+verify_jwt = false
+
+[functions.view_secret_reply]
+verify_jwt = false
+
+[functions.list_guestbook_admin]
+verify_jwt = false
+
+[functions.delete_guestbook]
+verify_jwt = false
