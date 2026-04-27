@@ -5,6 +5,8 @@ updated: 2026-04-27
 
 # 겨울비 블로그 운영 가이드
 
+<<<<<<< ours
+<<<<<<< ours
 이 블로그는 네이버 블로그, 티스토리, 브런치처럼 관리자 화면에서 글을 쓰는 방식이 아니다. 글 파일을 직접 만들고, GitHub에 올리면 GitHub Actions가 사이트를 다시 빌드해서 GitHub Pages에 배포하는 정적 블로그다.
 
 처음에는 낯설 수 있지만 장점도 분명하다. 글과 블로그 구조가 모두 내 저장소에 남고, 플랫폼의 에디터나 정책에 덜 묶이며, 필요하면 디자인과 기능을 직접 바꿀 수 있다.
@@ -14,6 +16,26 @@ updated: 2026-04-27
 ```text
 Markdown 글 작성
   -> 로컬에서 미리보기
+=======
+=======
+>>>>>>> theirs
+이 문서는 블로그를 “운영”할 때 보는 안내서다. 글을 어떻게 쓰고 Markdown을 어떻게 쓰는지는 별도 문서에 정리했다.
+
+```text
+docs/writing-guide.md
+```
+
+이 블로그는 관리자 화면에서 저장 버튼을 누르는 방식이 아니다. Markdown 파일을 만들고 GitHub에 올리면, GitHub Actions가 사이트를 다시 빌드해서 GitHub Pages에 배포한다.
+
+## 운영 흐름
+
+```text
+글 파일 작성 또는 수정
+  -> 로컬에서 확인
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
   -> Git commit
   -> GitHub push
   -> GitHub Actions 자동 빌드
@@ -22,19 +44,53 @@ Markdown 글 작성
 
 블로그 주소:
 
+<<<<<<< ours
+<<<<<<< ours
 https://winterrainlee.github.io/
 
 저장소:
 
 https://github.com/winterrainlee/winterrainlee.github.io
+=======
+=======
+>>>>>>> theirs
+```text
+https://winterrainlee.github.io/
+```
+
+저장소:
+
+```text
+https://github.com/winterrainlee/winterrainlee.github.io
+```
+
+## 자주 보는 문서
+
+- `docs/writing-guide.md`: 새 글 쓰기, Markdown 문법, Obsidian식 링크와 주석
+- `docs/templates-guide.md`: 글 템플릿 사용법
+- `docs/remote-writing-guide.md`: 다른 기기에서 글 쓰는 방법
+- `docs/tech_stack.md`: 블로그 기술 스택
+- `docs/security_guide.md`: 공개해도 되는 문서와 숨겨야 하는 정보 기준
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 
 ## 글 카테고리
 
 ### Memo
 
+<<<<<<< ours
+<<<<<<< ours
 짧게 남긴 단상이다. 완성된 글이라기보다 지나가는 마음, 문장, 장면을 붙잡아두는 공간이다.
 
 파일 위치:
+=======
+짧게 남긴 단상이다. 지나가는 마음, 문장, 장면을 가볍게 붙잡아두는 공간이다.
+>>>>>>> theirs
+=======
+짧게 남긴 단상이다. 지나가는 마음, 문장, 장면을 가볍게 붙잡아두는 공간이다.
+>>>>>>> theirs
 
 ```text
 src/content/memo/
@@ -48,9 +104,17 @@ https://winterrainlee.github.io/memo/first-note/
 
 ### Article
 
+<<<<<<< ours
+<<<<<<< ours
 여러 사안에 대한 생각을 정리해서 쓴 글이다. memo보다 길고, 생각의 흐름을 한 번 더 다듬은 글을 둔다.
 
 파일 위치:
+=======
+생각을 한 번 더 정리해서 쓴 글이다. memo보다 길고, 공개 글의 형태를 더 갖춘 글을 둔다.
+>>>>>>> theirs
+=======
+생각을 한 번 더 정리해서 쓴 글이다. memo보다 길고, 공개 글의 형태를 더 갖춘 글을 둔다.
+>>>>>>> theirs
 
 ```text
 src/content/articles/
@@ -64,9 +128,17 @@ https://winterrainlee.github.io/articles/article-intro/
 
 ### Self-Practice
 
+<<<<<<< ours
+<<<<<<< ours
 직접 이것저것 연습하며 남기는 기록이다. 예를 들어 AI agent, automation, 이 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
 
 파일 위치:
+=======
+직접 이것저것 연습하며 남기는 기록이다. AI agent, automation, 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
+>>>>>>> theirs
+=======
+직접 이것저것 연습하며 남기는 기록이다. AI agent, automation, 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
+>>>>>>> theirs
 
 ```text
 src/content/self-practice/
@@ -78,6 +150,8 @@ URL 예시:
 https://winterrainlee.github.io/self-practice/hello-blog/
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 ## 새 글 쓰는 방법
 
 1. 쓸 카테고리를 고른다.
@@ -194,6 +268,21 @@ console.log("hello");
 ````
 
 ## 로컬에서 확인하기
+=======
+=======
+>>>>>>> theirs
+## 새 글을 공개하는 절차
+
+1. `docs/writing-guide.md`를 보고 알맞은 위치에 `.md` 파일을 만든다.
+2. 로컬에서 미리 본다.
+3. 빌드가 되는지 확인한다.
+4. 변경 사항을 commit한다.
+5. GitHub에 push한다.
+6. GitHub Actions와 실제 블로그를 확인한다.
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 
 개발 서버 실행:
 
@@ -201,7 +290,15 @@ console.log("hello");
 npm run dev
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 브라우저에서 보통 아래 주소를 연다.
+=======
+보통 아래 주소에서 미리 본다.
+>>>>>>> theirs
+=======
+보통 아래 주소에서 미리 본다.
+>>>>>>> theirs
 
 ```text
 http://localhost:4321/
@@ -217,11 +314,21 @@ npm run build
 
 ## 배포하기
 
+<<<<<<< ours
+<<<<<<< ours
 글을 추가하거나 수정한 뒤:
+=======
+터미널로 배포할 때:
+>>>>>>> theirs
+=======
+터미널로 배포할 때:
+>>>>>>> theirs
 
 ```bash
 git status
 git add .
+<<<<<<< ours
+<<<<<<< ours
 git commit -m "Add new memo"
 git push
 ```
@@ -279,11 +386,64 @@ public/images/2026-04-26-rainy-evening/photo.jpg
 ```
 
 이미지는 너무 큰 원본을 그대로 올리지 않는 편이 좋다. 긴 변 기준 1600px 안팎이면 대부분 충분하다.
+=======
+=======
+>>>>>>> theirs
+git commit -m "Add new post"
+git push
+```
+
+GitHub Desktop을 쓴다면 다음 흐름으로 생각하면 된다.
+
+1. 바뀐 파일을 확인한다.
+2. commit 메시지를 쓴다.
+3. `Commit to main`을 누른다.
+4. `Push origin`을 누른다.
+
+GitHub Desktop은 이 블로그의 “발행 버튼”에 가깝다.
+
+## 배포 상태 확인
+
+GitHub Actions 상태:
+
+```bash
+gh run list --repo winterrainlee/winterrainlee.github.io --limit 3
+```
+
+가장 최근 배포가 성공했는지 보고, 실패했다면 먼저 로컬에서 다시 확인한다.
+
+```bash
+npm run build
+```
+
+## 글 수정, 숨기기, 삭제
+
+이미 쓴 글을 수정하려면 해당 `.md` 파일을 고치고 다시 commit/push하면 된다.
+
+큰 개정이라면 frontmatter에 `updated`를 추가할 수 있다.
+
+```md
+updated: 2026-05-01
+```
+
+잠시 숨기려면:
+
+```md
+draft: true
+```
+
+완전히 삭제하려면 해당 `.md` 파일을 삭제한다. 삭제 후에도 Git 기록에는 남지만, 다음 배포 이후 공개 사이트에서는 사라진다.
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 
 ## Timeline 관리
 
 Timeline은 별도로 글을 쓰는 곳이 아니다. `memo`, `articles`, `self-practice`에 있는 모든 글을 날짜순으로 모아 보여준다.
 
+<<<<<<< ours
+<<<<<<< ours
 따라서 Timeline 순서를 바꾸고 싶으면 각 글의 `date`를 조정하면 된다.
 
 ## 검색 관리
@@ -304,18 +464,49 @@ npm run build
 
 ```text
 VS Code: 글 작성, 파일 관리, Markdown 미리보기, 로컬 서버 실행
+=======
+=======
+>>>>>>> theirs
+Timeline 순서를 바꾸고 싶으면 각 글의 `date`를 조정한다.
+
+## 검색 관리
+
+검색은 Pagefind가 빌드할 때 자동으로 만든다. 새 글을 추가하면 `npm run build` 과정에서 `dist/pagefind/` 검색 인덱스가 다시 생성된다.
+
+별도의 검색 서버는 없다.
+
+## 작업 환경
+
+이 블로그는 VS Code만으로도 관리할 수 있다. 글쓰기, Git 관리, 평소 메모를 나누어 생각하면 다음 조합이 편하다.
+
+```text
+VS Code: 파일 관리, Markdown 미리보기, 로컬 서버 실행
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 GitHub Desktop: 변경 사항 확인, commit, push
 Obsidian: 초안, 단상, 블로그 글 작성
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 ### VS Code로 관리하기
 
 VS Code에서는 이 폴더를 열면 된다.
+=======
+VS Code에서 열 폴더:
+>>>>>>> theirs
+=======
+VS Code에서 열 폴더:
+>>>>>>> theirs
 
 ```text
 /Users/kioku/Documents/Blog
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 Markdown 미리보기:
 
 ```text
@@ -356,11 +547,19 @@ GitHub Desktop은 “발행 버튼”처럼 생각하면 된다.
 기존 개인 Obsidian vault와 블로그 글을 섞지 않는 편이 좋다. 이 블로그 폴더 자체를 별도 vault로 추가하는 방식을 추천한다.
 
 블로그 vault 경로:
+=======
+Obsidian에서도 이 폴더를 별도 vault로 열 수 있다. 기존 개인 vault와 섞지 않고 Blog vault를 따로 두는 편이 안전하다.
+>>>>>>> theirs
+=======
+Obsidian에서도 이 폴더를 별도 vault로 열 수 있다. 기존 개인 vault와 섞지 않고 Blog vault를 따로 두는 편이 안전하다.
+>>>>>>> theirs
 
 ```text
 /Users/kioku/Documents/Blog
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 Obsidian에서 추가하는 방법:
 
 1. Obsidian을 연다.
@@ -372,6 +571,12 @@ Obsidian에서 추가하는 방법:
 이렇게 하면 기존 개인 vault는 사적인 생각 창고로 두고, Blog vault는 공개 글 작업실로 쓸 수 있다.
 
 Obsidian에서 새 글을 만들 때도 위치가 중요하다.
+=======
+Obsidian에서 글을 만들 때도 위치가 중요하다. 아무 폴더에 만든 노트는 블로그에 올라가지 않는다.
+>>>>>>> theirs
+=======
+Obsidian에서 글을 만들 때도 위치가 중요하다. 아무 폴더에 만든 노트는 블로그에 올라가지 않는다.
+>>>>>>> theirs
 
 ```text
 src/content/memo/
@@ -379,6 +584,8 @@ src/content/articles/
 src/content/self-practice/
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 아무 폴더에 만든 노트는 블로그에 올라가지 않는다. 반드시 `src/content/...` 아래에 있어야 한다.
 
 다른 기기에서 작성하는 방법은 별도 문서에 정리해두었다.
@@ -392,6 +599,18 @@ docs/remote-writing-guide.md
 나중에 새 카테고리를 추가하려면 “콘텐츠 폴더 + Astro 컬렉션 + 페이지 + 네비게이션”을 함께 추가해야 한다.
 
 예를 들어 `reading` 카테고리를 추가한다고 하면 다음 순서로 진행한다.
+=======
+=======
+>>>>>>> theirs
+## 카테고리 추가하기
+
+새 카테고리를 추가하려면 “콘텐츠 폴더 + Astro 컬렉션 + 페이지 + 네비게이션”을 함께 추가해야 한다.
+
+예를 들어 `reading` 카테고리를 추가한다면 다음을 진행한다.
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 
 ### 1. 폴더 만들기
 
@@ -437,7 +656,15 @@ export const sectionPaths: Record<Section, string> = {
 
 ### 4. 목록 페이지와 글 상세 페이지 만들기
 
+<<<<<<< ours
+<<<<<<< ours
 기존 `src/pages/self-practice/index.astro`와 `src/pages/self-practice/[...slug].astro`를 복사해서 `reading`에 맞게 바꾼다.
+=======
+기존 카테고리 페이지를 복사해서 `reading`에 맞게 바꾼다.
+>>>>>>> theirs
+=======
+기존 카테고리 페이지를 복사해서 `reading`에 맞게 바꾼다.
+>>>>>>> theirs
 
 ```text
 src/pages/reading/index.astro
@@ -456,8 +683,14 @@ const postItems = [
 ];
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 상단 메뉴에 직접 노출하고 싶으면 `Post` 드롭다운이 아니라 Header의 일반 링크 영역에 넣으면 된다.
 
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 ### 6. 빌드하고 배포하기
 
 ```bash
@@ -467,6 +700,8 @@ git commit -m "Add reading category"
 git push
 ```
 
+<<<<<<< ours
+<<<<<<< ours
 ## 포털형 블로그와 다른 점
 
 | 포털형/설치형 블로그 | 이 블로그 |
@@ -477,12 +712,18 @@ git push
 | 검색/목록이 서비스 기능 | 빌드 시 검색 인덱스와 목록 생성 |
 | 플랫폼 UI에 맞춰 운영 | 디자인과 구조를 직접 바꿀 수 있음 |
 
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
 ## 조심할 점
 
 - `src/content/...` 아래의 글 파일을 지우면 배포 후 글도 사라진다.
 - 파일 이름을 바꾸면 URL도 바뀐다.
 - `date`가 미래 날짜여도 현재는 숨기지 않는다.
 - `npm run build`가 실패하면 GitHub Actions 배포도 실패할 가능성이 크다.
+<<<<<<< ours
+<<<<<<< ours
 - `dist/`와 `node_modules/`는 직접 관리하지 않는다. 저장소에도 올리지 않는다.
 
 ## 추천 운영 루틴
@@ -518,6 +759,12 @@ git add .
 git commit -m "Add ..."
 git push
 ```
+=======
+- `dist/`와 `node_modules/`는 직접 관리하지 않는다.
+>>>>>>> theirs
+=======
+- `dist/`와 `node_modules/`는 직접 관리하지 않는다.
+>>>>>>> theirs
 
 ## 자주 생기는 문제
 
@@ -547,9 +794,21 @@ gh run list --repo winterrainlee/winterrainlee.github.io --limit 3
 
 ### 검색에 새 글이 안 나온다
 
+<<<<<<< ours
+<<<<<<< ours
 배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시가 있어 몇 분 늦게 보일 때도 있다.
 
 ## 이 블로그의 핵심 원칙
+=======
+배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시 때문에 몇 분 늦게 보일 때도 있다.
+
+## 운영 원칙
+>>>>>>> theirs
+=======
+배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시 때문에 몇 분 늦게 보일 때도 있다.
+
+## 운영 원칙
+>>>>>>> theirs
 
 - memo는 가볍게.
 - article은 조금 더 천천히.

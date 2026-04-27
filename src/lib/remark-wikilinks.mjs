@@ -3,6 +3,7 @@ import { extname, join, relative, sep } from 'node:path';
 
 const CONTENT_ROOT = join(process.cwd(), 'src', 'content');
 const SECTIONS = ['memo', 'articles', 'self-practice'];
+const OBSIDIAN_COMMENT_PATTERN = /%%[\s\S]*?%%/g;
 const WIKILINK_PATTERN = /\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g;
 
 function withoutExtension(path) {
@@ -92,6 +93,34 @@ function wikiLinkNodes(value, index) {
   return nodes;
 }
 
+function isEmptyNode(node) {
+  if (node.type === 'text') return node.value.length === 0;
+  if (!Array.isArray(node.children)) return false;
+
+  return node.children.length === 0 && ['paragraph', 'heading', 'blockquote', 'list', 'listItem'].includes(node.type);
+}
+
+function removeObsidianComments(node) {
+  if (!node) return;
+
+  if (node.type === 'text') {
+    node.value = node.value.replace(OBSIDIAN_COMMENT_PATTERN, '');
+    return;
+  }
+
+  if (!Array.isArray(node.children)) return;
+
+  for (let i = node.children.length - 1; i >= 0; i -= 1) {
+    const child = node.children[i];
+
+    removeObsidianComments(child);
+
+    if (isEmptyNode(child)) {
+      node.children.splice(i, 1);
+    }
+  }
+}
+
 function visit(node, index) {
   if (!node || !Array.isArray(node.children)) return;
 
@@ -117,6 +146,7 @@ export default function remarkWikiLinks() {
   const index = buildWikiLinkIndex();
 
   return (tree) => {
+    removeObsidianComments(tree);
     visit(tree, index);
   };
 }
