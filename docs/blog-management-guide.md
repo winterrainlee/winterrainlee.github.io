@@ -5,21 +5,7 @@ updated: 2026-04-27
 
 # 겨울비 블로그 운영 가이드
 
-<<<<<<< ours
-<<<<<<< ours
-이 블로그는 네이버 블로그, 티스토리, 브런치처럼 관리자 화면에서 글을 쓰는 방식이 아니다. 글 파일을 직접 만들고, GitHub에 올리면 GitHub Actions가 사이트를 다시 빌드해서 GitHub Pages에 배포하는 정적 블로그다.
-
-처음에는 낯설 수 있지만 장점도 분명하다. 글과 블로그 구조가 모두 내 저장소에 남고, 플랫폼의 에디터나 정책에 덜 묶이며, 필요하면 디자인과 기능을 직접 바꿀 수 있다.
-
-## 운영 방식 한눈에 보기
-
-```text
-Markdown 글 작성
-  -> 로컬에서 미리보기
-=======
-=======
->>>>>>> theirs
-이 문서는 블로그를 “운영”할 때 보는 안내서다. 글을 어떻게 쓰고 Markdown을 어떻게 쓰는지는 별도 문서에 정리했다.
+이 문서는 블로그를 운영할 때 보는 안내서다. 글을 어떻게 쓰고 Markdown을 어떻게 쓰는지는 별도 문서에 정리했다.
 
 ```text
 docs/writing-guide.md
@@ -32,10 +18,6 @@ docs/writing-guide.md
 ```text
 글 파일 작성 또는 수정
   -> 로컬에서 확인
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
   -> Git commit
   -> GitHub push
   -> GitHub Actions 자동 빌드
@@ -44,16 +26,6 @@ docs/writing-guide.md
 
 블로그 주소:
 
-<<<<<<< ours
-<<<<<<< ours
-https://winterrainlee.github.io/
-
-저장소:
-
-https://github.com/winterrainlee/winterrainlee.github.io
-=======
-=======
->>>>>>> theirs
 ```text
 https://winterrainlee.github.io/
 ```
@@ -71,26 +43,12 @@ https://github.com/winterrainlee/winterrainlee.github.io
 - `docs/remote-writing-guide.md`: 다른 기기에서 글 쓰는 방법
 - `docs/tech_stack.md`: 블로그 기술 스택
 - `docs/security_guide.md`: 공개해도 되는 문서와 숨겨야 하는 정보 기준
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
 
 ## 글 카테고리
 
 ### Memo
 
-<<<<<<< ours
-<<<<<<< ours
-짧게 남긴 단상이다. 완성된 글이라기보다 지나가는 마음, 문장, 장면을 붙잡아두는 공간이다.
-
-파일 위치:
-=======
 짧게 남긴 단상이다. 지나가는 마음, 문장, 장면을 가볍게 붙잡아두는 공간이다.
->>>>>>> theirs
-=======
-짧게 남긴 단상이다. 지나가는 마음, 문장, 장면을 가볍게 붙잡아두는 공간이다.
->>>>>>> theirs
 
 ```text
 src/content/memo/
@@ -104,17 +62,7 @@ https://winterrainlee.github.io/memo/first-note/
 
 ### Article
 
-<<<<<<< ours
-<<<<<<< ours
-여러 사안에 대한 생각을 정리해서 쓴 글이다. memo보다 길고, 생각의 흐름을 한 번 더 다듬은 글을 둔다.
-
-파일 위치:
-=======
 생각을 한 번 더 정리해서 쓴 글이다. memo보다 길고, 공개 글의 형태를 더 갖춘 글을 둔다.
->>>>>>> theirs
-=======
-생각을 한 번 더 정리해서 쓴 글이다. memo보다 길고, 공개 글의 형태를 더 갖춘 글을 둔다.
->>>>>>> theirs
 
 ```text
 src/content/articles/
@@ -128,17 +76,7 @@ https://winterrainlee.github.io/articles/article-intro/
 
 ### Self-Practice
 
-<<<<<<< ours
-<<<<<<< ours
-직접 이것저것 연습하며 남기는 기록이다. 예를 들어 AI agent, automation, 이 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
-
-파일 위치:
-=======
-직접 이것저것 연습하며 남기는 기록이다. AI agent, automation, 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
->>>>>>> theirs
-=======
-직접 이것저것 연습하며 남기는 기록이다. AI agent, automation, 블로그 제작 과정처럼 “해봤고, 배웠고, 다음에 다시 볼 만한 것”을 둔다.
->>>>>>> theirs
+직접 이것저것 연습하며 남기는 기록이다. AI agent, automation, 블로그 제작 과정처럼 "해봤고, 배웠고, 다음에 다시 볼 만한 것"을 둔다.
 
 ```text
 src/content/self-practice/
@@ -150,478 +88,164 @@ URL 예시:
 https://winterrainlee.github.io/self-practice/hello-blog/
 ```
 
-<<<<<<< ours
-<<<<<<< ours
-## 새 글 쓰는 방법
+## 새 글 공개하기
 
-1. 쓸 카테고리를 고른다.
-2. 해당 폴더에 `.md` 파일을 만든다.
-3. 파일 맨 위에 frontmatter를 쓴다.
-4. 그 아래에 본문을 Markdown으로 쓴다.
-5. 로컬에서 확인한다.
-6. commit 후 push한다.
-
-예를 들어 새 memo를 쓰려면:
+글 파일은 각 카테고리 폴더 아래에 Markdown으로 만든다.
 
 ```text
-src/content/memo/2026-04-26-rainy-evening.md
+src/content/memo/YYYY-MM-DD-short-title.md
+src/content/articles/YYYY-MM-DD-topic.md
+src/content/self-practice/YYYY-MM-DD-thing-i-tried.md
 ```
 
-파일 내용 예시:
+기본 frontmatter 예시:
 
-```md
+```yaml
 ---
-title: "비 오는 저녁"
-description: "문득 오래 남은 저녁의 감각"
-date: 2026-04-26
-tags: ["daily", "rain"]
----
-
-비가 오면 창밖이 조금 더 조용해진다.
-
-오늘은 해야 할 말보다 남겨둘 문장이 먼저 떠올랐다.
-```
-
-## Frontmatter 규칙
-
-모든 글 파일은 맨 위에 `---`로 감싼 정보 영역이 필요하다.
-
-```md
----
-title: "글 제목"
-description: "목록과 검색에 보일 짧은 설명"
-date: 2026-04-26
-tags: ["tag1", "tag2"]
+title: 글 제목
+description: 목록과 검색에 보이는 짧은 설명
+date: 2026-04-27
+tags:
+  - blog
 draft: false
 ---
 ```
 
-자주 쓰는 항목:
-
 - `title`: 글 제목. 필수.
 - `description`: 홈, 목록, Timeline, RSS에 보이는 요약. 권장.
-- `date`: 작성일. 필수. `YYYY-MM-DD` 형식 권장.
-- `tags`: 태그 목록. 없으면 `[]`로 두거나 생략 가능.
-- `draft`: `true`로 두면 배포 목록에서 제외된다.
+- `date`: 글 날짜. 필수.
+- `updated`: 수정일. 필요할 때만 사용.
+- `tags`: 태그 목록. 없으면 `[]` 또는 생략 가능.
+- `draft`: `true`이면 공개 목록에서 숨긴다.
 
-초안으로 숨기고 싶을 때:
+## 소개와 표지 문구 수정하기
 
-```md
-draft: true
-```
+소개 페이지와 각 표지 페이지의 안내 문구는 HTML 파일을 직접 고치지 않고 Markdown 파일에서 관리한다.
 
-## 파일 이름 규칙
+### 소개 페이지
 
-파일 이름은 URL이 된다. 한글도 가능하지만, 관리와 공유를 생각하면 영어 소문자와 하이픈을 권장한다.
-
-권장:
+소개 페이지 본문은 아래 파일에서 수정한다.
 
 ```text
-2026-04-26-rainy-evening.md
-my-first-agent-note.md
-why-i-keep-writing.md
+src/content/pages/about.md
 ```
 
-비권장:
+frontmatter의 `title`은 브라우저 제목에 쓰이고, `description`은 meta description에 쓰인다.
+
+```yaml
+---
+title: 소개
+description: 겨울비 소개
+---
+```
+
+그 아래 본문은 일반 Markdown으로 쓴다.
+
+```md
+# _겨울비冬雨_
+
+공존과 꾸준함을 연습하고 싶어 블로그를 해본다.
+
+## Favorites
+
+- 좋아하는 것
+```
+
+소개 페이지에서 복잡한 HTML을 직접 만질 필요는 없다. 다만 `dl`, `dt`, `dd`처럼 Markdown만으로 표현하기 애매한 구조가 필요하면 `about.md` 안에 짧은 HTML을 섞어 쓸 수 있다.
+
+### 메인과 표지 문구
+
+메인 화면, Memo, Article, Self-Practice, Timeline, Guestbook 표지의 짧은 소개 문구는 아래 파일에서 수정한다.
 
 ```text
-새 글.md
-최종진짜최종.md
-memo 1.md
+src/content/site/introductions.md
 ```
 
-## Markdown 기본 사용법
+예시:
 
-제목:
-
-```md
-## 작은 제목
-### 더 작은 제목
+```yaml
+---
+home:
+  description: |-
+    흘려보내기 아쉬운 단상은 memo에 둡니다.
+memo:
+  description: 짧게 남긴 단상
+  intro: 지나가는 마음, 문장, 장면을 짧게 붙잡아 둔 단상입니다.
+articles:
+  description: 생각을 정리해서 쓴 글
+  intro: 여러 사안에 대한 생각을 정리해서 쓴 글입니다.
+---
 ```
 
-목록:
+- `description`: 브라우저와 검색 엔진용 설명에 쓰인다.
+- `intro`: 페이지 상단에 보이는 안내 문구에 쓰인다.
+- 여러 줄 문구는 `|-`를 쓰고 다음 줄부터 들여써서 적는다.
 
-```md
-- 첫 번째
-- 두 번째
-- 세 번째
-```
-
-링크:
-
-```md
-[GitHub](https://github.com/winterrainlee)
-```
-
-인용:
-
-```md
-> 오래 남는 문장은 대개 늦게 이해된다.
-```
-
-코드:
-
-````md
-```js
-console.log("hello");
-```
-````
-
-## 로컬에서 확인하기
-=======
-=======
->>>>>>> theirs
-## 새 글을 공개하는 절차
-
-1. `docs/writing-guide.md`를 보고 알맞은 위치에 `.md` 파일을 만든다.
-2. 로컬에서 미리 본다.
-3. 빌드가 되는지 확인한다.
-4. 변경 사항을 commit한다.
-5. GitHub에 push한다.
-6. GitHub Actions와 실제 블로그를 확인한다.
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-
-개발 서버 실행:
-
-```bash
-npm run dev
-```
-
-<<<<<<< ours
-<<<<<<< ours
-브라우저에서 보통 아래 주소를 연다.
-=======
-보통 아래 주소에서 미리 본다.
->>>>>>> theirs
-=======
-보통 아래 주소에서 미리 본다.
->>>>>>> theirs
-
-```text
-http://localhost:4321/
-```
-
-정식 빌드 확인:
+문구를 바꾼 뒤에는 빌드를 한 번 확인한다.
 
 ```bash
 npm run build
 ```
 
-`npm run build`가 성공하면 GitHub Pages에서도 대체로 성공한다.
+## 로컬에서 확인하기
+
+로컬 미리보기:
+
+```bash
+npm run dev -- --host 127.0.0.1
+```
+
+기본 빌드 확인:
+
+```bash
+npm run build
+```
+
+`npm run build`는 Astro 정적 빌드와 Pagefind 검색 인덱스 생성을 함께 확인한다. 이 명령이 실패하면 GitHub Actions 배포도 실패할 가능성이 크다.
 
 ## 배포하기
 
-<<<<<<< ours
-<<<<<<< ours
-글을 추가하거나 수정한 뒤:
-=======
-터미널로 배포할 때:
->>>>>>> theirs
-=======
-터미널로 배포할 때:
->>>>>>> theirs
+변경 내용을 확인한다.
 
 ```bash
-git status
+git status --short
+```
+
+문제가 없으면 커밋하고 푸시한다.
+
+```bash
 git add .
-<<<<<<< ours
-<<<<<<< ours
-git commit -m "Add new memo"
+git commit -m "Add ..."
 git push
 ```
 
-push하면 GitHub Actions가 자동으로 사이트를 다시 만든다. 보통 1분 안팎이면 반영된다.
-
-배포 상태 확인:
-
-```bash
-gh run list --repo winterrainlee/winterrainlee.github.io --limit 3
-```
-
-## 글 수정하기
-
-이미 쓴 글을 고치려면 해당 `.md` 파일을 수정하고 다시 commit/push하면 된다.
-
-날짜를 그대로 두면 원래 작성일을 유지한다. 큰 개정이라면 `updated`를 추가할 수 있다.
-
-```md
-updated: 2026-05-01
-```
-
-현재 화면에는 `updated`가 따로 표시되지는 않지만, 나중에 표시 기능을 추가할 수 있도록 데이터로 남겨둘 수 있다.
-
-## 글 숨기기와 삭제
-
-잠시 숨기기:
-
-```md
-draft: true
-```
-
-완전히 삭제:
-
-```text
-해당 .md 파일 삭제
-```
-
-삭제 후에도 Git 기록에는 남는다. 정적 블로그라서 배포된 사이트에서는 다음 배포 이후 사라진다.
-
-## 이미지 넣기
-
-이미지는 `public/images/` 아래에 둔다.
-
-권장 구조:
-
-```text
-public/images/2026-04-26-rainy-evening/photo.jpg
-```
-
-본문에서 사용:
-
-```md
-![비 오는 창문](/images/2026-04-26-rainy-evening/photo.jpg)
-```
-
-이미지는 너무 큰 원본을 그대로 올리지 않는 편이 좋다. 긴 변 기준 1600px 안팎이면 대부분 충분하다.
-=======
-=======
->>>>>>> theirs
-git commit -m "Add new post"
-git push
-```
-
-GitHub Desktop을 쓴다면 다음 흐름으로 생각하면 된다.
-
-1. 바뀐 파일을 확인한다.
-2. commit 메시지를 쓴다.
-3. `Commit to main`을 누른다.
-4. `Push origin`을 누른다.
-
-GitHub Desktop은 이 블로그의 “발행 버튼”에 가깝다.
-
-## 배포 상태 확인
-
-GitHub Actions 상태:
-
-```bash
-gh run list --repo winterrainlee/winterrainlee.github.io --limit 3
-```
-
-가장 최근 배포가 성공했는지 보고, 실패했다면 먼저 로컬에서 다시 확인한다.
-
-```bash
-npm run build
-```
-
-## 글 수정, 숨기기, 삭제
-
-이미 쓴 글을 수정하려면 해당 `.md` 파일을 고치고 다시 commit/push하면 된다.
-
-큰 개정이라면 frontmatter에 `updated`를 추가할 수 있다.
-
-```md
-updated: 2026-05-01
-```
-
-잠시 숨기려면:
-
-```md
-draft: true
-```
-
-완전히 삭제하려면 해당 `.md` 파일을 삭제한다. 삭제 후에도 Git 기록에는 남지만, 다음 배포 이후 공개 사이트에서는 사라진다.
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
+푸시 후 GitHub Actions가 자동으로 사이트를 빌드하고 GitHub Pages에 배포한다.
 
 ## Timeline 관리
 
 Timeline은 별도로 글을 쓰는 곳이 아니다. `memo`, `articles`, `self-practice`에 있는 모든 글을 날짜순으로 모아 보여준다.
 
-<<<<<<< ours
-<<<<<<< ours
-따라서 Timeline 순서를 바꾸고 싶으면 각 글의 `date`를 조정하면 된다.
-
-## 검색 관리
-
-검색은 Pagefind가 빌드할 때 자동으로 만든다.
-
-새 글을 추가하면:
-
-```bash
-npm run build
-```
-
-이 과정에서 `dist/pagefind/` 검색 인덱스가 다시 생성된다. 별도의 검색 서버는 없다.
-
-## 추천 앱과 작업 환경
-
-이 블로그는 VS Code만으로도 충분히 관리할 수 있다. 다만 글쓰기, Git 관리, 평소 메모를 나누어 생각하면 다음 조합이 가장 편하다.
-
-```text
-VS Code: 글 작성, 파일 관리, Markdown 미리보기, 로컬 서버 실행
-=======
-=======
->>>>>>> theirs
 Timeline 순서를 바꾸고 싶으면 각 글의 `date`를 조정한다.
 
 ## 검색 관리
 
-검색은 Pagefind가 빌드할 때 자동으로 만든다. 새 글을 추가하면 `npm run build` 과정에서 `dist/pagefind/` 검색 인덱스가 다시 생성된다.
+검색은 빌드할 때 Pagefind가 `dist/`를 읽어서 만든다. 글을 추가하거나 수정한 뒤 `npm run build`가 성공하면 검색 인덱스도 함께 갱신된다.
 
-별도의 검색 서버는 없다.
-
-## 작업 환경
-
-이 블로그는 VS Code만으로도 관리할 수 있다. 글쓰기, Git 관리, 평소 메모를 나누어 생각하면 다음 조합이 편하다.
-
-```text
-VS Code: 파일 관리, Markdown 미리보기, 로컬 서버 실행
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-GitHub Desktop: 변경 사항 확인, commit, push
-Obsidian: 초안, 단상, 블로그 글 작성
-```
-
-<<<<<<< ours
-<<<<<<< ours
-### VS Code로 관리하기
-
-VS Code에서는 이 폴더를 열면 된다.
-=======
-VS Code에서 열 폴더:
->>>>>>> theirs
-=======
-VS Code에서 열 폴더:
->>>>>>> theirs
-
-```text
-/Users/kioku/Documents/Blog
-```
-
-<<<<<<< ours
-<<<<<<< ours
-Markdown 미리보기:
-
-```text
-Cmd + Shift + V
-```
-
-편집 화면 옆에 미리보기:
-
-```text
-Cmd + K, V
-```
-
-개발 서버 실행:
-
-```bash
-npm run dev
-```
-
-VS Code의 Source Control 탭에서도 변경 파일 확인, stage, commit이 가능하다. 터미널에 익숙하지 않다면 GitHub Desktop을 같이 쓰는 편이 더 편하다.
-
-### GitHub Desktop으로 배포하기
-
-GitHub Desktop은 Git 명령어를 외우지 않고도 변경 사항을 보고 commit/push할 수 있는 앱이다.
-
-추천 흐름:
-
-1. VS Code나 Obsidian에서 글을 쓴다.
-2. GitHub Desktop을 연다.
-3. 바뀐 파일을 확인한다.
-4. commit 메시지를 쓴다.
-5. `Commit to main`을 누른다.
-6. `Push origin`을 누른다.
-
-GitHub Desktop은 “발행 버튼”처럼 생각하면 된다.
-
-### Obsidian으로 관리하기
-
-기존 개인 Obsidian vault와 블로그 글을 섞지 않는 편이 좋다. 이 블로그 폴더 자체를 별도 vault로 추가하는 방식을 추천한다.
-
-블로그 vault 경로:
-=======
-Obsidian에서도 이 폴더를 별도 vault로 열 수 있다. 기존 개인 vault와 섞지 않고 Blog vault를 따로 두는 편이 안전하다.
->>>>>>> theirs
-=======
-Obsidian에서도 이 폴더를 별도 vault로 열 수 있다. 기존 개인 vault와 섞지 않고 Blog vault를 따로 두는 편이 안전하다.
->>>>>>> theirs
-
-```text
-/Users/kioku/Documents/Blog
-```
-
-<<<<<<< ours
-<<<<<<< ours
-Obsidian에서 추가하는 방법:
-
-1. Obsidian을 연다.
-2. 현재 vault 이름을 누른다.
-3. `Manage vaults...` 또는 `Open another vault`를 선택한다.
-4. `Open folder as vault`를 누른다.
-5. `/Users/kioku/Documents/Blog` 폴더를 선택한다.
-
-이렇게 하면 기존 개인 vault는 사적인 생각 창고로 두고, Blog vault는 공개 글 작업실로 쓸 수 있다.
-
-Obsidian에서 새 글을 만들 때도 위치가 중요하다.
-=======
-Obsidian에서 글을 만들 때도 위치가 중요하다. 아무 폴더에 만든 노트는 블로그에 올라가지 않는다.
->>>>>>> theirs
-=======
-Obsidian에서 글을 만들 때도 위치가 중요하다. 아무 폴더에 만든 노트는 블로그에 올라가지 않는다.
->>>>>>> theirs
-
-```text
-src/content/memo/
-src/content/articles/
-src/content/self-practice/
-```
-
-<<<<<<< ours
-<<<<<<< ours
-아무 폴더에 만든 노트는 블로그에 올라가지 않는다. 반드시 `src/content/...` 아래에 있어야 한다.
-
-다른 기기에서 작성하는 방법은 별도 문서에 정리해두었다.
-
-```text
-docs/remote-writing-guide.md
-```
+검색 결과 문구는 각 글의 `title`, `description`, 본문에서 나온다. 검색에 더 잘 보이게 하고 싶으면 `description`을 짧고 구체적으로 쓴다.
 
 ## 카테고리 추가하기
 
-나중에 새 카테고리를 추가하려면 “콘텐츠 폴더 + Astro 컬렉션 + 페이지 + 네비게이션”을 함께 추가해야 한다.
+카테고리를 새로 만들 때는 글 폴더, content collection, 목록 페이지, 상세 페이지, 네비게이션을 함께 추가해야 한다.
 
-예를 들어 `reading` 카테고리를 추가한다고 하면 다음 순서로 진행한다.
-=======
-=======
->>>>>>> theirs
-## 카테고리 추가하기
-
-새 카테고리를 추가하려면 “콘텐츠 폴더 + Astro 컬렉션 + 페이지 + 네비게이션”을 함께 추가해야 한다.
-
-예를 들어 `reading` 카테고리를 추가한다면 다음을 진행한다.
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-
-### 1. 폴더 만들기
+예를 들어 `reading` 카테고리를 추가한다면:
 
 ```text
 src/content/reading/
-src/pages/reading/
+src/pages/reading/index.astro
+src/pages/reading/[...slug].astro
 ```
 
-### 2. 컬렉션 등록하기
-
-`src/content.config.ts`에 추가한다.
+`src/content.config.ts`에 컬렉션을 등록한다.
 
 ```ts
 export const collections = {
@@ -632,139 +256,26 @@ export const collections = {
 };
 ```
 
-### 3. 카테고리 정보 등록하기
+`src/lib/content.ts`의 `Section`, `sectionLabels`, `sectionPaths`에도 추가한다.
 
-`src/lib/content.ts`의 `Section`, `sectionLabels`, `sectionPaths`에 추가한다.
-
-```ts
-export type Section = 'memo' | 'articles' | 'self-practice' | 'reading';
-
-export const sectionLabels: Record<Section, string> = {
-  memo: 'Memo',
-  articles: 'Article',
-  'self-practice': 'Self-Practice',
-  reading: 'Reading',
-};
-
-export const sectionPaths: Record<Section, string> = {
-  memo: '/memo/',
-  articles: '/articles/',
-  'self-practice': '/self-practice/',
-  reading: '/reading/',
-};
-```
-
-### 4. 목록 페이지와 글 상세 페이지 만들기
-
-<<<<<<< ours
-<<<<<<< ours
-기존 `src/pages/self-practice/index.astro`와 `src/pages/self-practice/[...slug].astro`를 복사해서 `reading`에 맞게 바꾼다.
-=======
-기존 카테고리 페이지를 복사해서 `reading`에 맞게 바꾼다.
->>>>>>> theirs
-=======
-기존 카테고리 페이지를 복사해서 `reading`에 맞게 바꾼다.
->>>>>>> theirs
-
-```text
-src/pages/reading/index.astro
-src/pages/reading/[...slug].astro
-```
-
-### 5. 네비게이션에 추가하기
-
-`src/components/Header.astro`의 `postItems`에 추가한다.
+`src/components/Header.astro`의 `postItems`에 네비게이션 항목을 추가한다.
 
 ```ts
 const postItems = [
+  { href: '/memo/', label: 'MEMO' },
+  { href: '/self-practice/', label: 'Self Practice' },
   { href: '/articles/', label: 'Article' },
-  { href: '/self-practice/', label: 'Self-Practice' },
   { href: '/reading/', label: 'Reading' },
 ];
 ```
 
-<<<<<<< ours
-<<<<<<< ours
-상단 메뉴에 직접 노출하고 싶으면 `Post` 드롭다운이 아니라 Header의 일반 링크 영역에 넣으면 된다.
-
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-### 6. 빌드하고 배포하기
-
-```bash
-npm run build
-git add .
-git commit -m "Add reading category"
-git push
-```
-
-<<<<<<< ours
-<<<<<<< ours
-## 포털형 블로그와 다른 점
-
-| 포털형/설치형 블로그 | 이 블로그 |
-| --- | --- |
-| 웹 관리자에서 글 작성 | Markdown 파일로 글 작성 |
-| 저장 버튼으로 공개 | Git commit/push로 공개 |
-| 서버나 플랫폼이 글을 DB에서 불러옴 | 빌드된 정적 HTML을 제공 |
-| 검색/목록이 서비스 기능 | 빌드 시 검색 인덱스와 목록 생성 |
-| 플랫폼 UI에 맞춰 운영 | 디자인과 구조를 직접 바꿀 수 있음 |
-
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
 ## 조심할 점
 
 - `src/content/...` 아래의 글 파일을 지우면 배포 후 글도 사라진다.
 - 파일 이름을 바꾸면 URL도 바뀐다.
 - `date`가 미래 날짜여도 현재는 숨기지 않는다.
-- `npm run build`가 실패하면 GitHub Actions 배포도 실패할 가능성이 크다.
-<<<<<<< ours
-<<<<<<< ours
-- `dist/`와 `node_modules/`는 직접 관리하지 않는다. 저장소에도 올리지 않는다.
-
-## 추천 운영 루틴
-
-memo는 가볍게 자주 쓴다.
-
-```text
-src/content/memo/YYYY-MM-DD-short-title.md
-```
-
-생각이 쌓이면 article로 옮긴다.
-
-```text
-src/content/articles/YYYY-MM-DD-topic.md
-```
-
-무언가를 만져보고 배운 기록은 self-practice에 둔다.
-
-```text
-src/content/self-practice/YYYY-MM-DD-thing-i-tried.md
-```
-
-글을 공개하기 전에는 한 번만 확인한다.
-
-```bash
-npm run build
-```
-
-문제가 없으면 배포한다.
-
-```bash
-git add .
-git commit -m "Add ..."
-git push
-```
-=======
-- `dist/`와 `node_modules/`는 직접 관리하지 않는다.
->>>>>>> theirs
-=======
-- `dist/`와 `node_modules/`는 직접 관리하지 않는다.
->>>>>>> theirs
+- `dist/`, `node_modules/`, `.env`, `docs/private/`, `supabase/.temp/`는 커밋하지 않는다.
+- Supabase service role key, webhook URL, 관리자 비밀번호 같은 secret은 공개 문서나 브라우저 코드에 넣지 않는다.
 
 ## 자주 생기는 문제
 
@@ -782,35 +293,18 @@ git push
 npm run build
 ```
 
-GitHub Actions 상태도 확인한다.
+로컬 빌드가 실패하면 터미널 에러 메시지의 파일 경로와 줄 번호를 확인한다.
 
-```bash
-gh run list --repo winterrainlee/winterrainlee.github.io --limit 3
-```
+### 문구를 바꿨는데 화면이 그대로다
 
-### URL이 바뀌었다
-
-파일 이름을 바꾸면 URL도 바뀐다. 이미 공유한 글은 파일 이름을 되도록 유지하는 편이 좋다.
-
-### 검색에 새 글이 안 나온다
-
-<<<<<<< ours
-<<<<<<< ours
-배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시가 있어 몇 분 늦게 보일 때도 있다.
-
-## 이 블로그의 핵심 원칙
-=======
-배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시 때문에 몇 분 늦게 보일 때도 있다.
+- 소개 페이지 본문은 `src/content/pages/about.md`를 수정했는지 확인한다.
+- 메인과 표지 문구는 `src/content/site/introductions.md`를 수정했는지 확인한다.
+- 로컬 서버를 켜둔 상태라면 브라우저를 새로고침한다.
+- 배포 사이트라면 GitHub Actions 배포가 끝났는지 확인한다.
 
 ## 운영 원칙
->>>>>>> theirs
-=======
-배포가 아직 끝나지 않았을 수 있다. GitHub Pages는 캐시 때문에 몇 분 늦게 보일 때도 있다.
 
-## 운영 원칙
->>>>>>> theirs
-
-- memo는 가볍게.
-- article은 조금 더 천천히.
-- self-practice는 결과보다 과정을 남긴다.
-- 완벽한 운영보다 계속 남기는 것을 우선한다.
+- 먼저 Markdown 파일로 콘텐츠를 관리한다.
+- HTML/Astro 파일은 구조나 기능을 바꿀 때만 수정한다.
+- 변경 후에는 `npm run build`로 확인한다.
+- 커밋 전에는 `git status --short`로 의도치 않은 파일이 포함되지 않았는지 확인한다.

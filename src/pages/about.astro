@@ -1,47 +1,18 @@
 ---
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const about = await getEntry('pages', 'about');
+
+if (!about) {
+  throw new Error('Missing about page content.');
+}
+
+const { Content } = await render(about);
 ---
 
-<BaseLayout title="소개 | 겨울비" description="겨울비 소개">
+<BaseLayout title={`${about.data.title} | 겨울비`} description={about.data.description}>
   <article class="prose">
-    <h1><em>겨울비冬雨</em></h1>
-
-    <p>
-      공존과 꾸준함을 연습하고 싶어 블로그를 해본다.
-    </p>
-
-    <h2>Favorites</h2>
-
-    <ul>
-      <li>臺灣대만🇹🇼，温貞菱온정릉，鄭宜農정의농</li>
-      <li>프로젝트 세카이/MORE MOMRE JUMP/히노모리 시즈쿠</li>
-    </ul>
-
-    <h2>Interests</h2>
-
-    <ul>
-      <li>왜 나는 대만을 영혼의 고향처럼 좋아하고 끌리는지 알아가는 것</li>
-      <li>희미한 것들을 보다 선명하게 만드는 것</li>
-      <li>즐겁게 배우는 방법을 찾아내는 것</li>
-    </ul>
-
-    <h2>Blog Categories</h2>
-
-    <ul>
-      <li>Memo: 문득 떠오른 단상</li>
-      <li>Article: 여러 사안에 대한 생각을 정리해서 쓴 글</li>
-      <li>Self-Practice: 이것저것 연습하며 배운 것들의 기록</li>
-    </ul>
-
-    <dl>
-      <div>
-        <dt>GitHub</dt>
-        <dd><a href="https://github.com/winterrainlee">winterrainlee</a></dd>
-      </div>
-      <div>
-        <dt>Twitter</dt>
-        <dd><a href="https://twitter.com/winterrain_lee">winterrain_lee</a></dd>
-      </div>
-    </dl>
+    <Content />
   </article>
 </BaseLayout>

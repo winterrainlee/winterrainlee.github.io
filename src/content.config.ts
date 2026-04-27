@@ -19,8 +19,47 @@ const writing = (base: string) =>
     schema: writingSchema,
   });
 
+const site = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/site' }),
+  schema: z.object({
+    home: z.object({
+      description: z.string(),
+    }),
+    memo: z.object({
+      description: z.string(),
+      intro: z.string(),
+    }),
+    articles: z.object({
+      description: z.string(),
+      intro: z.string(),
+    }),
+    selfPractice: z.object({
+      description: z.string(),
+      intro: z.string(),
+    }),
+    timeline: z.object({
+      description: z.string(),
+      intro: z.string(),
+    }),
+    guestbook: z.object({
+      description: z.string(),
+      intro: z.string(),
+    }),
+  }),
+});
+
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 export const collections = {
   articles: writing('./src/content/articles'),
   memo: writing('./src/content/memo'),
   'self-practice': writing('./src/content/self-practice'),
+  pages,
+  site,
 };

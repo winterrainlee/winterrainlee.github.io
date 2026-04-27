@@ -30,6 +30,17 @@ export async function getAllPublished() {
   return groups.flat().sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
+export async function getSiteIntroductions() {
+  const entries = await getCollection('site');
+  const introductions = entries.find((entry) => entry.id === 'introductions.md' || entry.id === 'introductions');
+
+  if (!introductions) {
+    throw new Error('Missing site introductions content entry.');
+  }
+
+  return introductions.data;
+}
+
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('en', {
     month: 'short',

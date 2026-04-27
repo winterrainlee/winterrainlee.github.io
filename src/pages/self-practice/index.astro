@@ -1,15 +1,14 @@
 ---
 import PostList from '../../components/PostList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublished } from '../../lib/content';
+import { getPublished, getSiteIntroductions } from '../../lib/content';
 
+const introductions = await getSiteIntroductions();
 const posts = await getPublished('self-practice');
 ---
 
-<BaseLayout title="Self-Practice | 겨울비" description="이것저것 연습하며 남긴 기록">
+<BaseLayout title="Self-Practice | 겨울비" description={introductions.selfPractice.description}>
   <h1 class="serif mb-6 text-4xl">Self-Practice</h1>
-  <p class="mb-8 text-[var(--muted)]">
-    AI agent, automation, 이 블로그처럼 직접 만져보고 연습하며 배운 것들을 정리합니다.
-  </p>
+  <p class="mb-8 text-[var(--muted)]">{introductions.selfPractice.intro}</p>
   <PostList posts={posts} section="self-practice" />
 </BaseLayout>

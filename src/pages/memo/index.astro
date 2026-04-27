@@ -1,13 +1,14 @@
 ---
 import PostList from '../../components/PostList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getPublished } from '../../lib/content';
+import { getPublished, getSiteIntroductions } from '../../lib/content';
 
+const introductions = await getSiteIntroductions();
 const posts = await getPublished('memo');
 ---
 
-<BaseLayout title="Memo | 겨울비" description="짧게 남긴 단상">
+<BaseLayout title="Memo | 겨울비" description={introductions.memo.description}>
   <h1 class="serif mb-6 text-4xl">Memo</h1>
-  <p class="mb-8 text-[var(--muted)]">지나가는 마음, 문장, 장면을 짧게 붙잡아 둔 단상입니다.</p>
+  <p class="mb-8 text-[var(--muted)]">{introductions.memo.intro}</p>
   <PostList posts={posts} section="memo" />
 </BaseLayout>
