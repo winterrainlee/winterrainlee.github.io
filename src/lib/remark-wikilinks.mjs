@@ -3,6 +3,8 @@ import { extname, join, relative, sep } from 'node:path';
 
 const CONTENT_ROOT = join(process.cwd(), 'src', 'content');
 const SECTIONS = ['memo', 'articles', 'self-practice'];
+const SUPPORTED_CALLOUTS = new Set(['note', 'info', 'tip', 'warning', 'danger', 'quote']);
+const CALLOUT_PATTERN = /^\[!([a-z]+)\][+-]?[ \t]*(.*?)(?:\r?\n|$)/i;
 const OBSIDIAN_COMMENT_PATTERN = /%%[\s\S]*?%%/g;
 const WIKILINK_PATTERN = /\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|([^\]]+))?\]\]/g;
 
@@ -121,6 +123,58 @@ function removeObsidianComments(node) {
   }
 }
 
+function setHProperties(node, hProperties) {
+  node.data = node.data ?? {};
+  node.data.hProperties = {
+    ...(node.data.hProperties ?? {}),
+    ...hProperties,
+  };
+}
+
+function firstTextChild(node) {
+  if (!node || !Array.isArray(node.children)) return null;
+  return node.children.find((child) => child.type === 'text') ?? null;
+}
+
+function transformObsidianCallouts(node) {
+  if (!node || !Array.isArray(node.children)) return;
+
+  for (const child of node.children) {
+    if (child.type === 'blockquote') {
+      const firstParagraph = child.children?.[0];
+      const markerNode = firstParagraph?.type === 'paragraph' ? firstTextChild(firstParagraph) : null;
+      const match = markerNode?.value.match(CALLOUT_PATTERN);
+      const calloutType = match?.[1]?.toLowerCase();
+
+      if (SUPPORTED_CALLOUTS.has(calloutType)) {
+        const title = match[2].trim();
+        const body = markerNode.value.slice(match[0].length);
+
+        setHProperties(child, {
+          className: ['callout', `callout-${calloutType}`],
+          'data-callout': calloutType,
+        });
+
+        if (title) {
+          markerNode.value = title;
+          setHProperties(firstParagraph, { className: ['callout-title'] });
+          if (body) {
+            child.children.splice(1, 0, {
+              type: 'paragraph',
+              children: [{ type: 'text', value: body }],
+            });
+          }
+        } else {
+          markerNode.value = body;
+          if (isEmptyNode(firstParagraph)) child.children.shift();
+        }
+      }
+    }
+
+    transformObsidianCallouts(child);
+  }
+}
+
 function visit(node, index) {
   if (!node || !Array.isArray(node.children)) return;
 
@@ -147,6 +201,7 @@ export default function remarkWikiLinks() {
 
   return (tree) => {
     removeObsidianComments(tree);
+    transformObsidianCallouts(tree);
     visit(tree, index);
   };
 }

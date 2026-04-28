@@ -168,6 +168,114 @@ img {
   vertical-align: -0.08em;
 }
 
+.prose blockquote[data-callout] {
+  --callout-accent: var(--accent);
+  --callout-accent-soft: rgba(47, 111, 143, 0.12);
+  --callout-accent-line: rgba(47, 111, 143, 0.42);
+  position: relative;
+  margin: 1.6rem 0;
+  border: 1px solid var(--callout-accent-line);
+  border-left: 3px solid var(--callout-accent);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, var(--callout-accent-soft), transparent 42%),
+    rgba(255, 255, 255, 0.44);
+  padding: 1rem 1.1rem 1.05rem 3rem;
+  color: #31424d;
+}
+
+.prose blockquote[data-callout]::before {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.75rem;
+  display: grid;
+  width: 1.4rem;
+  height: 1.4rem;
+  place-items: center;
+  border: 1px solid var(--callout-accent-line);
+  border-radius: 999px;
+  color: var(--callout-accent);
+  content: "i";
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.prose blockquote[data-callout="note"] {
+  --callout-accent: #2f6f8f;
+  --callout-accent-soft: rgba(47, 111, 143, 0.1);
+  --callout-accent-line: rgba(47, 111, 143, 0.32);
+}
+
+.prose blockquote[data-callout="info"] {
+  --callout-accent: #4c6f9f;
+  --callout-accent-soft: rgba(76, 111, 159, 0.1);
+  --callout-accent-line: rgba(76, 111, 159, 0.32);
+}
+
+.prose blockquote[data-callout="tip"] {
+  --callout-accent: #4f7d57;
+  --callout-accent-soft: rgba(79, 125, 87, 0.1);
+  --callout-accent-line: rgba(79, 125, 87, 0.32);
+}
+
+.prose blockquote[data-callout="tip"]::before {
+  content: "?";
+}
+
+.prose blockquote[data-callout="warning"] {
+  --callout-accent: #9a6a35;
+  --callout-accent-soft: rgba(154, 106, 53, 0.11);
+  --callout-accent-line: rgba(154, 106, 53, 0.34);
+}
+
+.prose blockquote[data-callout="warning"]::before {
+  content: "!";
+}
+
+.prose blockquote[data-callout="danger"] {
+  --callout-accent: #9a6257;
+  --callout-accent-soft: rgba(154, 98, 87, 0.12);
+  --callout-accent-line: rgba(154, 98, 87, 0.36);
+}
+
+.prose blockquote[data-callout="danger"]::before {
+  content: "!";
+}
+
+.prose blockquote[data-callout="quote"] {
+  --callout-accent: #2f6f8f;
+  --callout-accent-soft: rgba(47, 111, 143, 0.08);
+  --callout-accent-line: rgba(47, 111, 143, 0.28);
+}
+
+.prose blockquote[data-callout="quote"]::before {
+  top: 0.1rem;
+  border: 0;
+  border-radius: 0;
+  color: rgba(47, 111, 143, 0.42);
+  content: "“";
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3.2rem;
+  font-weight: 400;
+}
+
+.prose blockquote[data-callout] .callout-title {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.prose blockquote[data-callout] p {
+  margin: 0.55rem 0;
+}
+
+.prose blockquote[data-callout] p:last-child {
+  margin-bottom: 0;
+}
+
 .prose figure {
   margin: 1.25rem 0 1.5rem;
 }
