@@ -4,6 +4,7 @@ description: 로컬 LLM에 대한 생각
 date: 2026-04-30
 tags:
   - memo
+  - local-model
 draft: false
 ---
 
