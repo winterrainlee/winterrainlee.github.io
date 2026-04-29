@@ -44,6 +44,7 @@ export async function getSiteIntroductions() {
 
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('en', {
+    timeZone: 'Asia/Seoul',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -51,13 +52,15 @@ export function formatDate(date: Date) {
 }
 
 export function formatDateTime(date: Date) {
-  return new Intl.DateTimeFormat('en', {
+  const formatted = new Intl.DateTimeFormat('en', {
+    timeZone: 'Asia/Seoul',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
   }).format(date);
+  return `${formatted} KST`;
 }
 
 const gitLogCache = new Map<string, Date[]>();
