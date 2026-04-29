@@ -7,6 +7,7 @@ type ViewSecretReplyRequest = {
 
 type GuestbookEntry = {
   is_secret: boolean;
+  body: string;
   owner_reply: string | null;
   owner_replied_at: string | null;
   password_salt: string | null;
@@ -58,7 +59,7 @@ Deno.serve(async (request) => {
   }
 
   const entryResponse = await fetch(
-    `${supabaseUrl}/rest/v1/guestbook_entries?id=eq.${encodeURIComponent(id)}&select=is_secret,owner_reply,owner_replied_at,password_salt,password_hash&limit=1`,
+    `${supabaseUrl}/rest/v1/guestbook_entries?id=eq.${encodeURIComponent(id)}&select=is_secret,body,owner_reply,owner_replied_at,password_salt,password_hash&limit=1`,
     {
       headers: {
         apikey: serviceRoleKey,
@@ -102,6 +103,7 @@ Deno.serve(async (request) => {
 
   return new Response(
     JSON.stringify({
+      body: entry.body,
       owner_reply: entry.owner_reply,
       owner_replied_at: entry.owner_replied_at,
     }),

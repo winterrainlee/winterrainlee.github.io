@@ -112,6 +112,37 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
     }).format(new Date(dateText));
   };
 
+  const createReplyElement = (ownerReply, ownerRepliedAt) => {
+    if (!ownerReply) return null;
+
+    const reply = document.createElement('section');
+    reply.className = 'guestbook-reply';
+
+    const replyHeader = document.createElement('div');
+    replyHeader.className = 'flex flex-wrap items-baseline justify-between gap-2';
+
+    const replyTitle = document.createElement('h4');
+    replyTitle.className = 'text-sm font-bold text-[var(--accent-2)]';
+    replyTitle.textContent = '겨울비의 답글';
+
+    replyHeader.append(replyTitle);
+
+    if (ownerRepliedAt) {
+      const replyTime = document.createElement('time');
+      replyTime.className = 'text-xs text-[var(--muted)]';
+      replyTime.dateTime = ownerRepliedAt;
+      replyTime.textContent = formatDate(ownerRepliedAt);
+      replyHeader.append(replyTime);
+    }
+
+    const replyBody = document.createElement('p');
+    replyBody.className = 'mt-2 whitespace-pre-line leading-relaxed';
+    replyBody.textContent = ownerReply;
+
+    reply.append(replyHeader, replyBody);
+    return reply;
+  };
+
   const renderEntries = (entries) => {
     if (!list || !count) return;
     count.textContent = `${entries.length} notes`;
@@ -145,54 +176,15 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
       article.append(meta);
 
       if (entry.is_secret) {
-        const secret = document.createElement('div');
-        secret.className = 'mt-4 rounded border border-dashed border-[var(--line)] bg-[var(--soft)] px-3 py-3 text-sm text-[var(--muted)]';
-        secret.textContent = '비밀글입니다.';
-        article.append(secret);
-      } else {
-        const body = document.createElement('p');
-        body.className = 'mt-4 whitespace-pre-line leading-relaxed';
-        body.textContent = entry.body ?? '';
-        article.append(body);
-      }
-
-      if (!entry.is_secret && entry.owner_reply) {
-        const reply = document.createElement('section');
-        reply.className = 'guestbook-reply';
-
-        const replyHeader = document.createElement('div');
-        replyHeader.className = 'flex flex-wrap items-baseline justify-between gap-2';
-
-        const replyTitle = document.createElement('h4');
-        replyTitle.className = 'text-sm font-bold text-[var(--accent-2)]';
-        replyTitle.textContent = '겨울비의 답글';
-
-        replyHeader.append(replyTitle);
-
-        if (entry.owner_replied_at) {
-          const replyTime = document.createElement('time');
-          replyTime.className = 'text-xs text-[var(--muted)]';
-          replyTime.dateTime = entry.owner_replied_at;
-          replyTime.textContent = formatDate(entry.owner_replied_at);
-          replyHeader.append(replyTime);
-        }
-
-        const replyBody = document.createElement('p');
-        replyBody.className = 'mt-2 whitespace-pre-line leading-relaxed';
-        replyBody.textContent = entry.owner_reply;
-
-        reply.append(replyHeader, replyBody);
-        article.append(reply);
-      }
-
-      if (entry.is_secret && entry.has_owner_reply) {
-        const secretReply = document.createElement('section');
-        secretReply.className = 'guestbook-secret-reply';
+        const secret = document.createElement('section');
+        secret.className = 'guestbook-secret-reply';
 
         const button = document.createElement('button');
         button.className = 'guestbook-secret-reply-button';
         button.type = 'button';
-        button.textContent = '비밀 답글이 달렸습니다.';
+        button.textContent = entry.has_owner_reply
+          ? '비밀글입니다. 비밀번호로 글과 답글 보기'
+          : '비밀글입니다. 비밀번호로 글 보기';
 
         const panel = document.createElement('form');
         panel.className = 'mt-3 hidden gap-2';
@@ -250,18 +242,16 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
             const result = await response.json();
 
             if (!response.ok) {
-              throw new Error(result.error ?? '비밀 답글을 불러오지 못했습니다.');
+              throw new Error(result.error ?? '비밀글을 불러오지 못했습니다.');
             }
 
-            if (!result.owner_reply) {
-              message.textContent = '아직 답글 내용이 없습니다.';
-              return;
-            }
+            const body = document.createElement('p');
+            body.className = 'mt-3 whitespace-pre-line leading-relaxed text-[var(--ink)]';
+            body.textContent = result.body ?? '';
+            panel.replaceChildren(body);
 
-            const reply = document.createElement('div');
-            reply.className = 'mt-3 whitespace-pre-line leading-relaxed';
-            reply.textContent = result.owner_reply;
-            panel.replaceChildren(reply);
+            const reply = createReplyElement(result.owner_reply, result.owner_replied_at);
+            if (reply) panel.append(reply);
           } catch (error) {
             message.textContent = error instanceof Error ? error.message : '문제가 생겼습니다.';
           } finally {
@@ -269,8 +259,16 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
           }
         });
 
-        secretReply.append(button, panel);
-        article.append(secretReply);
+        secret.append(button, panel);
+        article.append(secret);
+      } else {
+        const body = document.createElement('p');
+        body.className = 'mt-4 whitespace-pre-line leading-relaxed';
+        body.textContent = entry.body ?? '';
+        article.append(body);
+
+        const reply = createReplyElement(entry.owner_reply, entry.owner_replied_at);
+        if (reply) article.append(reply);
       }
 
       list.append(article);
