@@ -1,6 +1,6 @@
 ---
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-04-29
 ---
 
 # AGENTS.md
@@ -45,6 +45,22 @@ updated: 2026-04-27
 - `docs/private/`는 Git에서 추적하지 않는다.
 - Supabase project ref, 관리자 경로, 보호 헤더 이름, 함수별 테스트 명령처럼 운영 단서를 자세히 담은 문서는 공개하지 않는다.
 - `docs/` 아래 공개 문서를 만들거나 수정할 때는 작업 마지막에 프론트매터의 `created`, `updated` 날짜를 확인하고 갱신한다.
+
+## Blog Agent Operating Docs
+
+Hermes context files are split by purpose:
+
+- `SOUL.md` in the `blog-agent` profile defines Saito's identity, tone, and relationship to Winterrain.
+- This root `AGENTS.md` defines repository-wide project rules.
+- `src/content/AGENTS.md` defines public content collection rules and should apply when editing `src/content`.
+- `docs/private/blog-agent/AGENTS.md` indexes private `blog-agent` operating docs and should apply when reading or editing that private directory.
+
+When working as Hermes `blog-agent` for this blog, read the private operating docs indexed by `docs/private/blog-agent/AGENTS.md` before publishing drafts or changing blog-agent operations.
+
+When changing context files themselves, follow the Hermes context files guide:
+`https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files`.
+
+These docs are private operational notes. Do not copy secrets, Discord tokens, allowed user values, private draft content, or unpublished operational details into public files or commits.
 
 ## 방명록 구조
 
