@@ -136,6 +136,24 @@ function firstTextChild(node) {
   return node.children.find((child) => child.type === 'text') ?? null;
 }
 
+function splitCalloutTitleAndBody(firstParagraph, markerNode, title, body) {
+  const markerIndex = firstParagraph.children.indexOf(markerNode);
+  const bodyChildren = [];
+
+  if (body) bodyChildren.push({ type: 'text', value: body });
+  if (markerIndex >= 0) bodyChildren.push(...firstParagraph.children.slice(markerIndex + 1));
+
+  firstParagraph.children = [{ type: 'text', value: title }];
+  setHProperties(firstParagraph, { className: ['callout-title'] });
+
+  if (bodyChildren.length === 0) return null;
+
+  return {
+    type: 'paragraph',
+    children: bodyChildren,
+  };
+}
+
 function transformObsidianCallouts(node) {
   if (!node || !Array.isArray(node.children)) return;
 
@@ -156,14 +174,8 @@ function transformObsidianCallouts(node) {
         });
 
         if (title) {
-          markerNode.value = title;
-          setHProperties(firstParagraph, { className: ['callout-title'] });
-          if (body) {
-            child.children.splice(1, 0, {
-              type: 'paragraph',
-              children: [{ type: 'text', value: body }],
-            });
-          }
+          const bodyParagraph = splitCalloutTitleAndBody(firstParagraph, markerNode, title, body);
+          if (bodyParagraph) child.children.splice(1, 0, bodyParagraph);
         } else {
           markerNode.value = body;
           if (isEmptyNode(firstParagraph)) child.children.shift();
