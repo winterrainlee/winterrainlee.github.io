@@ -351,7 +351,7 @@ img {
 }
 
 .prose pre {
-  overflow-x: auto;
+  overflow-x: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #172127;
@@ -363,6 +363,9 @@ img {
   background: transparent;
   padding: 0;
   color: inherit;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .prose dl {
