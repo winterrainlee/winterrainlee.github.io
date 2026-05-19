@@ -25,7 +25,8 @@ n번째 블로그 연습 중.
 ## Favorites
 
 - 臺灣대만🇹🇼，温貞菱온정릉，鄭宜農정의농
-- 프로젝트 세카이/MORE MOMRE JUMP/히노모리 시즈쿠
+- 프로젝트 세카이/MORE MORE JUMP!/히노모리 시즈쿠
+- 활자와 서사 읽기
 
 ## Interests
 

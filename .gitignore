@@ -5,6 +5,7 @@ dist
 .env.*
 supabase/.temp/
 docs/private/
+Drafts/
 .DS_Store
 .obsidian/
 npm-debug.log*
