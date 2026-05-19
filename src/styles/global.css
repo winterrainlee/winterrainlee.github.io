@@ -196,6 +196,15 @@ img {
   text-decoration-color: currentColor;
 }
 
+.prose mark {
+  border-radius: 4px;
+  background: linear-gradient(180deg, transparent 12%, rgba(219, 194, 105, 0.34) 12%, rgba(219, 194, 105, 0.34) 88%, transparent 88%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 0.12em;
+  color: inherit;
+}
+
 .prose a[href]:not(:has(img))::after {
   display: inline-block;
   width: 0.82em;
