@@ -3,8 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getSiteIntroductions } from '../lib/content';
 
 const introductions = await getSiteIntroductions();
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
-const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+const web3FormsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 ---
 
 <BaseLayout title="Guestbook | 겨울비" description={introductions.guestbook.description}>
@@ -32,68 +31,49 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
           />
         </label>
         <label class="grid gap-2 text-sm font-bold">
-          비밀번호
+          답장 받을 이메일
           <input
             class="guestbook-input"
-            type="password"
-            name="password"
-            autocomplete="new-password"
-            maxlength="80"
-            placeholder="입력하면 비밀글"
+            type="email"
+            name="email"
+            autocomplete="email"
+            maxlength="254"
+            placeholder="you@example.com"
+            required
           />
         </label>
       </div>
 
       <label class="grid gap-2 text-sm font-bold">
-        글
+        메시지
         <textarea
           class="guestbook-input min-h-36 resize-y leading-relaxed"
-          name="body"
-          maxlength="1000"
+          name="message"
+          maxlength="2000"
           placeholder="여기에 남겨주세요."
           required></textarea>
       </label>
 
+      <label class="hidden" aria-hidden="true">
+        Botcheck
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+      </label>
+
       <div class="flex flex-col gap-3 border-t border-[var(--line)] pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <label class="inline-flex items-center gap-2 text-sm text-[var(--muted)]">
-          <input class="guestbook-checkbox" type="checkbox" name="isSecret" />
-          비밀글
-        </label>
+        <p class="m-0 text-sm text-[var(--muted)]">답장은 입력한 이메일로 보낼게요.</p>
         <button class="guestbook-submit" type="submit">남기기</button>
       </div>
       <p class="hidden text-sm text-[var(--muted)]" id="guestbook-status" role="status"></p>
     </form>
   </section>
-
-  <section class="mt-12">
-    <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-xs font-bold uppercase tracking-[0.16em] text-[var(--muted)]">Messages</h2>
-      <span class="text-sm text-[var(--muted)]" id="guestbook-count">0 notes</span>
-    </div>
-
-    <div class="grid gap-3" id="guestbook-list">
-      <p class="rounded-lg border border-[var(--line)] bg-white/45 p-4 text-sm text-[var(--muted)]">방명록을 불러오는 중입니다.</p>
-    </div>
-  </section>
 </BaseLayout>
 
-<script define:vars={{ supabaseUrl, supabaseKey }}>
+<script define:vars={{ web3FormsAccessKey }}>
   const form = document.getElementById('guestbook-form');
-  const list = document.getElementById('guestbook-list');
-  const count = document.getElementById('guestbook-count');
   const status = document.getElementById('guestbook-status');
-  const passwordInput = form?.querySelector('input[name="password"]');
-  const secretInput = form?.querySelector('input[name="isSecret"]');
   const submitButton = form?.querySelector('button[type="submit"]');
-
-  const publicEndpoint = `${supabaseUrl}/rest/v1/guestbook_public_entries`;
-  const createEndpoint = `${supabaseUrl}/functions/v1/create-guestbook`;
-  const secretReplyEndpoint = `${supabaseUrl}/functions/v1/view-secret-reply`;
-  const headers = {
-    apikey: supabaseKey,
-    Authorization: `Bearer ${supabaseKey}`,
-    'Content-Type': 'application/json',
-  };
+  const web3FormsEndpoint = 'https://api.web3forms.com/submit';
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const setStatus = (message, isError = false) => {
     if (!status) return;
@@ -102,259 +82,76 @@ const supabaseKey = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
     status.classList.toggle('text-[var(--accent-2)]', isError);
   };
 
-  const formatDate = (dateText) => {
-    return new Intl.DateTimeFormat('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-    }).format(new Date(dateText));
+  const readError = async (response) => {
+    try {
+      const result = await response.json();
+      return result.message || result.body?.message || '메시지를 보내지 못했습니다.';
+    } catch {
+      return '메시지를 보내지 못했습니다.';
+    }
   };
-
-  const createReplyElement = (ownerReply, ownerRepliedAt) => {
-    if (!ownerReply) return null;
-
-    const reply = document.createElement('section');
-    reply.className = 'guestbook-reply';
-
-    const replyHeader = document.createElement('div');
-    replyHeader.className = 'flex flex-wrap items-baseline justify-between gap-2';
-
-    const replyTitle = document.createElement('h4');
-    replyTitle.className = 'text-sm font-bold text-[var(--accent-2)]';
-    replyTitle.textContent = '겨울비의 답글';
-
-    replyHeader.append(replyTitle);
-
-    if (ownerRepliedAt) {
-      const replyTime = document.createElement('time');
-      replyTime.className = 'text-xs text-[var(--muted)]';
-      replyTime.dateTime = ownerRepliedAt;
-      replyTime.textContent = formatDate(ownerRepliedAt);
-      replyHeader.append(replyTime);
-    }
-
-    const replyBody = document.createElement('p');
-    replyBody.className = 'mt-2 whitespace-pre-line leading-relaxed';
-    replyBody.textContent = ownerReply;
-
-    reply.append(replyHeader, replyBody);
-    return reply;
-  };
-
-  const renderEntries = (entries) => {
-    if (!list || !count) return;
-    count.textContent = `${entries.length} notes`;
-    list.replaceChildren();
-
-    if (entries.length === 0) {
-      const empty = document.createElement('p');
-      empty.className = 'rounded-lg border border-[var(--line)] bg-white/45 p-4 text-sm text-[var(--muted)]';
-      empty.textContent = '아직 남겨진 글이 없습니다.';
-      list.append(empty);
-      return;
-    }
-
-    entries.forEach((entry) => {
-      const article = document.createElement('article');
-      article.className = 'rounded-lg border border-[var(--line)] bg-white/45 p-4';
-
-      const meta = document.createElement('div');
-      meta.className = 'flex flex-wrap items-baseline justify-between gap-2';
-
-      const name = document.createElement('h3');
-      name.className = 'serif text-xl';
-      name.textContent = entry.name;
-
-      const time = document.createElement('time');
-      time.className = 'text-sm text-[var(--muted)]';
-      time.dateTime = entry.created_at;
-      time.textContent = formatDate(entry.created_at);
-
-      meta.append(name, time);
-      article.append(meta);
-
-      if (entry.is_secret) {
-        const secret = document.createElement('section');
-        secret.className = 'guestbook-secret-reply';
-
-        const button = document.createElement('button');
-        button.className = 'guestbook-secret-reply-button';
-        button.type = 'button';
-        button.textContent = entry.has_owner_reply
-          ? '비밀글입니다. 비밀번호로 글과 답글 보기'
-          : '비밀글입니다. 비밀번호로 글 보기';
-
-        const panel = document.createElement('form');
-        panel.className = 'mt-3 hidden gap-2';
-
-        const input = document.createElement('input');
-        input.className = 'guestbook-input';
-        input.type = 'password';
-        input.placeholder = '작성할 때 입력한 비밀번호';
-        input.autocomplete = 'current-password';
-
-        const actions = document.createElement('div');
-        actions.className = 'flex flex-wrap items-center gap-2';
-
-        const submit = document.createElement('button');
-        submit.className = 'guestbook-submit';
-        submit.type = 'submit';
-        submit.textContent = '확인';
-
-        const message = document.createElement('p');
-        message.className = 'text-sm text-[var(--muted)]';
-
-        actions.append(submit, message);
-        panel.append(input, actions);
-
-        button.addEventListener('click', () => {
-          panel.classList.toggle('hidden');
-          panel.classList.toggle('grid');
-          if (!panel.classList.contains('hidden')) input.focus();
-        });
-
-        panel.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          const password = input.value;
-
-          if (!password) {
-            message.textContent = '비밀번호를 입력해주세요.';
-            return;
-          }
-
-          submit.setAttribute('disabled', 'true');
-          message.textContent = '확인하는 중입니다.';
-
-          try {
-            const response = await fetch(secretReplyEndpoint, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                id: entry.id,
-                password,
-              }),
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-              throw new Error(result.error ?? '비밀글을 불러오지 못했습니다.');
-            }
-
-            const body = document.createElement('p');
-            body.className = 'mt-3 whitespace-pre-line leading-relaxed text-[var(--ink)]';
-            body.textContent = result.body ?? '';
-            panel.replaceChildren(body);
-
-            const reply = createReplyElement(result.owner_reply, result.owner_replied_at);
-            if (reply) panel.append(reply);
-          } catch (error) {
-            message.textContent = error instanceof Error ? error.message : '문제가 생겼습니다.';
-          } finally {
-            submit.removeAttribute('disabled');
-          }
-        });
-
-        secret.append(button, panel);
-        article.append(secret);
-      } else {
-        const body = document.createElement('p');
-        body.className = 'mt-4 whitespace-pre-line leading-relaxed';
-        body.textContent = entry.body ?? '';
-        article.append(body);
-
-        const reply = createReplyElement(entry.owner_reply, entry.owner_replied_at);
-        if (reply) article.append(reply);
-      }
-
-      list.append(article);
-    });
-  };
-
-  const loadEntries = async () => {
-    if (!supabaseUrl || !supabaseKey) {
-      setStatus('Supabase 환경 변수가 아직 설정되지 않았습니다.', true);
-      return;
-    }
-
-    const response = await fetch(`${publicEndpoint}?select=id,name,body,is_secret,owner_reply,owner_replied_at,has_owner_reply,created_at&order=created_at.desc`, {
-      headers,
-    });
-
-    if (!response.ok) {
-      throw new Error('방명록을 불러오지 못했습니다.');
-    }
-
-    renderEntries(await response.json());
-  };
-
-  passwordInput?.addEventListener('input', () => {
-    if (secretInput && passwordInput.value.length > 0) {
-      secretInput.checked = true;
-    }
-  });
-
-  secretInput?.addEventListener('change', () => {
-    if (!secretInput.checked && passwordInput) {
-      passwordInput.value = '';
-    }
-  });
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const data = new FormData(form);
-    const name = String(data.get('name') ?? '').trim();
-    const body = String(data.get('body') ?? '').trim();
-    const password = String(data.get('password') ?? '');
-    const isSecret = Boolean(data.get('isSecret')) || password.length > 0;
 
-    if (!name || !body) {
-      setStatus('이름과 글을 모두 입력해주세요.', true);
+    if (!web3FormsAccessKey) {
+      setStatus('방명록 메일 access key가 아직 설정되지 않았습니다.', true);
       return;
     }
 
-    if (isSecret && password.length < 4) {
-      setStatus('비밀글 비밀번호는 4자 이상 입력해주세요.', true);
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+    const botcheck = data.get('botcheck');
+
+    if (!name || !email || !message) {
+      setStatus('이름, 이메일, 메시지를 모두 입력해주세요.', true);
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      setStatus('답장을 받을 수 있는 이메일을 입력해주세요.', true);
+      return;
+    }
+
+    if (botcheck) {
+      form.reset();
+      setStatus('메시지가 도착했습니다. 답장은 이메일로 보낼게요.');
       return;
     }
 
     submitButton?.setAttribute('disabled', 'true');
-    setStatus('남기는 중입니다.');
+    setStatus('보내는 중입니다.');
 
     try {
-      const response = await fetch(createEndpoint, {
+      const response = await fetch(web3FormsEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
+          access_key: web3FormsAccessKey,
+          subject: `[방명록] ${name}님의 메시지`,
+          from_name: '겨울비 블로그 방명록',
           name,
-          body,
-          is_secret: isSecret,
-          password,
+          email,
+          message,
+          botcheck,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('글을 남기지 못했습니다.');
+        throw new Error(await readError(response));
       }
 
       form.reset();
-      setStatus('남겨졌습니다.');
-      await loadEntries();
+      setStatus('메시지가 도착했습니다. 답장은 이메일로 보낼게요.');
     } catch (error) {
       setStatus(error instanceof Error ? error.message : '문제가 생겼습니다.', true);
     } finally {
       submitButton?.removeAttribute('disabled');
     }
-  });
-
-  loadEntries().catch((error) => {
-    renderEntries([]);
-    setStatus(error instanceof Error ? error.message : '방명록을 불러오지 못했습니다.', true);
   });
 </script>

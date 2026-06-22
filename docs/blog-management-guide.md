@@ -1,6 +1,6 @@
 ---
 created: 2026-04-26
-updated: 2026-04-27
+updated: 2026-06-18
 ---
 
 # 겨울비 블로그 운영 가이드
@@ -275,7 +275,7 @@ const postItems = [
 - 파일 이름을 바꾸면 URL도 바뀐다.
 - `date`가 미래 날짜여도 현재는 숨기지 않는다.
 - `dist/`, `node_modules/`, `.env`, `docs/private/`, `supabase/.temp/`는 커밋하지 않는다.
-- Supabase service role key, webhook URL, 관리자 비밀번호 같은 secret은 공개 문서나 브라우저 코드에 넣지 않는다.
+- Supabase service role key, webhook URL, Web3Forms access key, 관리자 비밀번호 같은 운영 값은 공개 문서나 브라우저 코드에 직접 넣지 않는다.
 
 ## 자주 생기는 문제
 

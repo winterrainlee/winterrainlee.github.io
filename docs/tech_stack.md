@@ -1,6 +1,6 @@
 ---
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-06-18
 ---
 
 # 블로그 기술 스택
@@ -35,11 +35,9 @@ updated: 2026-04-27
 ## 방명록
 
 - 공개 페이지: `src/pages/guestbook.astro`
-- 관리자 페이지: `src/pages/admin/guestbook.astro`
-- 데이터 저장과 관리자 작업: Supabase
-- 알림: Discord Incoming Webhook과 Supabase Edge Functions
+- 메시지 전달과 메일 전송: Web3Forms
 
-운영 절차, secret, project ref, webhook 헤더, 수동 테스트 명령은 공개 문서에 두지 않고 `docs/private/`에 둔다.
+운영 절차, access key, 수동 테스트 명령은 공개 문서에 두지 않고 `docs/private/`에 둔다.
 
 ## 기본 명령
 
