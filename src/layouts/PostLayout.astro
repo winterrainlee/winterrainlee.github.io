@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import TagLink from '../components/TagLink.astro';
 import BaseLayout from './BaseLayout.astro';
 import { formatDate, formatDateTime, postFooterDate } from '../lib/content';
 
@@ -22,7 +23,7 @@ const footer = postFooterDate(post);
       {post.data.description && <p class="mt-4 text-lg leading-relaxed text-[var(--muted)]">{post.data.description}</p>}
       {post.data.tags.length > 0 && (
         <div class="mt-4 flex flex-wrap gap-2">
-          {post.data.tags.map((tag) => <span class="rounded border border-[var(--line)] px-2 py-1 text-xs text-[var(--muted)]">{tag}</span>)}
+          {post.data.tags.map((tag) => <TagLink tag={tag} class="py-1" />)}
         </div>
       )}
     </header>

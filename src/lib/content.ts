@@ -1,7 +1,10 @@
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import { execFileSync } from 'node:child_process';
 
 export type Section = 'memo' | 'articles' | 'self-practice';
+export type PublishedPost = CollectionEntry<Section> & { section: Section };
+export type TagGroup = { tag: string; slug: string; posts: PublishedPost[] };
 
 export const sectionLabels: Record<Section, string> = {
   memo: 'Memo',
@@ -104,6 +107,43 @@ export function postFooterDate(post: TimelineDatePost) {
 
 export function postPath(section: Section, slug: string) {
   return `/${section}/${slug}/`;
+}
+
+export function normalizeTag(tag: string) {
+  return tag.trim().replace(/\s+/g, ' ').toLocaleLowerCase('en');
+}
+
+export function tagSlug(tag: string) {
+  return normalizeTag(tag);
+}
+
+export function tagPath(tag: string) {
+  return `/tags/${encodeURIComponent(tagSlug(tag))}/`;
+}
+
+const tagCollator = new Intl.Collator('ko', { numeric: true, sensitivity: 'base' });
+
+export function getTagGroups(posts: PublishedPost[]) {
+  const groups = new Map<string, TagGroup>();
+
+  posts.forEach((post) => {
+    post.data.tags.forEach((tag) => {
+      const normalized = normalizeTag(tag);
+      if (!normalized) return;
+
+      groups.set(
+        normalized,
+        groups.get(normalized) ?? {
+          tag: tag.trim(),
+          slug: tagSlug(tag),
+          posts: [],
+        },
+      );
+      groups.get(normalized)?.posts.push(post);
+    });
+  });
+
+  return Array.from(groups.values()).sort((a, b) => tagCollator.compare(a.tag, b.tag));
 }
 
 export function entrySlug(post: { id?: string; slug?: string }) {

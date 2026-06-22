@@ -1,0 +1,20 @@
+---
+import { tagPath } from '../lib/content';
+
+interface Props {
+  tag: string;
+  class?: string;
+}
+
+const { tag, class: className = '' } = Astro.props;
+---
+
+<a
+  href={tagPath(tag)}
+  class:list={[
+    'inline-flex items-center rounded border border-[var(--line)] px-2 py-0.5 text-xs text-[var(--muted)] no-underline transition hover:border-[var(--accent)] hover:text-[var(--accent)]',
+    className,
+  ]}
+>
+  {tag}
+</a>

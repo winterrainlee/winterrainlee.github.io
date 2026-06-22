@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagLink from '../../components/TagLink.astro';
 import { entrySlug, formatDate, getAllPublished, getSiteIntroductions, postPath, readingMinutes, sectionLabels, timelineDate } from '../../lib/content';
 
 const introductions = await getSiteIntroductions();
@@ -26,7 +27,7 @@ const years = posts.reduce<Record<string, typeof posts>>((groups, post) => {
         <h2 class="serif text-3xl md:pl-36">{year}</h2>
         <div class="grid gap-5">
           {items.map((post) => (
-            <a href={postPath(post.section, entrySlug(post))} class="grid gap-3 rounded-lg border border-[var(--line)] bg-white/45 p-4 no-underline transition hover:border-[var(--accent)] md:grid-cols-[7rem_1fr]">
+            <article class="grid gap-3 rounded-lg border border-[var(--line)] bg-white/45 p-4 transition hover:border-[var(--accent)] md:grid-cols-[7rem_1fr]">
               <div class="relative pl-6 text-sm text-[var(--muted)] md:pl-0">
                 <span class="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-[var(--accent)] bg-[var(--paper)] md:left-[6.9rem]"></span>
                 <div>{formatDate(timelineDate(post))}</div>
@@ -35,12 +36,14 @@ const years = posts.reduce<Record<string, typeof posts>>((groups, post) => {
               <div class="md:pl-6">
                 <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
                   <span>{sectionLabels[post.section]}</span>
-                  {post.data.tags.map((tag) => <span class="rounded border border-[var(--line)] px-2 py-0.5 normal-case tracking-normal">{tag}</span>)}
+                  {post.data.tags.map((tag) => <TagLink tag={tag} class="normal-case tracking-normal" />)}
                 </div>
-                <h3 class="serif mt-2 text-2xl leading-tight">{post.data.title}</h3>
+                <h3 class="serif mt-2 text-2xl leading-tight">
+                  <a href={postPath(post.section, entrySlug(post))} class="no-underline transition hover:text-[var(--accent)]">{post.data.title}</a>
+                </h3>
                 {post.data.description && <p class="mt-2 text-sm leading-relaxed text-[var(--muted)]">{post.data.description}</p>}
               </div>
-            </a>
+            </article>
           ))}
         </div>
       </section>
