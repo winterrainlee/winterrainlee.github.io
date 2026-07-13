@@ -4,6 +4,8 @@ description: 교만, 공의, 우상숭배, 그리고 새 창조
 date: 2026-07-13
 tags:
   - essay
+  - 성경
+  - 교만
 draft: false
 ---
 
