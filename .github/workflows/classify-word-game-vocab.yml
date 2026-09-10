@@ -8,6 +8,7 @@ on:
       - 'data/word-game/VOCABULARY-SCHEMA.md'
       - 'data/word-game/classification-taxonomy.json'
       - 'scripts/classify_word_game_vocab.py'
+      - 'scripts/run_word_game_classification.py'
       - 'scripts/build_word_game_review_queue.py'
       - '.github/workflows/classify-word-game-vocab.yml'
   workflow_dispatch:
@@ -28,7 +29,7 @@ jobs:
           python-version: '3.12'
 
       - name: Build assisted classification candidates
-        run: python scripts/classify_word_game_vocab.py
+        run: python scripts/run_word_game_classification.py
 
       - name: Build review queue
         run: python scripts/build_word_game_review_queue.py
