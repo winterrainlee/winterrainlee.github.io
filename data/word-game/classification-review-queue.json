@@ -1,10 +1,12 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "description": "전체 4,070개를 한 번에 사람이 검토하지 않고, 학습 가치와 분류 필요도가 높은 단어부터 검토하기 위한 작업 큐.",
+  "key_policy": "lexeme_key는 TBCL 원문 키를 보존한다. display_word는 숫자 접미사 같은 내부 구분 표기를 숨긴 학습/UI 표시 후보다.",
   "buckets": {
     "core_unreviewed_high_frequency": [
       {
-        "word": "好2",
+        "lexeme_key": "好2",
+        "display_word": "好",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -18,7 +20,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "中2",
+        "lexeme_key": "中2",
+        "display_word": "中",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -32,7 +35,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "而",
+        "lexeme_key": "而",
+        "display_word": "而",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -46,7 +50,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "與",
+        "lexeme_key": "與",
+        "display_word": "與",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -60,7 +65,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "種2",
+        "lexeme_key": "種2",
+        "display_word": "種",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -74,7 +80,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "看2",
+        "lexeme_key": "看2",
+        "display_word": "看",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -88,7 +95,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之",
+        "lexeme_key": "之",
+        "display_word": "之",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -102,7 +110,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "為1",
+        "lexeme_key": "為1",
+        "display_word": "為",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -116,7 +125,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "以",
+        "lexeme_key": "以",
+        "display_word": "以",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -130,7 +140,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "並",
+        "lexeme_key": "並",
+        "display_word": "並",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -144,7 +155,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "將",
+        "lexeme_key": "將",
+        "display_word": "將",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -158,7 +170,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "以及/及",
+        "lexeme_key": "以及/及",
+        "display_word": "以及/及",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -172,7 +185,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "卻",
+        "lexeme_key": "卻",
+        "display_word": "卻",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -186,7 +200,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "喔",
+        "lexeme_key": "喔",
+        "display_word": "喔",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -200,7 +215,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "當2",
+        "lexeme_key": "當2",
+        "display_word": "當",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -214,7 +230,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "可",
+        "lexeme_key": "可",
+        "display_word": "可",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -228,7 +245,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "於",
+        "lexeme_key": "於",
+        "display_word": "於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -242,7 +260,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之後",
+        "lexeme_key": "之後",
+        "display_word": "之後",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -256,7 +275,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "則",
+        "lexeme_key": "則",
+        "display_word": "則",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -270,7 +290,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "此",
+        "lexeme_key": "此",
+        "display_word": "此",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -284,7 +305,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "使",
+        "lexeme_key": "使",
+        "display_word": "使",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -298,7 +320,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "由",
+        "lexeme_key": "由",
+        "display_word": "由",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -312,7 +335,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "曾經/曾",
+        "lexeme_key": "曾經/曾",
+        "display_word": "曾經/曾",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -326,7 +350,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "牠",
+        "lexeme_key": "牠",
+        "display_word": "牠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -340,7 +365,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "如何",
+        "lexeme_key": "如何",
+        "display_word": "如何",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -354,7 +380,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "無法",
+        "lexeme_key": "無法",
+        "display_word": "無法",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -368,7 +395,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "該",
+        "lexeme_key": "該",
+        "display_word": "該",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -382,7 +410,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "變成",
+        "lexeme_key": "變成",
+        "display_word": "變成",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -396,7 +425,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "無",
+        "lexeme_key": "無",
+        "display_word": "無",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -410,7 +440,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "仍然/仍",
+        "lexeme_key": "仍然/仍",
+        "display_word": "仍然/仍",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -424,7 +455,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "如此",
+        "lexeme_key": "如此",
+        "display_word": "如此",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -438,7 +470,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "任何",
+        "lexeme_key": "任何",
+        "display_word": "任何",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -452,7 +485,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "令",
+        "lexeme_key": "令",
+        "display_word": "令",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -466,7 +500,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "甚至",
+        "lexeme_key": "甚至",
+        "display_word": "甚至",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -480,7 +515,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "道2",
+        "lexeme_key": "道2",
+        "display_word": "道",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -494,7 +530,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "於是",
+        "lexeme_key": "於是",
+        "display_word": "於是",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -508,7 +545,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "某",
+        "lexeme_key": "某",
+        "display_word": "某",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -522,7 +560,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "對於",
+        "lexeme_key": "對於",
+        "display_word": "對於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -536,7 +575,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "全球",
+        "lexeme_key": "全球",
+        "display_word": "全球",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -550,7 +590,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "宗教/教2",
+        "lexeme_key": "宗教/教2",
+        "display_word": "宗教/教",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -564,7 +605,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人家2",
+        "lexeme_key": "人家2",
+        "display_word": "人家",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -578,7 +620,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "受",
+        "lexeme_key": "受",
+        "display_word": "受",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -592,7 +635,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "到底",
+        "lexeme_key": "到底",
+        "display_word": "到底",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -606,7 +650,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "主要",
+        "lexeme_key": "主要",
+        "display_word": "主要",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -620,7 +665,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "過去",
+        "lexeme_key": "過去",
+        "display_word": "過去",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -634,7 +680,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "使用",
+        "lexeme_key": "使用",
+        "display_word": "使用",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -648,7 +695,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "段",
+        "lexeme_key": "段",
+        "display_word": "段",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -662,7 +710,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "似乎/似",
+        "lexeme_key": "似乎/似",
+        "display_word": "似乎/似",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -676,7 +725,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "生命",
+        "lexeme_key": "生命",
+        "display_word": "生命",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -690,7 +740,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "非",
+        "lexeme_key": "非",
+        "display_word": "非",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -704,7 +755,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "目前",
+        "lexeme_key": "目前",
+        "display_word": "目前",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -718,7 +770,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "只是",
+        "lexeme_key": "只是",
+        "display_word": "只是",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -732,7 +785,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "嗯",
+        "lexeme_key": "嗯",
+        "display_word": "嗯",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -746,7 +800,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "然而",
+        "lexeme_key": "然而",
+        "display_word": "然而",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -760,7 +815,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "未",
+        "lexeme_key": "未",
+        "display_word": "未",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -774,7 +830,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "項",
+        "lexeme_key": "項",
+        "display_word": "項",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -788,7 +845,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "進行",
+        "lexeme_key": "進行",
+        "display_word": "進行",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -802,7 +860,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "情況",
+        "lexeme_key": "情況",
+        "display_word": "情況",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -816,7 +875,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "透過",
+        "lexeme_key": "透過",
+        "display_word": "透過",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -830,7 +890,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之前",
+        "lexeme_key": "之前",
+        "display_word": "之前",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -844,7 +905,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "事實",
+        "lexeme_key": "事實",
+        "display_word": "事實",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -858,7 +920,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "至",
+        "lexeme_key": "至",
+        "display_word": "至",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -872,7 +935,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "產生",
+        "lexeme_key": "產生",
+        "display_word": "產生",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -886,7 +950,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人們",
+        "lexeme_key": "人們",
+        "display_word": "人們",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -900,7 +965,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "田",
+        "lexeme_key": "田",
+        "display_word": "田",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -914,7 +980,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "幾乎",
+        "lexeme_key": "幾乎",
+        "display_word": "幾乎",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -928,7 +995,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "所謂",
+        "lexeme_key": "所謂",
+        "display_word": "所謂",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -942,7 +1010,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "狀況",
+        "lexeme_key": "狀況",
+        "display_word": "狀況",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -956,7 +1025,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "是否",
+        "lexeme_key": "是否",
+        "display_word": "是否",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -970,7 +1040,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "真正",
+        "lexeme_key": "真正",
+        "display_word": "真正",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -984,7 +1055,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人類",
+        "lexeme_key": "人類",
+        "display_word": "人類",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -998,7 +1070,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "未來",
+        "lexeme_key": "未來",
+        "display_word": "未來",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1012,7 +1085,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感到",
+        "lexeme_key": "感到",
+        "display_word": "感到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1026,7 +1100,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "處1",
+        "lexeme_key": "處1",
+        "display_word": "處",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1040,7 +1115,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "成",
+        "lexeme_key": "成",
+        "display_word": "成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1054,7 +1130,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "竟然/竟",
+        "lexeme_key": "竟然/竟",
+        "display_word": "竟然/竟",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1068,7 +1145,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "基本",
+        "lexeme_key": "基本",
+        "display_word": "基本",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1082,7 +1160,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "提供",
+        "lexeme_key": "提供",
+        "display_word": "提供",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1096,7 +1175,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "突然",
+        "lexeme_key": "突然",
+        "display_word": "突然",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1110,7 +1190,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "表示",
+        "lexeme_key": "表示",
+        "display_word": "表示",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1124,7 +1205,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "時代",
+        "lexeme_key": "時代",
+        "display_word": "時代",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1138,7 +1220,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人生",
+        "lexeme_key": "人生",
+        "display_word": "人生",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1152,7 +1235,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "即使",
+        "lexeme_key": "即使",
+        "display_word": "即使",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1166,7 +1250,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "受到",
+        "lexeme_key": "受到",
+        "display_word": "受到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1180,7 +1265,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "面對",
+        "lexeme_key": "面對",
+        "display_word": "面對",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1194,7 +1280,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根本",
+        "lexeme_key": "根本",
+        "display_word": "根本",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1208,7 +1295,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根據/據",
+        "lexeme_key": "根據/據",
+        "display_word": "根據/據",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1222,7 +1310,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "比如說/比如",
+        "lexeme_key": "比如說/比如",
+        "display_word": "比如說/比如",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1236,7 +1325,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "不斷",
+        "lexeme_key": "不斷",
+        "display_word": "不斷",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1250,7 +1340,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "行動",
+        "lexeme_key": "行動",
+        "display_word": "行動",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1264,7 +1355,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "有關",
+        "lexeme_key": "有關",
+        "display_word": "有關",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1278,7 +1370,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "意義",
+        "lexeme_key": "意義",
+        "display_word": "意義",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1292,7 +1385,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "處理",
+        "lexeme_key": "處理",
+        "display_word": "處理",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1306,7 +1400,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "代表",
+        "lexeme_key": "代表",
+        "display_word": "代表",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1320,7 +1415,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "存在",
+        "lexeme_key": "存在",
+        "display_word": "存在",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1334,7 +1430,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "指",
+        "lexeme_key": "指",
+        "display_word": "指",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1348,7 +1445,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "十分",
+        "lexeme_key": "十分",
+        "display_word": "十分",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1362,7 +1460,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "解決",
+        "lexeme_key": "解決",
+        "display_word": "解決",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1376,7 +1475,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "態度",
+        "lexeme_key": "態度",
+        "display_word": "態度",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1390,7 +1490,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "或許",
+        "lexeme_key": "或許",
+        "display_word": "或許",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1404,7 +1505,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "目標",
+        "lexeme_key": "目標",
+        "display_word": "目標",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1418,7 +1520,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "終於",
+        "lexeme_key": "終於",
+        "display_word": "終於",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1432,7 +1535,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "溫度",
+        "lexeme_key": "溫度",
+        "display_word": "溫度",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1446,7 +1550,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "力量",
+        "lexeme_key": "力量",
+        "display_word": "力量",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1460,7 +1565,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "並且",
+        "lexeme_key": "並且",
+        "display_word": "並且",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1474,7 +1580,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "通常",
+        "lexeme_key": "通常",
+        "display_word": "通常",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1488,7 +1595,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "靠",
+        "lexeme_key": "靠",
+        "display_word": "靠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1502,7 +1610,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "接下來",
+        "lexeme_key": "接下來",
+        "display_word": "接下來",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1516,7 +1625,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "反應",
+        "lexeme_key": "反應",
+        "display_word": "反應",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1530,7 +1640,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "實在",
+        "lexeme_key": "實在",
+        "display_word": "實在",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1544,7 +1655,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "對方",
+        "lexeme_key": "對方",
+        "display_word": "對方",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1558,7 +1670,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "夫人",
+        "lexeme_key": "夫人",
+        "display_word": "夫人",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1572,7 +1685,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "本身",
+        "lexeme_key": "本身",
+        "display_word": "本身",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1586,7 +1700,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "完成",
+        "lexeme_key": "完成",
+        "display_word": "完成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1600,7 +1715,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "章",
+        "lexeme_key": "章",
+        "display_word": "章",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1614,7 +1730,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "幸福",
+        "lexeme_key": "幸福",
+        "display_word": "幸福",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1628,7 +1745,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "原本",
+        "lexeme_key": "原本",
+        "display_word": "原本",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1642,7 +1760,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感恩",
+        "lexeme_key": "感恩",
+        "display_word": "感恩",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1656,7 +1775,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "明白",
+        "lexeme_key": "明白",
+        "display_word": "明白",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1670,7 +1790,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "群/羣",
+        "lexeme_key": "群/羣",
+        "display_word": "群/羣",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1684,7 +1805,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "擁有",
+        "lexeme_key": "擁有",
+        "display_word": "擁有",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1698,7 +1820,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "自",
+        "lexeme_key": "自",
+        "display_word": "自",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1712,7 +1835,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "智慧",
+        "lexeme_key": "智慧",
+        "display_word": "智慧",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1726,7 +1850,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "動作",
+        "lexeme_key": "動作",
+        "display_word": "動作",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1740,7 +1865,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "永遠",
+        "lexeme_key": "永遠",
+        "display_word": "永遠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1754,7 +1880,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "壓力",
+        "lexeme_key": "壓力",
+        "display_word": "壓力",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1768,7 +1895,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "現象",
+        "lexeme_key": "現象",
+        "display_word": "現象",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1782,7 +1910,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "代",
+        "lexeme_key": "代",
+        "display_word": "代",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1796,7 +1925,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之中",
+        "lexeme_key": "之中",
+        "display_word": "之中",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1810,7 +1940,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "來自",
+        "lexeme_key": "來自",
+        "display_word": "來自",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1824,7 +1955,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "控制",
+        "lexeme_key": "控制",
+        "display_word": "控制",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1838,7 +1970,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "篇",
+        "lexeme_key": "篇",
+        "display_word": "篇",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1852,7 +1985,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "絕對",
+        "lexeme_key": "絕對",
+        "display_word": "絕對",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1866,7 +2000,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "厲害",
+        "lexeme_key": "厲害",
+        "display_word": "厲害",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1880,7 +2015,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "直到",
+        "lexeme_key": "直到",
+        "display_word": "直到",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1894,7 +2030,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "重新",
+        "lexeme_key": "重新",
+        "display_word": "重新",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1908,7 +2045,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "譬如說/譬如",
+        "lexeme_key": "譬如說/譬如",
+        "display_word": "譬如說/譬如",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1922,7 +2060,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "提到",
+        "lexeme_key": "提到",
+        "display_word": "提到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1936,7 +2075,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "至少",
+        "lexeme_key": "至少",
+        "display_word": "至少",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1950,7 +2090,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "量1",
+        "lexeme_key": "量1",
+        "display_word": "量",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -1964,7 +2105,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "量2",
+        "lexeme_key": "量2",
+        "display_word": "量",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1978,7 +2120,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "一旦",
+        "lexeme_key": "一旦",
+        "display_word": "一旦",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -1992,7 +2135,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "作為",
+        "lexeme_key": "作為",
+        "display_word": "作為",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2006,7 +2150,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "倒1",
+        "lexeme_key": "倒1",
+        "display_word": "倒",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2020,7 +2165,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "倒2",
+        "lexeme_key": "倒2",
+        "display_word": "倒",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2034,7 +2180,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "葉子/葉",
+        "lexeme_key": "葉子/葉",
+        "display_word": "葉子/葉",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2048,7 +2195,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "往往",
+        "lexeme_key": "往往",
+        "display_word": "往往",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2062,7 +2210,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "而已",
+        "lexeme_key": "而已",
+        "display_word": "而已",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2076,7 +2225,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "不然",
+        "lexeme_key": "不然",
+        "display_word": "不然",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2090,7 +2240,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根",
+        "lexeme_key": "根",
+        "display_word": "根",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2104,7 +2255,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "關於",
+        "lexeme_key": "關於",
+        "display_word": "關於",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2118,7 +2270,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "姑娘",
+        "lexeme_key": "姑娘",
+        "display_word": "姑娘",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2132,7 +2285,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "鼓勵",
+        "lexeme_key": "鼓勵",
+        "display_word": "鼓勵",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2146,7 +2300,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "反而",
+        "lexeme_key": "反而",
+        "display_word": "反而",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2160,7 +2315,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "失去",
+        "lexeme_key": "失去",
+        "display_word": "失去",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2174,7 +2330,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "強1",
+        "lexeme_key": "強1",
+        "display_word": "強",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2188,7 +2345,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "屬於",
+        "lexeme_key": "屬於",
+        "display_word": "屬於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2202,7 +2360,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "遇到",
+        "lexeme_key": "遇到",
+        "display_word": "遇到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2216,7 +2375,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "頁",
+        "lexeme_key": "頁",
+        "display_word": "頁",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2230,7 +2390,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "唯一",
+        "lexeme_key": "唯一",
+        "display_word": "唯一",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2244,7 +2405,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "作者",
+        "lexeme_key": "作者",
+        "display_word": "作者",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2258,7 +2420,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "危機",
+        "lexeme_key": "危機",
+        "display_word": "危機",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2272,7 +2435,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "至於",
+        "lexeme_key": "至於",
+        "display_word": "至於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2286,7 +2450,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "參與",
+        "lexeme_key": "參與",
+        "display_word": "參與",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2300,7 +2465,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感受",
+        "lexeme_key": "感受",
+        "display_word": "感受",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2314,7 +2480,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "無論",
+        "lexeme_key": "無論",
+        "display_word": "無論",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2328,7 +2495,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "皆",
+        "lexeme_key": "皆",
+        "display_word": "皆",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2342,7 +2510,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "重2",
+        "lexeme_key": "重2",
+        "display_word": "重",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2356,7 +2525,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "確實",
+        "lexeme_key": "確實",
+        "display_word": "確實",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2370,7 +2540,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "時期",
+        "lexeme_key": "時期",
+        "display_word": "時期",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2384,7 +2555,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "逐漸",
+        "lexeme_key": "逐漸",
+        "display_word": "逐漸",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2398,7 +2570,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "關懷",
+        "lexeme_key": "關懷",
+        "display_word": "關懷",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2412,7 +2585,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "公尺",
+        "lexeme_key": "公尺",
+        "display_word": "公尺",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2426,7 +2600,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "等於",
+        "lexeme_key": "等於",
+        "display_word": "等於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2440,7 +2615,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "兒童",
+        "lexeme_key": "兒童",
+        "display_word": "兒童",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2454,7 +2630,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "儘管",
+        "lexeme_key": "儘管",
+        "display_word": "儘管",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2468,7 +2645,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "棵",
+        "lexeme_key": "棵",
+        "display_word": "棵",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2482,7 +2660,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "相關",
+        "lexeme_key": "相關",
+        "display_word": "相關",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2496,7 +2675,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "忽然/忽",
+        "lexeme_key": "忽然/忽",
+        "display_word": "忽然/忽",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2510,7 +2690,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "首",
+        "lexeme_key": "首",
+        "display_word": "首",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2524,7 +2705,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "面",
+        "lexeme_key": "面",
+        "display_word": "面",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2538,7 +2720,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "稍微/稍",
+        "lexeme_key": "稍微/稍",
+        "display_word": "稍微/稍",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2552,7 +2735,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "大約",
+        "lexeme_key": "大約",
+        "display_word": "大約",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2566,7 +2750,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "加入",
+        "lexeme_key": "加入",
+        "display_word": "加入",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2580,7 +2765,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "當初",
+        "lexeme_key": "當初",
+        "display_word": "當初",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2594,7 +2780,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "一邊",
+        "lexeme_key": "一邊",
+        "display_word": "一邊",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2608,7 +2795,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "顯然",
+        "lexeme_key": "顯然",
+        "display_word": "顯然",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2622,7 +2810,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "公里",
+        "lexeme_key": "公里",
+        "display_word": "公里",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2636,7 +2825,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "創造",
+        "lexeme_key": "創造",
+        "display_word": "創造",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2650,7 +2840,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "肯定",
+        "lexeme_key": "肯定",
+        "display_word": "肯定",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2664,7 +2855,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "隨著",
+        "lexeme_key": "隨著",
+        "display_word": "隨著",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2678,7 +2870,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "初",
+        "lexeme_key": "初",
+        "display_word": "初",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2692,7 +2885,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "的確",
+        "lexeme_key": "的確",
+        "display_word": "的確",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2706,7 +2900,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "堅持",
+        "lexeme_key": "堅持",
+        "display_word": "堅持",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2720,7 +2915,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "從小",
+        "lexeme_key": "從小",
+        "display_word": "從小",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2734,7 +2930,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "僅僅/僅",
+        "lexeme_key": "僅僅/僅",
+        "display_word": "僅僅/僅",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2748,7 +2945,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "採",
+        "lexeme_key": "採",
+        "display_word": "採",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2762,7 +2960,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "豐富",
+        "lexeme_key": "豐富",
+        "display_word": "豐富",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2776,7 +2975,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "按",
+        "lexeme_key": "按",
+        "display_word": "按",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2790,7 +2990,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "明顯",
+        "lexeme_key": "明顯",
+        "display_word": "明顯",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2804,7 +3005,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "直",
+        "lexeme_key": "直",
+        "display_word": "直",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2818,7 +3020,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "運用",
+        "lexeme_key": "運用",
+        "display_word": "運用",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2832,7 +3035,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "使得",
+        "lexeme_key": "使得",
+        "display_word": "使得",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2846,7 +3050,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "夢想",
+        "lexeme_key": "夢想",
+        "display_word": "夢想",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2860,7 +3065,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "將近",
+        "lexeme_key": "將近",
+        "display_word": "將近",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2874,7 +3080,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "土",
+        "lexeme_key": "土",
+        "display_word": "土",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2888,7 +3095,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "擔任",
+        "lexeme_key": "擔任",
+        "display_word": "擔任",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2902,7 +3110,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "稱為",
+        "lexeme_key": "稱為",
+        "display_word": "稱為",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2916,7 +3125,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "複雜",
+        "lexeme_key": "複雜",
+        "display_word": "複雜",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2930,7 +3140,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "面前",
+        "lexeme_key": "面前",
+        "display_word": "面前",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2944,7 +3155,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "描述",
+        "lexeme_key": "描述",
+        "display_word": "描述",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -2958,7 +3170,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "理由",
+        "lexeme_key": "理由",
+        "display_word": "理由",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2972,7 +3185,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "假如",
+        "lexeme_key": "假如",
+        "display_word": "假如",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -2986,7 +3200,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "待",
+        "lexeme_key": "待",
+        "display_word": "待",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3000,7 +3215,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "挑戰",
+        "lexeme_key": "挑戰",
+        "display_word": "挑戰",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3014,7 +3230,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "算是",
+        "lexeme_key": "算是",
+        "display_word": "算是",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3028,7 +3245,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "願",
+        "lexeme_key": "願",
+        "display_word": "願",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3042,7 +3260,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "付出",
+        "lexeme_key": "付出",
+        "display_word": "付出",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3056,7 +3275,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "如今",
+        "lexeme_key": "如今",
+        "display_word": "如今",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3070,7 +3290,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "現實",
+        "lexeme_key": "現實",
+        "display_word": "現實",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3084,7 +3305,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "見到",
+        "lexeme_key": "見到",
+        "display_word": "見到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3098,7 +3320,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "入",
+        "lexeme_key": "入",
+        "display_word": "入",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3112,7 +3335,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "安排",
+        "lexeme_key": "安排",
+        "display_word": "安排",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3126,7 +3350,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "漸漸/漸",
+        "lexeme_key": "漸漸/漸",
+        "display_word": "漸漸/漸",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3140,7 +3365,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "採取",
+        "lexeme_key": "採取",
+        "display_word": "採取",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3154,7 +3380,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "印象",
+        "lexeme_key": "印象",
+        "display_word": "印象",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3168,7 +3395,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "堆",
+        "lexeme_key": "堆",
+        "display_word": "堆",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3182,7 +3410,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "村子/村",
+        "lexeme_key": "村子/村",
+        "display_word": "村子/村",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3196,7 +3425,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "特殊",
+        "lexeme_key": "特殊",
+        "display_word": "特殊",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3210,7 +3440,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "盡量/儘量",
+        "lexeme_key": "盡量/儘量",
+        "display_word": "盡量/儘量",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3224,7 +3455,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "缺乏",
+        "lexeme_key": "缺乏",
+        "display_word": "缺乏",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3238,7 +3470,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "顯示",
+        "lexeme_key": "顯示",
+        "display_word": "顯示",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3252,7 +3485,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "說法",
+        "lexeme_key": "說法",
+        "display_word": "說法",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3266,7 +3500,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "尋找",
+        "lexeme_key": "尋找",
+        "display_word": "尋找",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3280,7 +3515,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "清",
+        "lexeme_key": "清",
+        "display_word": "清",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3294,7 +3530,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "番",
+        "lexeme_key": "番",
+        "display_word": "番",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3308,7 +3545,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "省",
+        "lexeme_key": "省",
+        "display_word": "省",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3322,7 +3560,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "任",
+        "lexeme_key": "任",
+        "display_word": "任",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3336,7 +3575,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "做出",
+        "lexeme_key": "做出",
+        "display_word": "做出",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3350,7 +3590,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "內心",
+        "lexeme_key": "內心",
+        "display_word": "內心",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3364,7 +3605,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "難以",
+        "lexeme_key": "難以",
+        "display_word": "難以",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3378,7 +3620,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "仔細",
+        "lexeme_key": "仔細",
+        "display_word": "仔細",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3392,7 +3635,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "以來",
+        "lexeme_key": "以來",
+        "display_word": "以來",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3406,7 +3650,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "學會",
+        "lexeme_key": "學會",
+        "display_word": "學會",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3420,7 +3665,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "滿足",
+        "lexeme_key": "滿足",
+        "display_word": "滿足",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3434,7 +3680,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "追求",
+        "lexeme_key": "追求",
+        "display_word": "追求",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3448,7 +3695,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "期待",
+        "lexeme_key": "期待",
+        "display_word": "期待",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3462,7 +3710,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "期間",
+        "lexeme_key": "期間",
+        "display_word": "期間",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3476,7 +3725,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "求",
+        "lexeme_key": "求",
+        "display_word": "求",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3490,7 +3740,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "當作/當做",
+        "lexeme_key": "當作/當做",
+        "display_word": "當作/當做",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3506,7 +3757,8 @@
     ],
     "semantic_tagged_but_topic_weak": [
       {
-        "word": "因此",
+        "lexeme_key": "因此",
+        "display_word": "因此",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3522,7 +3774,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "造成",
+        "lexeme_key": "造成",
+        "display_word": "造成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3538,7 +3791,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "成為",
+        "lexeme_key": "成為",
+        "display_word": "成為",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3556,7 +3810,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "過程",
+        "lexeme_key": "過程",
+        "display_word": "過程",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3574,7 +3829,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "之間",
+        "lexeme_key": "之間",
+        "display_word": "之間",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3592,7 +3848,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "改變",
+        "lexeme_key": "改變",
+        "display_word": "改變",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3610,7 +3867,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "接受",
+        "lexeme_key": "接受",
+        "display_word": "接受",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3626,7 +3884,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "繼續",
+        "lexeme_key": "繼續",
+        "display_word": "繼續",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3644,7 +3903,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "由於",
+        "lexeme_key": "由於",
+        "display_word": "由於",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3660,7 +3920,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "思考",
+        "lexeme_key": "思考",
+        "display_word": "思考",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3676,7 +3937,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "解釋",
+        "lexeme_key": "解釋",
+        "display_word": "解釋",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3695,7 +3957,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "增加/增",
+        "lexeme_key": "增加/增",
+        "display_word": "增加/增",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3713,7 +3976,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "減少",
+        "lexeme_key": "減少",
+        "display_word": "減少",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3731,7 +3995,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "感動",
+        "lexeme_key": "感動",
+        "display_word": "感動",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3747,7 +4012,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "觀察",
+        "lexeme_key": "觀察",
+        "display_word": "觀察",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3763,7 +4029,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "變化",
+        "lexeme_key": "變化",
+        "display_word": "變化",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3781,7 +4048,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "說明",
+        "lexeme_key": "說明",
+        "display_word": "說明",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3798,7 +4066,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "想像",
+        "lexeme_key": "想像",
+        "display_word": "想像",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3814,7 +4083,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "正確",
+        "lexeme_key": "正確",
+        "display_word": "正確",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3832,7 +4102,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "保持",
+        "lexeme_key": "保持",
+        "display_word": "保持",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3850,7 +4121,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "確定",
+        "lexeme_key": "確定",
+        "display_word": "確定",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3868,7 +4140,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "持續",
+        "lexeme_key": "持續",
+        "display_word": "持續",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3886,7 +4159,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "理解",
+        "lexeme_key": "理解",
+        "display_word": "理解",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -3902,7 +4176,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "錯誤",
+        "lexeme_key": "錯誤",
+        "display_word": "錯誤",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3920,7 +4195,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "首先",
+        "lexeme_key": "首先",
+        "display_word": "首先",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3938,7 +4214,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "溝通",
+        "lexeme_key": "溝通",
+        "display_word": "溝通",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3957,7 +4234,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "條件",
+        "lexeme_key": "條件",
+        "display_word": "條件",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3975,7 +4253,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "平均",
+        "lexeme_key": "平均",
+        "display_word": "平均",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -3994,7 +4273,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "共同",
+        "lexeme_key": "共同",
+        "display_word": "共同",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4012,7 +4292,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "值得",
+        "lexeme_key": "值得",
+        "display_word": "值得",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4030,7 +4311,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "階段",
+        "lexeme_key": "階段",
+        "display_word": "階段",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4048,7 +4330,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "因素",
+        "lexeme_key": "因素",
+        "display_word": "因素",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4064,7 +4347,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "距離/距",
+        "lexeme_key": "距離/距",
+        "display_word": "距離/距",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4084,7 +4368,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "協助",
+        "lexeme_key": "協助",
+        "display_word": "協助",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4102,7 +4387,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "維持",
+        "lexeme_key": "維持",
+        "display_word": "維持",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4120,7 +4406,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "懷疑",
+        "lexeme_key": "懷疑",
+        "display_word": "懷疑",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4136,7 +4423,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "強調",
+        "lexeme_key": "強調",
+        "display_word": "強調",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4155,7 +4443,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "相同",
+        "lexeme_key": "相同",
+        "display_word": "相同",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4173,7 +4462,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "破壞",
+        "lexeme_key": "破壞",
+        "display_word": "破壞",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4192,7 +4482,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "拒絕",
+        "lexeme_key": "拒絕",
+        "display_word": "拒絕",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4208,7 +4499,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "必要",
+        "lexeme_key": "必要",
+        "display_word": "必要",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4226,7 +4518,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "考慮",
+        "lexeme_key": "考慮",
+        "display_word": "考慮",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4242,7 +4535,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "類似",
+        "lexeme_key": "類似",
+        "display_word": "類似",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4260,7 +4554,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "需求",
+        "lexeme_key": "需求",
+        "display_word": "需求",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4278,7 +4573,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "衝突",
+        "lexeme_key": "衝突",
+        "display_word": "衝突",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4296,7 +4592,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "否則",
+        "lexeme_key": "否則",
+        "display_word": "否則",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4314,7 +4611,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "降低",
+        "lexeme_key": "降低",
+        "display_word": "降低",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4332,7 +4630,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "通過",
+        "lexeme_key": "通過",
+        "display_word": "通過",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4350,7 +4649,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "判斷",
+        "lexeme_key": "判斷",
+        "display_word": "判斷",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4368,7 +4668,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "上升",
+        "lexeme_key": "上升",
+        "display_word": "上升",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4386,7 +4687,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "接近",
+        "lexeme_key": "接近",
+        "display_word": "接近",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4404,7 +4706,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "不如",
+        "lexeme_key": "不如",
+        "display_word": "不如",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4422,7 +4725,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "批評",
+        "lexeme_key": "批評",
+        "display_word": "批評",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4440,7 +4744,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "興奮",
+        "lexeme_key": "興奮",
+        "display_word": "興奮",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4456,7 +4761,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "限制/限",
+        "lexeme_key": "限制/限",
+        "display_word": "限制/限",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4475,7 +4781,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "提高",
+        "lexeme_key": "提高",
+        "display_word": "提高",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4493,7 +4800,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "信任",
+        "lexeme_key": "信任",
+        "display_word": "信任",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4509,7 +4817,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "風險",
+        "lexeme_key": "風險",
+        "display_word": "風險",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4528,7 +4837,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "規定",
+        "lexeme_key": "規定",
+        "display_word": "規定",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4546,7 +4856,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "評估",
+        "lexeme_key": "評估",
+        "display_word": "評估",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4564,7 +4875,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "調整",
+        "lexeme_key": "調整",
+        "display_word": "調整",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4582,7 +4894,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "配合",
+        "lexeme_key": "配合",
+        "display_word": "配合",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4600,7 +4913,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "焦慮",
+        "lexeme_key": "焦慮",
+        "display_word": "焦慮",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4616,7 +4930,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "滿意",
+        "lexeme_key": "滿意",
+        "display_word": "滿意",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4632,7 +4947,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "少數",
+        "lexeme_key": "少數",
+        "display_word": "少數",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4648,7 +4964,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "集中",
+        "lexeme_key": "集中",
+        "display_word": "集中",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4666,7 +4983,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "除非",
+        "lexeme_key": "除非",
+        "display_word": "除非",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4684,7 +5002,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "移動",
+        "lexeme_key": "移動",
+        "display_word": "移動",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4702,7 +5021,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "前進",
+        "lexeme_key": "前進",
+        "display_word": "前進",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4720,7 +5040,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "合理",
+        "lexeme_key": "合理",
+        "display_word": "合理",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4738,7 +5059,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "周圍",
+        "lexeme_key": "周圍",
+        "display_word": "周圍",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4756,7 +5078,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "下降",
+        "lexeme_key": "下降",
+        "display_word": "下降",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4774,7 +5097,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "多數",
+        "lexeme_key": "多數",
+        "display_word": "多數",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4790,7 +5114,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "轉變",
+        "lexeme_key": "轉變",
+        "display_word": "轉變",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4808,7 +5133,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "後果",
+        "lexeme_key": "後果",
+        "display_word": "後果",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4824,7 +5150,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "允許",
+        "lexeme_key": "允許",
+        "display_word": "允許",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4842,7 +5169,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "說服",
+        "lexeme_key": "說服",
+        "display_word": "說服",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4860,7 +5188,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "詢問",
+        "lexeme_key": "詢問",
+        "display_word": "詢問",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4876,7 +5205,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "保留",
+        "lexeme_key": "保留",
+        "display_word": "保留",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4894,7 +5224,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "加強",
+        "lexeme_key": "加強",
+        "display_word": "加強",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4912,7 +5243,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "勸",
+        "lexeme_key": "勸",
+        "display_word": "勸",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4930,7 +5262,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "靠近",
+        "lexeme_key": "靠近",
+        "display_word": "靠近",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4948,7 +5281,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "差別",
+        "lexeme_key": "差別",
+        "display_word": "差別",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -4966,7 +5300,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "聚集",
+        "lexeme_key": "聚集",
+        "display_word": "聚集",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -4984,7 +5319,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "相似",
+        "lexeme_key": "相似",
+        "display_word": "相似",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5002,7 +5338,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "確認",
+        "lexeme_key": "確認",
+        "display_word": "確認",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5020,7 +5357,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "寂寞",
+        "lexeme_key": "寂寞",
+        "display_word": "寂寞",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5036,7 +5374,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "禁止",
+        "lexeme_key": "禁止",
+        "display_word": "禁止",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5054,7 +5393,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "評價",
+        "lexeme_key": "評價",
+        "display_word": "評價",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5072,7 +5412,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "通知",
+        "lexeme_key": "通知",
+        "display_word": "通知",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5089,7 +5430,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "返回",
+        "lexeme_key": "返回",
+        "display_word": "返回",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5107,7 +5449,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "順序",
+        "lexeme_key": "順序",
+        "display_word": "順序",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5125,7 +5468,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "先後",
+        "lexeme_key": "先後",
+        "display_word": "先後",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5143,7 +5487,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "想像力",
+        "lexeme_key": "想像力",
+        "display_word": "想像力",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5159,7 +5504,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "相比",
+        "lexeme_key": "相比",
+        "display_word": "相比",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5177,7 +5523,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "挑選",
+        "lexeme_key": "挑選",
+        "display_word": "挑選",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5195,7 +5542,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "改進",
+        "lexeme_key": "改進",
+        "display_word": "改進",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5213,7 +5561,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "分開",
+        "lexeme_key": "分開",
+        "display_word": "分開",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5231,7 +5580,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "遵守",
+        "lexeme_key": "遵守",
+        "display_word": "遵守",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5249,7 +5599,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "轉移",
+        "lexeme_key": "轉移",
+        "display_word": "轉移",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5267,7 +5618,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "集合",
+        "lexeme_key": "集合",
+        "display_word": "集合",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5285,7 +5637,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "爭議",
+        "lexeme_key": "爭議",
+        "display_word": "爭議",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5303,7 +5656,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "轉換",
+        "lexeme_key": "轉換",
+        "display_word": "轉換",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5321,7 +5675,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "優先",
+        "lexeme_key": "優先",
+        "display_word": "優先",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5339,7 +5694,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "增長",
+        "lexeme_key": "增長",
+        "display_word": "增長",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5357,7 +5713,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "區別",
+        "lexeme_key": "區別",
+        "display_word": "區別",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5375,7 +5732,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "回復/回覆",
+        "lexeme_key": "回復/回覆",
+        "display_word": "回復/回覆",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5391,7 +5749,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "縮小",
+        "lexeme_key": "縮小",
+        "display_word": "縮小",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5409,7 +5768,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "分散",
+        "lexeme_key": "分散",
+        "display_word": "分散",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5427,7 +5787,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "打架",
+        "lexeme_key": "打架",
+        "display_word": "打架",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5445,7 +5806,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "誤會",
+        "lexeme_key": "誤會",
+        "display_word": "誤會",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5461,7 +5823,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "孤單",
+        "lexeme_key": "孤單",
+        "display_word": "孤單",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5477,7 +5840,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "搬運",
+        "lexeme_key": "搬運",
+        "display_word": "搬運",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5495,7 +5859,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "後退",
+        "lexeme_key": "後退",
+        "display_word": "後退",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5513,7 +5878,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "安全帶",
+        "lexeme_key": "安全帶",
+        "display_word": "安全帶",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "",
@@ -5534,7 +5900,8 @@
     ],
     "multi_semantic_or_mechanic": [
       {
-        "word": "分享",
+        "lexeme_key": "分享",
+        "display_word": "分享",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社交、人際",
@@ -5557,7 +5924,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "距離/距",
+        "lexeme_key": "距離/距",
+        "display_word": "距離/距",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5577,7 +5945,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "避免",
+        "lexeme_key": "避免",
+        "display_word": "避免",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "安全",
@@ -5598,7 +5967,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "破壞",
+        "lexeme_key": "破壞",
+        "display_word": "破壞",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5617,7 +5987,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "傷害",
+        "lexeme_key": "傷害",
+        "display_word": "傷害",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "安全",
@@ -5638,7 +6009,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "威脅",
+        "lexeme_key": "威脅",
+        "display_word": "威脅",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "安全",
@@ -5659,7 +6031,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "意外",
+        "lexeme_key": "意外",
+        "display_word": "意外",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "安全",
@@ -5680,7 +6053,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "風險",
+        "lexeme_key": "風險",
+        "display_word": "風險",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5699,7 +6073,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "防止",
+        "lexeme_key": "防止",
+        "display_word": "防止",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "安全",
@@ -5720,7 +6095,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "避開",
+        "lexeme_key": "避開",
+        "display_word": "避開",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "安全",
@@ -5741,7 +6117,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "防守",
+        "lexeme_key": "防守",
+        "display_word": "防守",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "休閒、娛樂",
@@ -5763,7 +6140,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "安全帶",
+        "lexeme_key": "安全帶",
+        "display_word": "安全帶",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "",
@@ -5782,7 +6160,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "解釋",
+        "lexeme_key": "解釋",
+        "display_word": "解釋",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5801,7 +6180,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "溝通",
+        "lexeme_key": "溝通",
+        "display_word": "溝通",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5820,7 +6200,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "平均",
+        "lexeme_key": "平均",
+        "display_word": "平均",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5839,7 +6220,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "表達",
+        "lexeme_key": "表達",
+        "display_word": "表達",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "情緒、態度",
@@ -5861,7 +6243,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "強調",
+        "lexeme_key": "強調",
+        "display_word": "強調",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -5880,7 +6263,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "範圍",
+        "lexeme_key": "範圍",
+        "display_word": "範圍",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -5902,7 +6286,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "限制/限",
+        "lexeme_key": "限制/限",
+        "display_word": "限制/限",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5921,7 +6306,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "說明",
+        "lexeme_key": "說明",
+        "display_word": "說明",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5938,7 +6324,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "統計",
+        "lexeme_key": "統計",
+        "display_word": "統計",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -5958,7 +6345,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "通知",
+        "lexeme_key": "通知",
+        "display_word": "通知",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5977,7 +6365,8 @@
     ],
     "high_frequency_nonmechanic": [
       {
-        "word": "好2",
+        "lexeme_key": "好2",
+        "display_word": "好",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -5991,7 +6380,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "中2",
+        "lexeme_key": "中2",
+        "display_word": "中",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6005,7 +6395,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "而",
+        "lexeme_key": "而",
+        "display_word": "而",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6019,7 +6410,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "與",
+        "lexeme_key": "與",
+        "display_word": "與",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6033,7 +6425,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "種2",
+        "lexeme_key": "種2",
+        "display_word": "種",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6047,7 +6440,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "看2",
+        "lexeme_key": "看2",
+        "display_word": "看",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6061,7 +6455,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之",
+        "lexeme_key": "之",
+        "display_word": "之",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6075,7 +6470,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "為1",
+        "lexeme_key": "為1",
+        "display_word": "為",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6089,7 +6485,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "以",
+        "lexeme_key": "以",
+        "display_word": "以",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6103,7 +6500,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "並",
+        "lexeme_key": "並",
+        "display_word": "並",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6117,7 +6515,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "將",
+        "lexeme_key": "將",
+        "display_word": "將",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6131,7 +6530,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "以及/及",
+        "lexeme_key": "以及/及",
+        "display_word": "以及/及",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6145,7 +6545,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "卻",
+        "lexeme_key": "卻",
+        "display_word": "卻",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6159,7 +6560,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "喔",
+        "lexeme_key": "喔",
+        "display_word": "喔",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6173,7 +6575,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "當2",
+        "lexeme_key": "當2",
+        "display_word": "當",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6187,7 +6590,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "可",
+        "lexeme_key": "可",
+        "display_word": "可",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6201,7 +6605,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "於",
+        "lexeme_key": "於",
+        "display_word": "於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6215,7 +6620,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之後",
+        "lexeme_key": "之後",
+        "display_word": "之後",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6229,7 +6635,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "則",
+        "lexeme_key": "則",
+        "display_word": "則",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6243,7 +6650,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "此",
+        "lexeme_key": "此",
+        "display_word": "此",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6257,7 +6665,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "使",
+        "lexeme_key": "使",
+        "display_word": "使",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6271,7 +6680,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "本2",
+        "lexeme_key": "本2",
+        "display_word": "本",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "",
@@ -6285,7 +6695,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "因此",
+        "lexeme_key": "因此",
+        "display_word": "因此",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6301,7 +6712,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "由",
+        "lexeme_key": "由",
+        "display_word": "由",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6315,7 +6727,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "曾經/曾",
+        "lexeme_key": "曾經/曾",
+        "display_word": "曾經/曾",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6329,7 +6742,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "比2",
+        "lexeme_key": "比2",
+        "display_word": "比",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "",
@@ -6343,7 +6757,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "牠",
+        "lexeme_key": "牠",
+        "display_word": "牠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6357,7 +6772,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "如何",
+        "lexeme_key": "如何",
+        "display_word": "如何",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6371,7 +6787,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "無法",
+        "lexeme_key": "無法",
+        "display_word": "無法",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6385,7 +6802,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "政府",
+        "lexeme_key": "政府",
+        "display_word": "政府",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社會",
@@ -6401,7 +6819,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "該",
+        "lexeme_key": "該",
+        "display_word": "該",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6415,7 +6834,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "造成",
+        "lexeme_key": "造成",
+        "display_word": "造成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6431,7 +6851,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "變成",
+        "lexeme_key": "變成",
+        "display_word": "變成",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6445,7 +6866,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "無",
+        "lexeme_key": "無",
+        "display_word": "無",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6459,7 +6881,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "仍然/仍",
+        "lexeme_key": "仍然/仍",
+        "display_word": "仍然/仍",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6473,7 +6896,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "如此",
+        "lexeme_key": "如此",
+        "display_word": "如此",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6487,7 +6911,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "任何",
+        "lexeme_key": "任何",
+        "display_word": "任何",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6501,7 +6926,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "令",
+        "lexeme_key": "令",
+        "display_word": "令",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6515,7 +6941,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "方式",
+        "lexeme_key": "方式",
+        "display_word": "方式",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -6532,7 +6959,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "甚至",
+        "lexeme_key": "甚至",
+        "display_word": "甚至",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6546,7 +6974,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "道2",
+        "lexeme_key": "道2",
+        "display_word": "道",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6560,7 +6989,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "於是",
+        "lexeme_key": "於是",
+        "display_word": "於是",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6574,7 +7004,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "某",
+        "lexeme_key": "某",
+        "display_word": "某",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6588,7 +7019,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "出現",
+        "lexeme_key": "出現",
+        "display_word": "出現",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "安全",
@@ -6604,7 +7036,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "身",
+        "lexeme_key": "身",
+        "display_word": "身",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "身體、醫療",
@@ -6621,7 +7054,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "對於",
+        "lexeme_key": "對於",
+        "display_word": "對於",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6635,7 +7069,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "全球",
+        "lexeme_key": "全球",
+        "display_word": "全球",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6649,7 +7084,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "宗教/教2",
+        "lexeme_key": "宗教/教2",
+        "display_word": "宗教/教",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6663,7 +7099,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人家1",
+        "lexeme_key": "人家1",
+        "display_word": "人家",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "日常起居",
@@ -6679,7 +7116,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人家2",
+        "lexeme_key": "人家2",
+        "display_word": "人家",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6693,7 +7131,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "受",
+        "lexeme_key": "受",
+        "display_word": "受",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6707,7 +7146,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "經濟",
+        "lexeme_key": "經濟",
+        "display_word": "經濟",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社會",
@@ -6723,7 +7163,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "到底",
+        "lexeme_key": "到底",
+        "display_word": "到底",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6737,7 +7178,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "博士",
+        "lexeme_key": "博士",
+        "display_word": "博士",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -6754,7 +7196,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "主要",
+        "lexeme_key": "主要",
+        "display_word": "主要",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6768,7 +7211,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "過去",
+        "lexeme_key": "過去",
+        "display_word": "過去",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6782,7 +7226,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "使用",
+        "lexeme_key": "使用",
+        "display_word": "使用",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6796,7 +7241,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "段",
+        "lexeme_key": "段",
+        "display_word": "段",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6810,7 +7256,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "似乎/似",
+        "lexeme_key": "似乎/似",
+        "display_word": "似乎/似",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6824,7 +7271,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "生命",
+        "lexeme_key": "生命",
+        "display_word": "生命",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6838,7 +7286,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "非",
+        "lexeme_key": "非",
+        "display_word": "非",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6852,7 +7301,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "行為",
+        "lexeme_key": "行為",
+        "display_word": "行為",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -6869,7 +7319,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "目前",
+        "lexeme_key": "目前",
+        "display_word": "目前",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6883,7 +7334,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "只是",
+        "lexeme_key": "只是",
+        "display_word": "只是",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6897,7 +7349,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "嗯",
+        "lexeme_key": "嗯",
+        "display_word": "嗯",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6911,7 +7364,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "皇帝",
+        "lexeme_key": "皇帝",
+        "display_word": "皇帝",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "文化",
@@ -6927,7 +7381,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "接受",
+        "lexeme_key": "接受",
+        "display_word": "接受",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -6943,7 +7398,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "然而",
+        "lexeme_key": "然而",
+        "display_word": "然而",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6957,7 +7413,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "未",
+        "lexeme_key": "未",
+        "display_word": "未",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6971,7 +7428,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "項",
+        "lexeme_key": "項",
+        "display_word": "項",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -6985,7 +7443,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "地球",
+        "lexeme_key": "地球",
+        "display_word": "地球",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7002,7 +7461,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "進行",
+        "lexeme_key": "進行",
+        "display_word": "進行",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7016,7 +7476,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "情況",
+        "lexeme_key": "情況",
+        "display_word": "情況",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7030,7 +7491,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "志工",
+        "lexeme_key": "志工",
+        "display_word": "志工",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -7047,7 +7509,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "透過",
+        "lexeme_key": "透過",
+        "display_word": "透過",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7061,7 +7524,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "土地",
+        "lexeme_key": "土地",
+        "display_word": "土地",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社會",
@@ -7077,7 +7541,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "地區",
+        "lexeme_key": "地區",
+        "display_word": "地區",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "交通、旅遊",
@@ -7094,7 +7559,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "民眾",
+        "lexeme_key": "民眾",
+        "display_word": "民眾",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "社會",
@@ -7110,7 +7576,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "國際",
+        "lexeme_key": "國際",
+        "display_word": "國際",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7127,7 +7594,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "有機",
+        "lexeme_key": "有機",
+        "display_word": "有機",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "餐飲、烹飪",
@@ -7144,7 +7612,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "之前",
+        "lexeme_key": "之前",
+        "display_word": "之前",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7158,7 +7627,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "事實",
+        "lexeme_key": "事實",
+        "display_word": "事實",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7172,7 +7642,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "至",
+        "lexeme_key": "至",
+        "display_word": "至",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7186,7 +7657,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "產生",
+        "lexeme_key": "產生",
+        "display_word": "產生",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7200,7 +7672,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人們",
+        "lexeme_key": "人們",
+        "display_word": "人們",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7214,7 +7687,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "企業",
+        "lexeme_key": "企業",
+        "display_word": "企業",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "職業",
@@ -7230,7 +7704,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "情緒",
+        "lexeme_key": "情緒",
+        "display_word": "情緒",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "情緒、態度",
@@ -7249,7 +7724,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "田",
+        "lexeme_key": "田",
+        "display_word": "田",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7263,7 +7739,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "幾乎",
+        "lexeme_key": "幾乎",
+        "display_word": "幾乎",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7277,7 +7754,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "所謂",
+        "lexeme_key": "所謂",
+        "display_word": "所謂",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7291,7 +7769,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "由於",
+        "lexeme_key": "由於",
+        "display_word": "由於",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7307,7 +7786,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "狀況",
+        "lexeme_key": "狀況",
+        "display_word": "狀況",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7321,7 +7801,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "阿嬤/阿媽",
+        "lexeme_key": "阿嬤/阿媽",
+        "display_word": "阿嬤/阿媽",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "個人資料",
@@ -7337,7 +7818,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "是否",
+        "lexeme_key": "是否",
+        "display_word": "是否",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7351,7 +7833,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "真正",
+        "lexeme_key": "真正",
+        "display_word": "真正",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7365,7 +7848,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人類",
+        "lexeme_key": "人類",
+        "display_word": "人類",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7379,7 +7863,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "未來",
+        "lexeme_key": "未來",
+        "display_word": "未來",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7393,7 +7878,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感到",
+        "lexeme_key": "感到",
+        "display_word": "感到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7407,7 +7893,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "處1",
+        "lexeme_key": "處1",
+        "display_word": "處",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7421,7 +7908,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "成",
+        "lexeme_key": "成",
+        "display_word": "成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7435,7 +7923,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "科學",
+        "lexeme_key": "科學",
+        "display_word": "科學",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7451,7 +7940,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "竟然/竟",
+        "lexeme_key": "竟然/竟",
+        "display_word": "竟然/竟",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7465,7 +7955,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "基本",
+        "lexeme_key": "基本",
+        "display_word": "基本",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7479,7 +7970,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "提供",
+        "lexeme_key": "提供",
+        "display_word": "提供",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7493,7 +7985,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "系統",
+        "lexeme_key": "系統",
+        "display_word": "系統",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -7509,7 +8002,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "個人",
+        "lexeme_key": "個人",
+        "display_word": "個人",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "個人資料",
@@ -7525,7 +8019,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "突然",
+        "lexeme_key": "突然",
+        "display_word": "突然",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7539,7 +8034,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "表示",
+        "lexeme_key": "表示",
+        "display_word": "表示",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7553,7 +8049,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "時代",
+        "lexeme_key": "時代",
+        "display_word": "時代",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7567,7 +8064,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人生",
+        "lexeme_key": "人生",
+        "display_word": "人生",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7581,7 +8079,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "設計",
+        "lexeme_key": "設計",
+        "display_word": "設計",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "職業",
@@ -7597,7 +8096,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "觀眾",
+        "lexeme_key": "觀眾",
+        "display_word": "觀眾",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -7613,7 +8113,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "即使",
+        "lexeme_key": "即使",
+        "display_word": "即使",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7627,7 +8128,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "受到",
+        "lexeme_key": "受到",
+        "display_word": "受到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7641,7 +8143,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "面對",
+        "lexeme_key": "面對",
+        "display_word": "面對",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7655,7 +8158,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "組織",
+        "lexeme_key": "組織",
+        "display_word": "組織",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -7671,7 +8175,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根本",
+        "lexeme_key": "根本",
+        "display_word": "根本",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7685,7 +8190,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "自我",
+        "lexeme_key": "自我",
+        "display_word": "自我",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "情緒、態度",
@@ -7702,7 +8208,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "氣候",
+        "lexeme_key": "氣候",
+        "display_word": "氣候",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "交通、旅遊",
@@ -7719,7 +8226,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根據/據",
+        "lexeme_key": "根據/據",
+        "display_word": "根據/據",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7733,7 +8241,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "比如說/比如",
+        "lexeme_key": "比如說/比如",
+        "display_word": "比如說/比如",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7747,7 +8256,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "心理",
+        "lexeme_key": "心理",
+        "display_word": "心理",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -7764,7 +8274,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "政治",
+        "lexeme_key": "政治",
+        "display_word": "政治",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7781,7 +8292,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "不斷",
+        "lexeme_key": "不斷",
+        "display_word": "不斷",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7795,7 +8307,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "思考",
+        "lexeme_key": "思考",
+        "display_word": "思考",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7811,7 +8324,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "當地",
+        "lexeme_key": "當地",
+        "display_word": "當地",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "交通、旅遊",
@@ -7828,7 +8342,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "行動",
+        "lexeme_key": "行動",
+        "display_word": "行動",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7842,7 +8357,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "治療",
+        "lexeme_key": "治療",
+        "display_word": "治療",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -7858,7 +8374,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "有關",
+        "lexeme_key": "有關",
+        "display_word": "有關",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7872,7 +8389,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "意義",
+        "lexeme_key": "意義",
+        "display_word": "意義",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7886,7 +8404,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "社區",
+        "lexeme_key": "社區",
+        "display_word": "社區",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7903,7 +8422,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "處理",
+        "lexeme_key": "處理",
+        "display_word": "處理",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7917,7 +8437,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "代表",
+        "lexeme_key": "代表",
+        "display_word": "代表",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7931,7 +8452,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "存在",
+        "lexeme_key": "存在",
+        "display_word": "存在",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -7945,7 +8467,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "指",
+        "lexeme_key": "指",
+        "display_word": "指",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -7959,7 +8482,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "表現",
+        "lexeme_key": "表現",
+        "display_word": "表現",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -7976,7 +8500,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "生",
+        "lexeme_key": "生",
+        "display_word": "生",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "個人資料",
@@ -7992,7 +8517,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "大腦",
+        "lexeme_key": "大腦",
+        "display_word": "大腦",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -8009,7 +8535,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "管理",
+        "lexeme_key": "管理",
+        "display_word": "管理",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "職業",
@@ -8025,7 +8552,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "十分",
+        "lexeme_key": "十分",
+        "display_word": "十分",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8039,7 +8567,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "解決",
+        "lexeme_key": "解決",
+        "display_word": "解決",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8053,7 +8582,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "態度",
+        "lexeme_key": "態度",
+        "display_word": "態度",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8067,7 +8597,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "或許",
+        "lexeme_key": "或許",
+        "display_word": "或許",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8081,7 +8612,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "目標",
+        "lexeme_key": "目標",
+        "display_word": "目標",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8095,7 +8627,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "終於",
+        "lexeme_key": "終於",
+        "display_word": "終於",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8109,7 +8642,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "溫度",
+        "lexeme_key": "溫度",
+        "display_word": "溫度",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8123,7 +8657,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "理論",
+        "lexeme_key": "理論",
+        "display_word": "理論",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -8140,7 +8675,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "力量",
+        "lexeme_key": "力量",
+        "display_word": "力量",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8154,7 +8690,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "並且",
+        "lexeme_key": "並且",
+        "display_word": "並且",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8168,7 +8705,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "獲得/獲",
+        "lexeme_key": "獲得/獲",
+        "display_word": "獲得/獲",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -8185,7 +8723,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "通常",
+        "lexeme_key": "通常",
+        "display_word": "通常",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8199,7 +8738,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "靠",
+        "lexeme_key": "靠",
+        "display_word": "靠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8213,7 +8753,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "接下來",
+        "lexeme_key": "接下來",
+        "display_word": "接下來",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8227,7 +8768,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "生態",
+        "lexeme_key": "生態",
+        "display_word": "生態",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "自然環境",
@@ -8243,7 +8785,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "反應",
+        "lexeme_key": "反應",
+        "display_word": "反應",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8257,7 +8800,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "實在",
+        "lexeme_key": "實在",
+        "display_word": "實在",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8271,7 +8815,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "建立",
+        "lexeme_key": "建立",
+        "display_word": "建立",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -8287,7 +8832,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "殺",
+        "lexeme_key": "殺",
+        "display_word": "殺",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "安全",
@@ -8303,7 +8849,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "對方",
+        "lexeme_key": "對方",
+        "display_word": "對方",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8317,7 +8864,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "事件",
+        "lexeme_key": "事件",
+        "display_word": "事件",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "安全",
@@ -8333,7 +8881,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "回收",
+        "lexeme_key": "回收",
+        "display_word": "回收",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "日常起居",
@@ -8349,7 +8898,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "藝術",
+        "lexeme_key": "藝術",
+        "display_word": "藝術",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -8366,7 +8916,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "夫人",
+        "lexeme_key": "夫人",
+        "display_word": "夫人",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8380,7 +8931,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "本身",
+        "lexeme_key": "本身",
+        "display_word": "本身",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8394,7 +8946,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "文章/文",
+        "lexeme_key": "文章/文",
+        "display_word": "文章/文",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -8411,7 +8964,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "具有",
+        "lexeme_key": "具有",
+        "display_word": "具有",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "",
@@ -8425,7 +8979,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "完成",
+        "lexeme_key": "完成",
+        "display_word": "完成",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8439,7 +8994,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "活",
+        "lexeme_key": "活",
+        "display_word": "活",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "身體、醫療",
@@ -8456,7 +9012,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "章",
+        "lexeme_key": "章",
+        "display_word": "章",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8470,7 +9027,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "幸福",
+        "lexeme_key": "幸福",
+        "display_word": "幸福",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8484,7 +9042,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "原本",
+        "lexeme_key": "原本",
+        "display_word": "原本",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8498,7 +9057,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感恩",
+        "lexeme_key": "感恩",
+        "display_word": "感恩",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8512,7 +9072,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "角色",
+        "lexeme_key": "角色",
+        "display_word": "角色",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -8529,7 +9090,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "訓練",
+        "lexeme_key": "訓練",
+        "display_word": "訓練",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "職業",
@@ -8545,7 +9107,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "明白",
+        "lexeme_key": "明白",
+        "display_word": "明白",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8559,7 +9122,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "實際",
+        "lexeme_key": "實際",
+        "display_word": "實際",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -8576,7 +9140,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "實驗",
+        "lexeme_key": "實驗",
+        "display_word": "實驗",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -8593,7 +9158,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "群/羣",
+        "lexeme_key": "群/羣",
+        "display_word": "群/羣",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8607,7 +9173,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "妻子/妻",
+        "lexeme_key": "妻子/妻",
+        "display_word": "妻子/妻",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "個人資料",
@@ -8623,7 +9190,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "擁有",
+        "lexeme_key": "擁有",
+        "display_word": "擁有",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8637,7 +9205,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "自",
+        "lexeme_key": "自",
+        "display_word": "自",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8651,7 +9220,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "神經",
+        "lexeme_key": "神經",
+        "display_word": "神經",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -8668,7 +9238,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "智慧",
+        "lexeme_key": "智慧",
+        "display_word": "智慧",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8682,7 +9253,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "動作",
+        "lexeme_key": "動作",
+        "display_word": "動作",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8696,7 +9268,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "價值",
+        "lexeme_key": "價值",
+        "display_word": "價值",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "購物、商店",
@@ -8713,7 +9286,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "永遠",
+        "lexeme_key": "永遠",
+        "display_word": "永遠",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8727,7 +9301,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "空間",
+        "lexeme_key": "空間",
+        "display_word": "空間",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "日常起居",
@@ -8743,7 +9318,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "成長",
+        "lexeme_key": "成長",
+        "display_word": "成長",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "職業",
@@ -8759,7 +9335,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "病患",
+        "lexeme_key": "病患",
+        "display_word": "病患",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "身體、醫療",
@@ -8775,7 +9352,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "壓力",
+        "lexeme_key": "壓力",
+        "display_word": "壓力",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8789,7 +9367,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "小說",
+        "lexeme_key": "小說",
+        "display_word": "小說",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -8806,7 +9385,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "現象",
+        "lexeme_key": "現象",
+        "display_word": "現象",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8820,7 +9400,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "稱1",
+        "lexeme_key": "稱1",
+        "display_word": "稱",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "公共服務",
@@ -8836,7 +9417,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "代",
+        "lexeme_key": "代",
+        "display_word": "代",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8850,7 +9432,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "主義",
+        "lexeme_key": "主義",
+        "display_word": "主義",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "社會",
@@ -8866,7 +9449,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "人員",
+        "lexeme_key": "人員",
+        "display_word": "人員",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -8882,7 +9466,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "感動",
+        "lexeme_key": "感動",
+        "display_word": "感動",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8898,7 +9483,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "觀察",
+        "lexeme_key": "觀察",
+        "display_word": "觀察",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -8914,7 +9500,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "說明",
+        "lexeme_key": "說明",
+        "display_word": "說明",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8931,7 +9518,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "內容",
+        "lexeme_key": "內容",
+        "display_word": "內容",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -8948,7 +9536,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "想像",
+        "lexeme_key": "想像",
+        "display_word": "想像",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8964,7 +9553,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "之中",
+        "lexeme_key": "之中",
+        "display_word": "之中",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8978,7 +9568,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "來自",
+        "lexeme_key": "來自",
+        "display_word": "來自",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -8992,7 +9583,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "專家",
+        "lexeme_key": "專家",
+        "display_word": "專家",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -9009,7 +9601,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "技術",
+        "lexeme_key": "技術",
+        "display_word": "技術",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "職業",
@@ -9025,7 +9618,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "節目",
+        "lexeme_key": "節目",
+        "display_word": "節目",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -9041,7 +9635,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "充滿",
+        "lexeme_key": "充滿",
+        "display_word": "充滿",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "情緒、態度",
@@ -9058,7 +9653,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "地震",
+        "lexeme_key": "地震",
+        "display_word": "地震",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "交通、旅遊",
@@ -9075,7 +9671,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "控制",
+        "lexeme_key": "控制",
+        "display_word": "控制",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9089,7 +9686,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "農夫",
+        "lexeme_key": "農夫",
+        "display_word": "農夫",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -9105,7 +9703,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "分析",
+        "lexeme_key": "分析",
+        "display_word": "分析",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -9124,7 +9723,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "篇",
+        "lexeme_key": "篇",
+        "display_word": "篇",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9138,7 +9738,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "總統",
+        "lexeme_key": "總統",
+        "display_word": "總統",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社會",
@@ -9154,7 +9755,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "神",
+        "lexeme_key": "神",
+        "display_word": "神",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "文化",
@@ -9170,7 +9772,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "功能",
+        "lexeme_key": "功能",
+        "display_word": "功能",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "身體、醫療",
@@ -9187,7 +9790,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "絕對",
+        "lexeme_key": "絕對",
+        "display_word": "絕對",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9201,7 +9805,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "養",
+        "lexeme_key": "養",
+        "display_word": "養",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "休閒、娛樂",
@@ -9218,7 +9823,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "厲害",
+        "lexeme_key": "厲害",
+        "display_word": "厲害",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9232,7 +9838,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "直到",
+        "lexeme_key": "直到",
+        "display_word": "直到",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9246,7 +9853,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "記憶",
+        "lexeme_key": "記憶",
+        "display_word": "記憶",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "文化",
@@ -9262,7 +9870,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "重新",
+        "lexeme_key": "重新",
+        "display_word": "重新",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9276,7 +9885,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "譬如說/譬如",
+        "lexeme_key": "譬如說/譬如",
+        "display_word": "譬如說/譬如",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9290,7 +9900,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "提到",
+        "lexeme_key": "提到",
+        "display_word": "提到",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9304,7 +9915,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "至少",
+        "lexeme_key": "至少",
+        "display_word": "至少",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9318,7 +9930,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "量1",
+        "lexeme_key": "量1",
+        "display_word": "量",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9332,7 +9945,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "量2",
+        "lexeme_key": "量2",
+        "display_word": "量",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9346,7 +9960,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "一旦",
+        "lexeme_key": "一旦",
+        "display_word": "一旦",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9360,7 +9975,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "作為",
+        "lexeme_key": "作為",
+        "display_word": "作為",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9374,7 +9990,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "倒1",
+        "lexeme_key": "倒1",
+        "display_word": "倒",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9388,7 +10005,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "倒2",
+        "lexeme_key": "倒2",
+        "display_word": "倒",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9402,7 +10020,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "天下",
+        "lexeme_key": "天下",
+        "display_word": "天下",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "社會",
@@ -9418,7 +10037,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "現場",
+        "lexeme_key": "現場",
+        "display_word": "現場",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "安全",
@@ -9434,7 +10054,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "葉子/葉",
+        "lexeme_key": "葉子/葉",
+        "display_word": "葉子/葉",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9448,7 +10069,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "往往",
+        "lexeme_key": "往往",
+        "display_word": "往往",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9462,7 +10084,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "而已",
+        "lexeme_key": "而已",
+        "display_word": "而已",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9476,7 +10099,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "不然",
+        "lexeme_key": "不然",
+        "display_word": "不然",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9490,7 +10114,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "化學",
+        "lexeme_key": "化學",
+        "display_word": "化學",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -9507,7 +10132,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "蓋",
+        "lexeme_key": "蓋",
+        "display_word": "蓋",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "餐飲、烹飪",
@@ -9524,7 +10150,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "調查",
+        "lexeme_key": "調查",
+        "display_word": "調查",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -9541,7 +10168,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "根",
+        "lexeme_key": "根",
+        "display_word": "根",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9555,7 +10183,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "女性",
+        "lexeme_key": "女性",
+        "display_word": "女性",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "個人資料",
@@ -9571,7 +10200,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "農藥",
+        "lexeme_key": "農藥",
+        "display_word": "農藥",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "自然環境",
@@ -9587,7 +10217,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "關於",
+        "lexeme_key": "關於",
+        "display_word": "關於",
         "tbcl_level": "4*",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9601,7 +10232,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "姑娘",
+        "lexeme_key": "姑娘",
+        "display_word": "姑娘",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "核心詞",
@@ -9615,7 +10247,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "戰爭",
+        "lexeme_key": "戰爭",
+        "display_word": "戰爭",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "社會",
@@ -9631,7 +10264,8 @@
         "classification_status": "assisted"
       },
       {
-        "word": "觀念",
+        "lexeme_key": "觀念",
+        "display_word": "觀念",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "教育、學習",
@@ -9648,7 +10282,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "農民",
+        "lexeme_key": "農民",
+        "display_word": "農民",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -9664,7 +10299,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "經營",
+        "lexeme_key": "經營",
+        "display_word": "經營",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "職業",
@@ -9680,7 +10316,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "訊息",
+        "lexeme_key": "訊息",
+        "display_word": "訊息",
         "tbcl_level": "5",
         "cefr": "B2",
         "source_category": "教育、學習",
@@ -9697,7 +10334,8 @@
         "classification_status": "unreviewed"
       },
       {
-        "word": "鼓勵",
+        "lexeme_key": "鼓勵",
+        "display_word": "鼓勵",
         "tbcl_level": "4",
         "cefr": "B1",
         "source_category": "核心詞",
@@ -9715,6 +10353,7 @@
   "review_policy": [
     "각 항목은 후보이며 사람이 뜻과 용도를 확인한다.",
     "검토가 끝난 단어만 curated word-game-overlay.json에서 reviewed로 승격한다.",
-    "전술 기믹 적합 여부와 어휘 학습 중요도를 별개로 판단한다."
+    "전술 기믹 적합 여부와 어휘 학습 중요도를 별개로 판단한다.",
+    "동일 표기라도 발음·의미가 다른 항목이 있을 수 있으므로 display_word만으로 항목을 합치지 않는다."
   ]
 }
