@@ -1,13 +1,21 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "description": "TBCL B1–B2 master vocabulary에 덧붙이는 단어게임 편집층. 원자료 master는 수정하지 않는다.",
+  "rationale_doc": "VOCABULARY-SCHEMA.md",
   "fields": {
-    "korean_gloss": "게임에서 사용할 한국어 뜻",
+    "korean_gloss": "게임에서 사용할 한국어 핵심 뜻",
     "study_priority": "암기 스테이지 우선순위 (core / normal / optional)",
-    "study_tags": "암기·복습용 의미/형태 태그",
-    "mechanic_eligible": "전술 기믹으로 직접 표현하기 좋은지",
-    "mechanic_tags": "이동·거리·선택·관계·자원 등 기믹 태그",
-    "village": "배정된 마을/지역",
+    "topic_tags": "세부 상황·주제 태그. 복수 허용",
+    "semantic_tags": "공간·변화·비교·판단·관계 등 의미 기능 태그. 복수 허용",
+    "study_tags": "형태·유의어·반의어·문맥 등 암기·복습용 태그",
+    "mechanic_eligible": "전술 기믹으로 의미를 직접 표현하기 좋은지. 학습 중요도와는 무관함",
+    "mechanic_tags": "이동·거리·선택·관계·자원 등 전술 기믹 태그",
+    "stage_modes": "뜻 판별·문맥 선택·대비·전술 기믹·주음 연결 등 적합한 학습 스테이지 방식",
+    "primary_village": "현재 대표적으로 배치한 마을/지역. 없을 수 있음",
+    "village_tags": "재등장할 수 있는 마을/지역 후보. 복수 허용",
+    "related_words": "함께 익히기 좋은 관련어",
+    "contrast_words": "의미 차이를 비교하기 좋은 단어",
+    "classification_status": "분류 검토 상태 (unreviewed / assisted / reviewed)",
     "notes": "설계 메모"
   },
   "words": {}
