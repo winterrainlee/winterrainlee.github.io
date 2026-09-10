@@ -21,77 +21,66 @@ def clean(value):
     return str(value).strip()
 
 
-def normalize_header(value):
-    return re.sub(r"\s+", "", clean(value))
-
-
-def pick_col(headers, *needles):
-    for idx, header in enumerate(headers):
-        h = normalize_header(header)
-        if any(n in h for n in needles):
-            return idx
-    return None
-
-
-def parse_level(raw, fallback=""):
-    text = clean(raw) or fallback
-    text = text.replace("＊", "*")
+def parse_level(raw):
+    text = clean(raw).replace("＊", "*")
     m = re.search(r"([1-7])\s*(\*)?", text)
     if not m:
         return ""
     return m.group(1) + ("*" if m.group(2) else "")
 
 
-def detect_header(ws):
-    for row_idx in range(1, min(ws.max_row, 30) + 1):
-        vals = [clean(c.value) for c in ws[row_idx]]
-        joined = "|".join(vals)
-        if "詞語" in joined and "等級" in joined:
-            return row_idx, vals
+def find_header(ws):
+    for row_idx in range(1, min(ws.max_row, 10) + 1):
+        values = [clean(c.value) for c in ws[row_idx]]
+        lowered = {v.lower() for v in values if v}
+        if {"word", "ji"}.issubset(lowered) or ("詞語" in values and "等級" in values):
+            return row_idx, values
     return None, None
+
+
+def find_col(headers, *candidates):
+    normalized = [clean(h).lower() for h in headers]
+    for candidate in candidates:
+        c = candidate.lower()
+        if c in normalized:
+            return normalized.index(c)
+    for idx, header in enumerate(normalized):
+        if any(candidate.lower() in header for candidate in candidates):
+            return idx
+    return None
 
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     XLSX_PATH.parent.mkdir(parents=True, exist_ok=True)
+
     print(f"Downloading {SOURCE_URL}")
     urllib.request.urlretrieve(SOURCE_URL, XLSX_PATH)
-
     wb = load_workbook(XLSX_PATH, read_only=True, data_only=True)
+
     rows = []
-
     for ws in wb.worksheets:
-        print(f"SHEET {ws.title!r} rows={ws.max_row} cols={ws.max_column}")
-        for n, values in enumerate(ws.iter_rows(min_row=1, max_row=min(ws.max_row, 12), values_only=True), start=1):
-            print(f"ROW {n}: {[clean(v) for v in list(values)[:16]]}")
-
-        header_row, headers = detect_header(ws)
+        header_row, headers = find_header(ws)
         if not header_row:
-            print("No header detected in this sheet")
             continue
 
-        print(f"Detected header row {header_row}: {headers}")
-        level_col = pick_col(headers, "等級")
-        word_col = pick_col(headers, "詞語")
-        category_col = pick_col(headers, "情境")
-        zhuyin_col = pick_col(headers, "注音", "音讀")
-        pinyin_col = pick_col(headers, "拼音")
-        written_col = pick_col(headers, "書面")
-        spoken_col = pick_col(headers, "口語")
+        word_col = find_col(headers, "word", "詞語")
+        level_col = find_col(headers, "ji", "等級")
+        category_col = find_col(headers, "situation", "情境")
+        zhuyin_col = find_col(headers, "bopomofo", "注音", "音讀")
+        pinyin_col = find_col(headers, "pinyin", "拼音")
+        written_col = find_col(headers, "wfreq", "書面")
+        spoken_col = find_col(headers, "sfreq", "口語")
 
-        if level_col is None or word_col is None:
-            print(f"Missing required columns: level={level_col}, word={word_col}")
+        if word_col is None or level_col is None:
             continue
 
-        last_level = ""
         for values in ws.iter_rows(min_row=header_row + 1, values_only=True):
             values = list(values)
-            if level_col >= len(values) or word_col >= len(values):
+            if max(word_col, level_col) >= len(values):
                 continue
 
-            level = parse_level(values[level_col], last_level)
-            if level:
-                last_level = level
+            level = parse_level(values[level_col])
             if level not in {"4", "4*", "5"}:
                 continue
 
@@ -116,10 +105,11 @@ def main():
     if not rows:
         raise RuntimeError("No TBCL level 4/5 vocabulary rows were found. The source format may have changed.")
 
+    # Preserve official source order. Only remove truly identical duplicate rows.
     seen = set()
     unique_rows = []
     for row in rows:
-        key = (row["word"], row["tbcl_level"], row["zhuyin"], row["pinyin"])
+        key = tuple(row.values())
         if key in seen:
             continue
         seen.add(key)
@@ -137,9 +127,16 @@ def main():
     meta_path = OUT_DIR / "tbcl-b1-b2-source.json"
 
     fields = [
-        "word", "tbcl_level", "cefr", "category", "zhuyin", "pinyin",
-        "written_freq_per_million", "spoken_freq_per_million",
+        "word",
+        "tbcl_level",
+        "cefr",
+        "category",
+        "zhuyin",
+        "pinyin",
+        "written_freq_per_million",
+        "spoken_freq_per_million",
     ]
+
     with csv_path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
@@ -156,11 +153,12 @@ def main():
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "scope": "TBCL Level 4 / 4* / 5 (CEFR B1–B2 target pool)",
         "counts": counts,
+        "fields": fields,
         "notes": [
             "master 파일은 원자료 층이다. 한국어 뜻·게임 기믹·마을 배정 같은 편집 정보는 별도 overlay에 둔다.",
-            "TBCL 4급은 B1, 5급은 B2 대응으로 사용한다.",
+            "TBCL 4급/4*급은 B1, 5급은 B2 대응으로 사용한다.",
             "원자료의 공개 다운로드와 재배포 허용 범위는 별도 확인이 필요하다. 외부 공개 배포 전 라이선스를 재확인한다."
-        ]
+        ],
     }
     with meta_path.open("w", encoding="utf-8") as f:
         json.dump(metadata, f, ensure_ascii=False, indent=2)
