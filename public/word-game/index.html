@@ -2,144 +2,80 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f1e8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>出發 — 단어 전술게임 튜토리얼</title>
 <style>
-:root{
-  color-scheme: light;
-  --bg:#f5f1e8; --paper:#fffdf7; --ink:#26231e; --muted:#777064;
-  --line:#d7d0c4; --accent:#2d6248; --accent-soft:#e0eee6;
-  --danger:#9c4038; --danger-soft:#f5dedb; --blue:#44668a; --shadow:0 8px 26px rgba(55,45,30,.12);
-  --cell: min(52px, calc((100vw - 42px) / 5));
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Apple SD Gothic Neo",sans-serif}
-button{font:inherit;color:inherit}
-body{min-height:100svh;overflow-x:hidden}
-#app{min-height:100svh;padding:max(10px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom));display:flex;justify-content:center}
-.shell{width:min(100%,430px);min-height:calc(100svh - max(10px,env(safe-area-inset-top)) - max(12px,env(safe-area-inset-bottom)));display:flex;flex-direction:column;gap:8px}
-.topbar{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:44px}
-.iconbtn{width:44px;height:44px;border:0;background:transparent;border-radius:12px;font-size:22px}
-.iconbtn:active{background:#e9e3d8}
-.stagehead{text-align:center;min-width:0}.stagekicker{font-size:12px;color:var(--muted);line-height:1.2}.stagetitle{font-size:17px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.goalbox{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:10px 12px;box-shadow:0 2px 10px rgba(55,45,30,.04)}
-.goal{font-size:18px;font-weight:800;line-height:1.35;text-align:center}.ruleline{margin-top:3px;font-size:14px;text-align:center;color:#5e574f}
-.goal .done{text-decoration:line-through;opacity:.5}.goal .hot{color:var(--accent)}
-.mapwrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:3px 0}
-.grid{display:grid;gap:3px;padding:5px;background:#ded7ca;border:1px solid #cfc6b8;border-radius:18px;box-shadow:var(--shadow);touch-action:manipulation;user-select:none}
-.cell{width:var(--cell);height:var(--cell);min-width:44px;min-height:44px;border:0;padding:0;border-radius:10px;position:relative;display:flex;align-items:center;justify-content:center;background:#e9e1d2;font-size:24px;overflow:hidden;outline:none}
-.cell.floor{background:#eee5d6}.cell.wall{background:#506653}.cell.wall:before{content:"";width:70%;height:65%;border-radius:45% 45% 35% 35%;background:#6f846e;box-shadow:-8px 5px 0 #5e765f,8px 4px 0 #5e765f}
-.cell.exit{background:#dcebdd}.cell.exit:after{content:"出口";font-size:11px;font-weight:800;color:#28553f;position:absolute;bottom:3px}.cell.stone{background:#d9d1c4}.cell.stone:before{content:"碑";width:62%;height:74%;display:flex;align-items:center;justify-content:center;background:#afa797;border:2px solid #8b8376;border-radius:5px 5px 2px 2px;font-size:18px;font-weight:800;color:#4d4a43}.cell.stone.active:before{box-shadow:0 0 0 3px #f2d473,0 0 16px #f4d86c;color:#7a5a00}.cell.gate{background:#d7ccc0}.cell.gate:before{content:"門";font-size:22px}.cell.gate.open{background:#eee5d6}.cell.gate.open:before{content:"開";color:var(--accent)}
-.cell.ruin{background:#c9bfae}.cell.ruin:before{content:"遺";font-size:17px;color:#5f5648;font-weight:800}.cell.ruin.crossed{box-shadow:inset 0 0 0 3px #9bb9a5}.cell.hazard{background:#ecd7cf}.cell.hazard:before{content:"✦";font-size:30px;color:var(--danger);transform:rotate(45deg)}.cell.wolfcell{background:#ddd2c3}
-.hero,.wolf{position:absolute;z-index:4;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.hero{font-size:28px}.wolf{font-size:27px}.cell.moveable{box-shadow:inset 0 0 0 3px rgba(45,98,72,.34)}.cell.inspectable{box-shadow:inset 0 0 0 3px rgba(68,102,138,.30)}
-.cell:focus-visible{outline:3px solid #2c65a2;outline-offset:1px}
-.status{min-height:34px;padding:6px 10px;border-radius:12px;background:rgba(255,253,247,.68);display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;line-height:1.35;color:#514b43}.status.bad{background:var(--danger-soft);color:#722f2a}.status.good{background:var(--accent-soft);color:#28563f}.status.info{background:#e3ebf3;color:#334f6a}
-.words{display:flex;gap:6px;justify-content:center;min-height:44px}.wordbtn{height:44px;min-width:56px;padding:0 10px;border:1px solid #cbc3b6;background:var(--paper);border-radius:12px;font-weight:800;font-size:16px}.wordbtn:active{transform:translateY(1px);background:#eee8dc}.wordbtn.done{border-color:#9eb4a5;background:#e8f0ea}
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.control{height:48px;border:1px solid #c9c0b2;background:var(--paper);border-radius:14px;font-weight:750}.control.primary{background:var(--accent);border-color:var(--accent);color:white}.control[disabled]{opacity:.38}.control.mode{background:#e7edf3;border-color:#bdcbd8;color:#31516e}
-.scrim{position:fixed;inset:0;background:rgba(31,28,24,.34);display:none;align-items:flex-end;justify-content:center;padding:16px max(12px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));z-index:20}.scrim.open{display:flex}.sheet{width:min(100%,430px);max-height:min(74svh,620px);overflow:auto;background:var(--paper);border-radius:22px;padding:18px;box-shadow:0 16px 60px rgba(0,0,0,.24)}.sheet h2{margin:0 0 6px;font-size:23px}.pinyin{color:var(--muted);margin-bottom:12px}.meaning{font-size:18px;font-weight:750;margin:8px 0}.example{background:#f0ebe2;border-radius:12px;padding:10px 12px;margin:12px 0;line-height:1.45}.gamerule{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;color:#554f47;line-height:1.45}.sheetactions{display:flex;gap:8px;margin-top:16px}.sheetactions button{height:48px;flex:1;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:800}.sheetactions button.secondary{background:#e9e3d8;color:var(--ink)}
-.menuList{display:grid;gap:8px;margin-top:12px}.stagepick{min-height:52px;text-align:left;padding:9px 12px;border-radius:14px;border:1px solid var(--line);background:#faf7f0}.stagepick strong{display:block}.stagepick small{color:var(--muted)}
-.completeMark{font-size:56px;text-align:center;margin:4px 0 10px}.story{white-space:pre-line;line-height:1.65;font-size:16px;text-align:center}.tiny{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
-@media (max-height:650px){:root{--cell:min(47px,calc((100vw - 42px)/5))}.shell{gap:5px}.goalbox{padding:7px 10px}.goal{font-size:16px}.mapwrap{padding:0}.status{min-height:28px;padding:4px 8px}.wordbtn{height:42px}.control{height:44px}}
-@media (prefers-reduced-motion:no-preference){.hero,.wolf{transition:transform .12s ease}.cell.stone.active:before{animation:glow .55s ease-out}@keyframes glow{50%{transform:scale(1.06)}}}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f5f1e8}
+iframe{display:block;width:100%;height:100%;border:0;background:#f5f1e8}
 </style>
 </head>
 <body>
-<div id="app"><main class="shell" aria-live="polite">
-  <div class="topbar"><button class="iconbtn" id="menuBtn" aria-label="스테이지 메뉴">☰</button><div class="stagehead"><div class="stagekicker" id="stageKicker"></div><div class="stagetitle" id="stageTitle"></div></div><button class="iconbtn" id="resetBtn" aria-label="현재 스테이지 다시 시작">↻</button></div>
-  <section class="goalbox"><div class="goal" id="goal"></div><div class="ruleline" id="ruleLine"></div></section>
-  <section class="mapwrap"><div class="grid" id="grid" role="grid" aria-label="전술 지도"></div></section>
-  <div class="status" id="status">용사를 눌러 시작해봐.</div>
-  <div class="words" id="words"></div>
-  <div class="controls">
-    <button class="control" id="waitBtn">기다리기</button>
-    <button class="control" id="inspectBtn">살펴보기</button>
-    <button class="control" id="undoBtn">되돌리기</button>
-  </div>
-</main></div>
-<div class="scrim" id="scrim"><section class="sheet" id="sheet" role="dialog" aria-modal="true"></section></div>
+<iframe id="game" src="./legacy-v03.html" title="出發 단어 전술게임"></iframe>
 <script>
-const WORDS={
- '接近':{p:'jiējìn',k:'가까이 가다, 접근하다',ex:'我慢慢接近石碑。',rule:'이 게임에서는 석비와 상하좌우 한 칸 거리까지 가면 석비가 반응해.'},
- '遠離':{p:'yuǎnlí',k:'멀어지다, 멀리 떨어지다',ex:'請遠離危險的地方。',rule:'늑대의 위험 범위와 거리를 두어야 해. 매번 거리가 늘어나야 한다는 뜻은 아니야.'},
- '通過':{p:'tōngguò',k:'통과하다, 지나가다',ex:'我們要通過這個遺跡。',rule:'유적의 한쪽 입구로 들어가 다른 쪽 입구로 나와야 통과한 것으로 판정해.'},
- '到達':{p:'dàodá',k:'도착하다, 이르다',ex:'最後到達出口。',rule:'필요한 조건을 마친 뒤 출구에 도착하면 스테이지가 끝나.'},
- '避開':{p:'bìkāi',k:'피하다, 비켜 가다',ex:'避開危險，繼續前進。',rule:'가시 칸으로 들어가는 행동은 확정되지 않아. 다른 경로를 찾아야 해.'}
-};
-const STAGES=[
- {id:'stage-0',title:'出發',subtitle:'마을을 떠나다',grid:['.E.','...','...','.S.'],goal:'到村口去。',words:[],win:['at_exit'],story:'소년은 뒤를 돌아보았다.\n익숙한 마을은 이제 조금씩 멀어지고 있었다.'},
- {id:'stage-1',title:'接近',subtitle:'낡은 석비',grid:['##E##','#...#','##G##','#...#','#K..#','#...#','##S##'],goal:'接近石碑。',goalAfter:'走到出口。',words:['接近'],win:['stone','at_exit'],story:'「방금… 글자가 빛난 건가?」'},
- {id:'stage-2',title:'遠離',subtitle:'늑대가 있는 길',grid:['##E##','.....','.#.#.','...W.','.#.#.','.....','##S##'],goal:'遠離野狼，走到出口。',words:['遠離'],win:['at_exit'],wolf:{cycle:[[3,3]],radius:1},story:'가장 짧은 길이 언제나 좋은 길은 아니었다.'},
- {id:'stage-3',title:'通過・到達',subtitle:'폐허를 지나서',grid:['#..E#','#.#.#','#R#.#','#R#.#','#R#.#','#.#.#','#..S#'],goal:'通過遺跡，然後到達出口。',words:['通過','到達'],win:['crossed','at_exit'],ruin:{portals:[[1,1],[5,1]]},story:'지나가는 것과 도착하는 것.\n비슷해 보여도 길 위에서는 전혀 다른 일이었다.'},
- {id:'stage-4',title:'避開',subtitle:'위험한 길',grid:['##E##','.....','.X.X.','..X..','.X.X.','.....','##S##'],goal:'避開危險，到達出口。',words:['避開','到達'],win:['at_exit'],story:'목적지만큼, 그곳까지 가는 길도 중요했다.'},
- {id:'stage-5',title:'走出森林',subtitle:'숲을 빠져나가라',grid:['....E','.#.#.','.#..W','.##X.','.RRR.','.K##.','S....'],goal:'接近石碑，通過遺跡，到達出口。',rule:'遠離野狼，避開危險。',words:['接近','遠離','通過','到達','避開'],win:['stone','crossed','at_exit'],ruin:{portals:[[4,0],[4,4]]},wolf:{initial:3,cycle:[[2,2],[2,2],[2,3],[2,4],[2,4],[2,3]],radius:1},story:'少年離開了熟悉的村子。\n他第一次發現，這個世界的「話」似乎有一種奇怪的力量。\n\n「救命！」'}
-];
-const SAVEKEY='chufa-tutorial-v03';
-let stageIndex=0,state=null,history=[],selected=false,inspect=false,completed=new Set();
-const $=s=>document.querySelector(s), gridEl=$('#grid'), statusEl=$('#status');
-function key(p){return p[0]+','+p[1]}
-function dist(a,b){return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])}
-function locate(g,ch){for(let r=0;r<g.length;r++)for(let c=0;c<g[r].length;c++)if(g[r][c]===ch)return [r,c]}
-function initialState(st){return {hero:locate(st.grid,'S'),phase:st.wolf?.initial||0,stone:false,crossed:false,entry:null,turn:0}}
-function clone(v){return JSON.parse(JSON.stringify(v))}
-function current(){return STAGES[stageIndex]}
-function wolfPos(st= current(),s=state,phase=s.phase){return st.wolf?st.wolf.cycle[phase]:null}
-function nextPhase(st=current(),s=state){return st.wolf?(s.phase+1)%st.wolf.cycle.length:s.phase}
-function tileAt(pos){return current().grid[pos[0]]?.[pos[1]]}
-function stonePos(){return locate(current().grid,'K')}
-function atExit(){return tileAt(state.hero)==='E'}
-function isWin(){const w=current().win;return (!w.includes('stone')||state.stone)&&(!w.includes('crossed')||state.crossed)&&(!w.includes('at_exit')||atExit())}
-function setStatus(msg,type=''){statusEl.textContent=msg;statusEl.className='status'+(type?' '+type:'')}
-function save(){try{localStorage.setItem(SAVEKEY,JSON.stringify({stageIndex,state,history,selected,inspect,completed:[...completed]}))}catch(e){setStatus('진행 상태를 저장하지 못했어. 이 탭에서는 계속 플레이할 수 있어.','bad')}}
-function load(){try{let x=JSON.parse(localStorage.getItem(SAVEKEY)||'null');if(!x)return false;if(!STAGES[x.stageIndex]||!x.state)return false;stageIndex=x.stageIndex;state=x.state;history=x.history||[];selected=!!x.selected;inspect=!!x.inspect;completed=new Set(x.completed||[]);return true}catch(e){return false}}
-function resetStage(quiet=false){state=initialState(current());history=[];selected=stageIndex>0;inspect=false;if(!quiet)setStatus(stageIndex===0?'용사를 누르고, 옆 칸을 눌러봐.':'목표와 지형을 보고 네 길을 찾아봐.','info');save();render()}
-function markGoal(text,word,done){return text.replace(word,`<span class="${done?'done':'hot'}">${word}</span>`)}
-function renderGoal(){let st=current(),g=st.goal;if(stageIndex===1&&state.stone)g=st.goalAfter;
- if(st.win.includes('stone'))g=markGoal(g,'接近',state.stone);
- if(st.win.includes('crossed'))g=markGoal(g,'通過',state.crossed);
- $('#goal').innerHTML=g;$('#ruleLine').textContent=st.rule||'';
-}
-function descTile(ch,pos){if(pos[0]===state.hero[0]&&pos[1]===state.hero[1])return '용사가 있는 칸';if(current().wolf&&key(pos)===key(wolfPos()))return '늑대';return {'#':'수풀, 지나갈 수 없음','.':'길','S':'길','E':'출구','K':'낡은 석비','G':state.stone?'열린 문':'닫힌 문','R':'유적 통로','X':'가시, 위험한 바닥','W':'길'}[ch]||'길'}
-function render(){let st=current();$('#stageKicker').textContent=`튜토리얼 ${stageIndex}/5`;$('#stageTitle').textContent=`${st.title} · ${st.subtitle}`;renderGoal();
- const rows=st.grid.length,cols=st.grid[0].length;gridEl.style.gridTemplateColumns=`repeat(${cols},var(--cell))`;gridEl.innerHTML='';
- for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){let ch=st.grid[r][c],b=document.createElement('button');b.className='cell ';let floor=['.','S','W'].includes(ch);
- b.className+=ch==='#'?'wall':ch==='E'?'exit':ch==='K'?'stone':ch==='G'?'gate':ch==='R'?'ruin':ch==='X'?'hazard':floor?'floor':'floor';
- if(ch==='K'&&state.stone)b.classList.add('active');if(ch==='G'&&state.stone)b.classList.add('open');if(ch==='R'&&state.crossed)b.classList.add('crossed');
- let pos=[r,c],d=dist(state.hero,pos);if(selected&&!inspect&&d===1&&!['#','K'].includes(ch)&&!(ch==='G'&&!state.stone))b.classList.add('moveable');if(inspect)b.classList.add('inspectable');
- b.setAttribute('role','gridcell');b.setAttribute('aria-label',`${String.fromCharCode(65+c)}${r+1}, ${descTile(ch,pos)}`);b.addEventListener('click',()=>tapCell(pos));
- if(r===state.hero[0]&&c===state.hero[1]){let x=document.createElement('span');x.className='hero';x.textContent='🧑‍🎒';x.setAttribute('aria-hidden','true');b.appendChild(x)}
- if(st.wolf&&key(pos)===key(wolfPos())){let x=document.createElement('span');x.className='wolf';x.textContent='🐺';x.setAttribute('aria-hidden','true');b.appendChild(x)}gridEl.appendChild(b)}
- $('#words').innerHTML='';st.words.forEach(w=>{let b=document.createElement('button');b.className='wordbtn';if((w==='接近'&&state.stone)||(w==='通過'&&state.crossed)||(w==='到達'&&atExit()))b.classList.add('done');b.textContent=w;b.onclick=()=>showWord(w);$('#words').appendChild(b)});
- $('#waitBtn').disabled=stageIndex!==5;$('#inspectBtn').textContent=inspect?'이동으로':'살펴보기';$('#inspectBtn').className='control'+(inspect?' mode':'');$('#undoBtn').disabled=!history.length;
-}
-function tapCell(pos){let st=current(),ch=tileAt(pos);
- if(inspect){showInspect(pos);return}
- if(!selected){if(key(pos)===key(state.hero)){selected=true;setStatus('좋아. 이제 옆 칸을 눌러 이동해.','info');render();return}setStatus('먼저 용사를 눌러줘.','info');return}
- if(key(pos)===key(state.hero)){setStatus('이동할 옆 칸을 골라봐.');return}
- if(dist(state.hero,pos)!==1){setStatus('한 번에 상하좌우 한 칸만 움직일 수 있어.','info');return}
- attemptMove(pos,false)
-}
-function attemptMove(pos,isWait){let st=current(),ch=tileAt(pos);if(!isWait){if(!ch||ch==='#'||ch==='K'||(ch==='G'&&!state.stone)){setStatus(ch==='G'?'문이 아직 닫혀 있어.':'그쪽으로는 갈 수 없어.','info');return}if(ch==='X'){setStatus('這裡有危險。 가시를 피해 다른 길을 찾아봐.','bad');return}}
- let np=isWait?state.hero:pos;
- if(st.wolf){let cur=wolfPos(st,state),np2=st.wolf.cycle[nextPhase(st,state)];if(dist(np,cur)<=st.wolf.radius||dist(np,np2)<=st.wolf.radius){setStatus('太接近野狼了。 늑대와 거리를 더 두어야 해.','bad');return}}
- history.push(clone(state));let oldHero=clone(state.hero),oldTile=tileAt(oldHero);state.hero=clone(np);if(st.wolf)state.phase=nextPhase(st,state);state.turn++;
- let k=stonePos();if(k&&!state.stone&&dist(state.hero,k)===1){state.stone=true;setStatus('接近石碑 — 석비가 빛나며 길이 열렸어.','good')}
- if(st.ruin&&!isWait){let newTile=tileAt(state.hero);let portals=st.ruin.portals;
-   if(newTile==='R'&&oldTile!=='R'){let idx=portals.findIndex(p=>key(p)===key(oldHero));state.entry=idx>=0?idx:null}
-   if(oldTile==='R'&&newTile!=='R'){let out=portals.findIndex(p=>key(p)===key(state.hero));if(state.entry!==null&&out>=0&&out!==state.entry){state.crossed=true;setStatus('已通過遺跡。 유적을 반대편까지 지나왔어.','good')}state.entry=null}
- }
- if(atExit()&&!isWin()){if(st.win.includes('crossed')&&!state.crossed)setStatus('還沒通過遺跡。 출구에는 왔지만 유적을 아직 통과하지 않았어.','info');else if(st.win.includes('stone')&&!state.stone)setStatus('아직 석비에 접근하지 않았어.','info')}
- if(isWin()){completed.add(st.id);save();render();setTimeout(showComplete,120);return}
- save();render();if(isWait)setStatus('한 턴 기다렸어. 늑대의 위치가 바뀌었어.','info');else if(!statusEl.classList.contains('good')&&!statusEl.classList.contains('info'))setStatus('한 칸 이동했어.')
-}
-function showWord(w){let x=WORDS[w];openSheet(`<h2>${w}</h2><div class="pinyin">${x.p}</div><div class="meaning">${x.k}</div><div class="example">${x.ex}</div><div class="gamerule"><strong>이 판에서는</strong><br>${x.rule}</div><div class="sheetactions"><button onclick="closeSheet()">닫기</button></div>`)}
-function showInspect(pos){let st=current(),ch=tileAt(pos),title=descTile(ch,pos),extra='';if(st.wolf&&key(pos)===key(wolfPos())){let cur=wolfPos(),n=st.wolf.cycle[nextPhase()];extra=`<div class="gamerule">위험 범위: 현재와 다음 위치의 상하좌우 한 칸.<br>다음 행동: ${key(cur)===key(n)?'여기서 기다림':`${String.fromCharCode(65+n[1])}${n[0]+1}로 이동`}.</div>`}if(ch==='R'&&st.ruin)extra+='<div class="gamerule">연결된 유적 통로야. 한쪽 입구에서 들어가 다른 입구로 나오면 <b>通過</b>가 성립해.</div>';if(ch==='K')extra+='<div class="gamerule">위에 올라갈 수는 없어. 가까이 가면 반응할 것 같아.</div>';if(ch==='X')extra+='<div class="gamerule">위험한 가시야. 이 칸으로 들어가는 행동은 확정되지 않아.</div>';openSheet(`<h2>${title}</h2><div class="pinyin">${String.fromCharCode(65+pos[1])}${pos[0]+1}</div>${extra}<div class="sheetactions"><button onclick="closeSheet()">닫기</button></div>`)}
-function openSheet(html){$('#sheet').innerHTML=html;$('#scrim').classList.add('open')}window.closeSheet=()=>$('#scrim').classList.remove('open');$('#scrim').addEventListener('click',e=>{if(e.target.id==='scrim')closeSheet()});
-function showComplete(){let st=current(),last=stageIndex===STAGES.length-1;openSheet(`<div class="completeMark">${last?'🌄':'✓'}</div><h2 style="text-align:center">${last?'튜토리얼 완료':'스테이지 완료'}</h2><div class="story">${st.story}</div><div class="sheetactions">${stageIndex>0?'<button class="secondary" onclick="replayStage()">다시 해보기</button>':''}<button onclick="nextStage()">${last?'처음부터 보기':'다음 스테이지'}</button></div>`)}
-window.nextStage=()=>{closeSheet();if(stageIndex<STAGES.length-1)stageIndex++;else stageIndex=0;resetStage()};window.replayStage=()=>{closeSheet();resetStage()};
-function showMenu(){let list=STAGES.map((s,i)=>`<button class="stagepick" onclick="jumpStage(${i})"><strong>${completed.has(s.id)?'✓ ':''}${i}. ${s.title}</strong><small>${s.subtitle}</small></button>`).join('');openSheet(`<h2>出發</h2><div class="pinyin">튜토리얼 스테이지 선택</div><div class="menuList">${list}</div><div class="sheetactions"><button class="secondary" onclick="closeSheet()">닫기</button></div>`)}window.jumpStage=i=>{stageIndex=i;closeSheet();resetStage()};
-$('#menuBtn').onclick=showMenu;$('#resetBtn').onclick=()=>resetStage();$('#inspectBtn').onclick=()=>{inspect=!inspect;setStatus(inspect?'살펴보기 모드야. 지형이나 늑대를 눌러봐.':'이동 모드로 돌아왔어.','info');render()};$('#undoBtn').onclick=()=>{if(!history.length)return;state=history.pop();setStatus('직전 행동 전으로 되돌렸어.','info');save();render()};$('#waitBtn').onclick=()=>attemptMove(state.hero,true);
-if(!load())resetStage(true);render();if(stageIndex===0&&!selected)setStatus('용사를 누르고, 옆 칸을 눌러봐.','info');else setStatus('목표와 지형을 보고 네 길을 찾아봐.','info');
+const frame=document.getElementById('game');
+frame.addEventListener('load',()=>{
+  const w=frame.contentWindow,d=frame.contentDocument;
+  const patch=d.createElement('script');
+  patch.textContent=`
+    WORDS['接近'].p='ㄐㄧㄝ ㄐㄧㄣˋ';
+    WORDS['遠離'].p='ㄩㄢˇ ㄌㄧˊ';
+    WORDS['通過'].p='ㄊㄨㄥ ㄍㄨㄛˋ';
+    WORDS['到達'].p='ㄉㄠˋ ㄉㄚˊ';
+    WORDS['避開'].p='ㄅㄧˋ ㄎㄞ';
+
+    const patchStyle=document.createElement('style');
+    patchStyle.textContent='.move-arrow{position:absolute;z-index:3;font-size:21px;font-weight:900;color:var(--accent);line-height:1;filter:drop-shadow(0 1px 0 rgba(255,255,255,.8));pointer-events:none}';
+    document.head.appendChild(patchStyle);
+
+    function acceptedMove(pos){
+      let st=current(),ch=tileAt(pos);
+      if(!ch||dist(state.hero,pos)!==1||ch==='#'||ch==='K'||ch==='X'||(ch==='G'&&!state.stone))return false;
+      if(st.wolf){
+        let cur=wolfPos(st,state),n=st.wolf.cycle[nextPhase(st,state)];
+        if(dist(pos,cur)<=st.wolf.radius||dist(pos,n)<=st.wolf.radius)return false;
+      }
+      return true;
+    }
+    function arrowFor(pos){
+      let dr=pos[0]-state.hero[0],dc=pos[1]-state.hero[1];
+      return dr===-1?'↑':dr===1?'↓':dc===-1?'←':'→';
+    }
+    function enhance(){
+      const st=current(),cells=[...document.querySelectorAll('.cell')],cols=st.grid[0].length;
+      cells.forEach((cell,i)=>{
+        cell.querySelectorAll('.move-arrow').forEach(x=>x.remove());
+        cell.classList.remove('moveable');
+        const pos=[Math.floor(i/cols),i%cols];
+        if(selected&&!inspect&&acceptedMove(pos)){
+          cell.classList.add('moveable');
+          const a=document.createElement('span');
+          a.className='move-arrow';a.textContent=arrowFor(pos);a.setAttribute('aria-hidden','true');
+          cell.insertBefore(a,cell.firstChild);
+        }
+      });
+      const wait=document.getElementById('waitBtn'),controls=document.querySelector('.controls');
+      wait.hidden=stageIndex!==5;
+      wait.textContent='1턴 기다리기';
+      wait.setAttribute('aria-label','제자리에서 한 턴 기다리기');
+      wait.title='용사는 움직이지 않고, 늑대의 순찰만 한 턴 진행해.';
+      controls.style.gridTemplateColumns=stageIndex===5?'1.25fr 1fr 1fr':'1fr 1fr';
+    }
+
+    const originalRender=render;
+    render=function(){originalRender();enhance();};
+    const originalReset=resetStage;
+    resetStage=function(quiet=false){
+      originalReset(quiet);
+      if(stageIndex===0&&!selected&&!quiet)setStatus('용사를 누르고, 화살표가 보이는 옆 칸을 눌러봐.','info');
+      if(stageIndex===5&&!quiet)setStatus('늑대는 행동할 때마다 움직여. 1턴 기다리기는 제자리에 머물며 늑대의 순찰만 진행시켜.','info');
+      enhance();
+    };
+    enhance();
+    if(stageIndex===0&&!selected)setStatus('용사를 누르고, 화살표가 보이는 옆 칸을 눌러봐.','info');
+    else if(stageIndex===5)setStatus('늑대는 행동할 때마다 움직여. 1턴 기다리기는 제자리에 머물며 늑대의 순찰만 진행시켜.','info');
+  `;
+  d.body.appendChild(patch);
+});
 </script>
 </body>
 </html>
