@@ -1,0 +1,27 @@
+{
+  "source_name": "TBCL 三等七級詞語表 2025-04",
+  "source_url": "https://coct.naer.edu.tw/file/files/14452%E8%A9%9E%E8%AA%9E%E8%A1%A8202504.xlsx",
+  "source_authority": "國家教育研究院（NAER）華語文語料庫與能力基準整合應用系統",
+  "generated_at_utc": "2026-09-10T03:54:45.384346+00:00",
+  "scope": "TBCL Level 4 / 4* / 5 (CEFR B1–B2 target pool)",
+  "counts": {
+    "B1": 1429,
+    "B2": 2641,
+    "total": 4070
+  },
+  "fields": [
+    "word",
+    "tbcl_level",
+    "cefr",
+    "category",
+    "zhuyin",
+    "pinyin",
+    "written_freq_per_million",
+    "spoken_freq_per_million"
+  ],
+  "notes": [
+    "master 파일은 원자료 층이다. 한국어 뜻·게임 기믹·마을 배정 같은 편집 정보는 별도 overlay에 둔다.",
+    "TBCL 4급/4*급은 B1, 5급은 B2 대응으로 사용한다.",
+    "원자료의 공개 다운로드와 재배포 허용 범위는 별도 확인이 필요하다. 외부 공개 배포 전 라이선스를 재확인한다."
+  ]
+}
