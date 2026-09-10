@@ -30,7 +30,7 @@ jobs:
 
       - name: Commit generated classification data
         run: |
-          if git diff --quiet -- data/word-game/word-game-classification-candidates.json data/word-game/CLASSIFICATION-REPORT.md; then
+          if [ -z "$(git status --porcelain -- data/word-game/word-game-classification-candidates.json data/word-game/CLASSIFICATION-REPORT.md)" ]; then
             echo "No classification changes"
             exit 0
           fi
