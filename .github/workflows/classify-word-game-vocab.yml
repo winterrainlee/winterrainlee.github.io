@@ -6,7 +6,9 @@ on:
     paths:
       - 'data/word-game/tbcl-b1-b2-master.json'
       - 'data/word-game/VOCABULARY-SCHEMA.md'
+      - 'data/word-game/classification-taxonomy.json'
       - 'scripts/classify_word_game_vocab.py'
+      - 'scripts/build_word_game_review_queue.py'
       - '.github/workflows/classify-word-game-vocab.yml'
   workflow_dispatch:
 
@@ -28,14 +30,18 @@ jobs:
       - name: Build assisted classification candidates
         run: python scripts/classify_word_game_vocab.py
 
+      - name: Build review queue
+        run: python scripts/build_word_game_review_queue.py
+
       - name: Commit generated classification data
         run: |
-          if [ -z "$(git status --porcelain -- data/word-game/word-game-classification-candidates.json data/word-game/CLASSIFICATION-REPORT.md)" ]; then
+          FILES="data/word-game/word-game-classification-candidates.json data/word-game/CLASSIFICATION-REPORT.md data/word-game/classification-review-queue.json"
+          if [ -z "$(git status --porcelain -- $FILES)" ]; then
             echo "No classification changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/word-game/word-game-classification-candidates.json data/word-game/CLASSIFICATION-REPORT.md
+          git add $FILES
           git commit -m "Generate assisted B1-B2 vocabulary classification"
           git push
