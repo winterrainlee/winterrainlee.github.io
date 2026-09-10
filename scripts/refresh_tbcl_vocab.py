@@ -61,10 +61,16 @@ def main():
     rows = []
 
     for ws in wb.worksheets:
+        print(f"SHEET {ws.title!r} rows={ws.max_row} cols={ws.max_column}")
+        for n, values in enumerate(ws.iter_rows(min_row=1, max_row=min(ws.max_row, 12), values_only=True), start=1):
+            print(f"ROW {n}: {[clean(v) for v in list(values)[:16]]}")
+
         header_row, headers = detect_header(ws)
         if not header_row:
+            print("No header detected in this sheet")
             continue
 
+        print(f"Detected header row {header_row}: {headers}")
         level_col = pick_col(headers, "等級")
         word_col = pick_col(headers, "詞語")
         category_col = pick_col(headers, "情境")
@@ -74,6 +80,7 @@ def main():
         spoken_col = pick_col(headers, "口語")
 
         if level_col is None or word_col is None:
+            print(f"Missing required columns: level={level_col}, word={word_col}")
             continue
 
         last_level = ""
@@ -109,7 +116,6 @@ def main():
     if not rows:
         raise RuntimeError("No TBCL level 4/5 vocabulary rows were found. The source format may have changed.")
 
-    # Preserve source order but remove accidental exact duplicates.
     seen = set()
     unique_rows = []
     for row in rows:
