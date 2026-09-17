@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="500" viewBox="0 0 980 500">
+<style>
+.title{font:700 22px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+.label{font:600 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+.small{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+.tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+.box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.5}
+.accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.8}
+.green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.8}
+.amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.8}
+.rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.8}
+.arrow{stroke:#6B7280;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="40" y="42" text-anchor="start">실패를 먼저 “누구의 실패인가”로 나눈다</text>
+<text class="small" x="40" y="68" text-anchor="start">모델 능력과 실험 장치 결함을 섞으면 이후 비교가 무의미해진다.</text>
+<rect class="rose" x="370" y="110" width="240" height="80" rx="14"/><text class="label" x="490" y="139" text-anchor="middle">관찰된 실패</text><text class="small" x="490" y="164" text-anchor="middle">한 run이 기대대로 끝나지 않음</text>
+<rect class="accent" x="45" y="265" width="150" height="90" rx="14"/><text class="label" x="120" y="294" text-anchor="middle">의미 판단</text><text class="small" x="120" y="319" text-anchor="middle">semantic failure</text><line class="arrow" x1="490" y1="190" x2="120" y2="265"/>
+<rect class="amber" x="225" y="265" width="150" height="90" rx="14"/><text class="label" x="300" y="294" text-anchor="middle">실행 / 표현</text><text class="small" x="300" y="319" text-anchor="middle">interface·serialization</text><line class="arrow" x1="490" y1="190" x2="300" y2="265"/>
+<rect class="box" x="405" y="265" width="150" height="90" rx="14"/><text class="label" x="480" y="294" text-anchor="middle">runtime</text><text class="small" x="480" y="319" text-anchor="middle">timeout·model error</text><line class="arrow" x1="490" y1="190" x2="480" y2="265"/>
+<rect class="green" x="585" y="265" width="150" height="90" rx="14"/><text class="label" x="660" y="294" text-anchor="middle">harness / capture</text><text class="small" x="660" y="319" text-anchor="middle">수집·실행 장치</text><line class="arrow" x1="490" y1="190" x2="660" y2="265"/>
+<rect class="box" x="765" y="265" width="150" height="90" rx="14"/><text class="label" x="840" y="294" text-anchor="middle">evaluator</text><text class="small" x="840" y="319" text-anchor="middle">판정 규칙</text><line class="arrow" x1="490" y1="190" x2="840" y2="265"/>
+<rect class="box" x="260" y="420" width="460" height="55" rx="14"/><text class="label" x="490" y="449" text-anchor="middle">결론</text><text class="small" x="490" y="474" text-anchor="middle">에이전트를 평가하려면 먼저 Observer를 믿을 수 있어야 한다.</text>
+</svg>
