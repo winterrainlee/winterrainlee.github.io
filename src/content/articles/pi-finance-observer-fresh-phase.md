@@ -1,6 +1,6 @@
 ---
 title: Pi Finance Observer — Fresh Session Final Report
-description: 개인 지출 기록이라는 작은 문제를 통해, 에이전트에게 무엇을 맡기고 무엇을 코드로 분리할지 관찰한 기록
+description: 자연어로 돈을 기록하고 싶다는 생활의 문제에서 출발해, 로컬 모델이 잘하는 일과 코드가 잘하는 일을 분리해 본 기록
 date: 2026-09-17
 updated: 2026-09-17
 tags:
@@ -13,340 +13,394 @@ draft: false
 
 **참고: 다른 글과 다르게 이 글은 내 지시를 받아 gpt 5.6 sol 매우 높음 조건으로 작성되었다.**
 
-Pi Finance Observer를 시작할 때 내가 만들고 싶었던 것은 거창한 금융 에이전트가 아니었다. 매일 내가 쓴 돈을 간단히 기록하고, 현금·교통카드·은행카드의 잔액을 이어서 관리하는 아주 작은 개인 장부였다.
+Pi Finance Observer는 처음부터 연구 프로젝트로 시작한 것이 아니다. 출발점은 훨씬 생활적이었다.
 
-그런데 실제로 만들어 보기 시작하니 내가 궁금했던 것은 가계부 자체보다 다른 쪽에 더 가까웠다.
+나는 매일 쓴 돈을 기록하고 싶었고, 그 기록을 나중에 다시 보고 싶었다. 그런데 일반적인 가계부 앱 방식은 나와 잘 맞지 않았다. 앱을 열고, 거래 유형을 고르고, 계좌를 고르고, 카테고리를 고르고, 금액을 입력하는 식의 절차가 한 건 한 건은 별것 아닌데 반복되면 꽤 귀찮았다.
 
-> **LLM 에이전트는 어디까지 스스로 맡겨도 되고, 어디부터는 코드가 책임져야 할까?**
+내가 원한 것은 오히려 이런 것이었다.
 
-그리고 한 단계 더 들어가면 질문은 이렇게 바뀌었다.
+> “점심 현금 120원.”
+>
+> 말하고 끝.
 
-> **에이전트가 실패했을 때, 대체 어디서부터 잘못된 걸까?**
+그리고 가능하다면 이 일은 개인적인 생활 기록을 다루는 만큼 내 로컬 환경에서 돌아갔으면 했다.
 
-이 글은 v0.1부터 v0.7까지의 실험을 숫자 순서대로 나열하기보다, 그 과정에서 내가 무엇을 보고 싶었고 무엇을 분리하려 했는지를 중심으로 정리한 글이다.
+이 글은 그 작은 욕구가 어떻게 `Pi Finance Observer`라는 실험으로 이어졌는지, 그리고 그 과정에서 무엇을 분리해서 보게 되었는지를 정리한 글이다.
 
 ---
 
-## 1. 시작점: 아주 작은 생활비 시스템
+## 1. 자연어로 돈 정리를 하고 싶다
 
-실험에 사용한 세계는 일부러 작게 만들었다. 계정은 세 개뿐이다.
+가계부 자체가 싫은 것은 아니다. 오히려 기록은 하고 싶다. 문제는 **기록을 위해 내가 앱의 형식에 맞춰 움직여야 한다는 점**이었다.
 
-| 계정 | 생활에서의 의미 | 주요 역할 |
-|---|---|---|
-| 현금 | 지갑 속 현금 | 직접 지출, 교통카드 충전 |
-| 교통카드 | EasyCard 같은 선불 교통카드 | 교통·소액 결제, 현금에서 충전 |
-| 은행카드 | 체크카드/현금 인출 원천 | 직접 결제, ATM에서 현금 인출 |
-
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/01-basic-system.svg" alt="현금, 교통카드, 은행카드로 이루어진 기본 생활비 시스템" style="display:block; width:920px; max-width:none; height:auto; margin:0 auto;" />
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/09-natural-language-friction.svg" alt="일반 가계부의 여러 입력 단계를 한 문장 자연어 입력으로 줄이고 싶은 흐름" />
 </figure>
 
-예를 들면 이런 입력을 받는다.
+매일 반복하는 작은 작업은 입력 비용이 조금만 높아도 금방 귀찮아진다. 그래서 내 경우에는 정확한 UI보다 **“생활 중 떠오르는 순간 바로 한 문장으로 적는 것”**이 더 중요했다.
+
+예를 들면 이 정도다.
 
 ```text
 점심 현금 120원
 버스 이지카드 25원
-은행카드에서 현금 2000원 인출
-현금에서 이지카드 500원 충전
+커피 은행카드 95원
 ```
 
-처음에는 `사용자 입력 → LLM → 장부 수정` 정도로 생각했다. 그런데 실제로 돌려보니 이 한 줄 안에 너무 많은 능력이 한꺼번에 섞여 있었다.
+이렇게 입력하면 시스템이 알아서 거래를 해석하고 기록해주면 된다.
+
+### 왜 로컬 모델인가
+
+여기에는 몇 가지 이유가 있었다.
+
+첫째, 돈 기록은 작지만 꽤 개인적인 데이터다. 어디에서 무엇을 샀는지, 어느 계좌를 자주 쓰는지, 생활 패턴이 그대로 쌓인다. 가능하면 원본 기록과 일상적인 처리 과정은 내 환경 안에 두고 싶었다.
+
+둘째, 이건 한두 번 쓰고 끝나는 기능이 아니라 매일 반복해서 쓰는 기능이다. 그래서 모델 호출비나 외부 서비스 상태보다 **내가 계속 유지할 수 있는 로컬 도구**에 가까웠으면 했다.
+
+셋째, 나는 이미 다른 작업에서도 로컬 모델을 개인 에이전트의 일부로 사용하고 있었다. 그렇다면 돈 기록도 그 흐름 안에 넣어볼 수 있지 않을까 싶었다.
 
 ---
 
-## 2. 내가 정말 보고 싶었던 것: “성공했나?”가 아니었다
+## 2. 사실 지금도 어느 정도는 이렇게 쓰고 있다
 
-에이전트 평가에서 가장 쉬운 질문은 성공과 실패다. 하지만 내가 궁금했던 것은 그보다 세분화된 것이었다.
+완전히 새로 만들려던 것은 아니다. 현재도 나는 비슷한 방식으로 돈을 기록하고 있다.
 
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/02-what-to-separate.svg" alt="사용자 입력에서 의미 판단, 실행과 표현, 상태 변화로 이어지는 과정과 Observer가 분리해 보려 한 실패 지점" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/10-current-workflow.svg" alt="Discord에서 OpenClaw와 Gemma 26B를 거쳐 Daily Note에 기록하고 정기적으로 상용 모델로 결산하는 현재 흐름" />
 </figure>
 
-최종 장부가 맞더라도 실제 과정은 다를 수 있다. 처음부터 정확하게 기록했을 수도 있고, 잘못 기록한 뒤 validator의 실패 신호를 보고 고쳤을 수도 있다.
+대략 이런 흐름이다.
 
-그래서 나는 처음부터 다음을 서로 다른 것으로 보고 싶었다.
+- Discord에 짧게 지출 내용을 보낸다.
+- OpenClaw가 입력과 도구 사용을 연결한다.
+- Gemma 26B가 내용을 해석한다.
+- 그날의 Daily Note, 즉 Markdown 문서에 기록한다.
+- 일정 기간이 지나면 기록을 모아 상용 대형 모델로 결산하거나 분석한다.
 
-**독립 수행 능력 ≠ 도움을 받았을 때의 회복 능력 ≠ 최종 결과**
+이 방식은 이미 꽤 쓸 만하다. 문제는 **기록과 결산이 분리되어 있다는 점**이다.
 
-이 구분은 나중에 모델 규모, 인터페이스, validator 지원을 비교할 때 꽤 중요해졌다.
+그러면 자연스럽게 이런 생각이 든다.
+
+> 이걸 그냥 에이전트 하나가 다 하면 안 되나?
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/11-one-agent-question.svg" alt="하나의 에이전트에게 자연어 이해, 장부 실행, 장기 분석을 모두 맡길 때 실패 원인이 섞이는 구조" />
+</figure>
+
+기록도 하고, 잔액도 관리하고, 나중에 주간·월간 분석도 하면 얼마나 편할까 싶다.
+
+그런데 지금까지 로컬 에이전트를 써본 경험으로는 **“한 에이전트에게 다 맡기면 되겠지”가 생각만큼 간단하지 않았다.**
+
+한 문장을 이해하는 일, 빠진 정보를 알아채는 일, 정확한 형식으로 파일을 고치는 일, 계산하는 일, 과거 상태를 이어받는 일, 오류를 발견하고 복구하는 일은 서로 다른 능력이다. 하나가 흔들렸을 때 마지막 결과만 보면 어디서부터 문제가 시작됐는지 알기 어렵다.
+
+그래서 질문이 바뀌었다.
+
+> 더 좋은 모델 하나를 찾으면 되는가?
+>
+> 아니면 먼저 **모델이 실제로 어디까지 잘하고 어디서부터 흔들리는지** 봐야 하는가?
+
+나는 두 번째 쪽을 먼저 해보기로 했다.
 
 ---
 
-## 3. 그래서 Observer를 에이전트 밖에 두었다
+## 3. 이왕 하는 김에 로컬 모델을 제대로 관찰해보자
 
-처음 생각했던 Observer의 모습은 일종의 외주 감리 회사에 가까웠다. 에이전트는 자기 업무만 하고, 관찰과 판정은 바깥에서 한다.
+문제는 실제 사용 환경이 너무 복잡하다는 점이었다.
 
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/03-observer-outside.svg" alt="에이전트 밖에서 실제 행동과 파일 상태를 수집하는 Observer 구조" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+내가 실제로 쓰는 OpenClaw에는 이미 memory, skills, 여러 tools, 긴 context, session 상태, 파일 규칙 같은 것이 들어 있다. 이런 환경에서 어떤 작업이 실패하면 그게 모델 때문인지, context 때문인지, tool interface 때문인지, harness 때문인지 구분하기 어렵다.
+
+그래서 관찰을 위해 일부러 시스템을 가난하게 만들기로 했다.
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/12-simplify-to-pi.svg" alt="실제 OpenClaw 환경을 Pi 기반 최소 실험 환경으로 단순화하는 구조" />
 </figure>
 
-중요한 것은 에이전트에게 따로 자기평가 보고서를 쓰라고 시키지 않는 것이었다.
+### 왜 Pi를 썼나
 
-“지금 네 판단 과정을 표로 보고해”, “실패했는지 스스로 분류해”, “무슨 능력을 사용했는지 설명해” 같은 요구는 관찰이 아니라 추가 업무다. 그 요구 자체가 모델의 행동을 바꿀 수 있다.
+Pi를 택한 이유는 OpenClaw보다 더 좋은 하네스라고 생각했기 때문이 아니다.
 
-내가 원했던 것은 단순했다.
+오히려 반대다. **관찰하려는 변수를 줄이고 싶었기 때문**이다.
 
-> 에이전트는 원래 하던 일을 하고, Observer는 실제 행동만 조용히 기록하며, 판정은 나중에 외부에서 한다.
+- fresh session으로 시작한다.
+- tool surface를 최소화한다.
+- 실제 개인 금융정보 대신 synthetic data를 쓴다.
+- 데이터는 CSV, JSON, Markdown처럼 단순한 파일로 둔다.
+- 복잡한 memory나 delegation은 빼둔다.
 
-이 원칙은 프로젝트 전체에서 계속 유지됐다.
+그리고 Observer는 에이전트 밖에 둔다.
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/03-observer-outside.svg" alt="에이전트는 원래 업무만 수행하고 Observer가 바깥에서 행동과 파일 상태를 수집하는 구조" />
+</figure>
+
+여기서 중요한 원칙은 에이전트에게 “네가 뭘 했는지 보고해”라고 시키지 않는 것이다. 그건 관찰이 아니라 추가 업무가 된다.
+
+에이전트는 자기 업무만 하고, Observer는 tool trajectory와 파일 상태를 바깥에서 기록한다. 실패 판정은 나중에 한다.
+
+이렇게 해야 최소한 **모델의 행동을 관찰하기 위해 모델의 행동 자체를 바꾸는 문제**를 줄일 수 있다.
 
 ---
 
-## 4. 첫 번째로 분리해야 했던 것: 모델 실패 vs 실험 장치 실패
+## 4. 실험용 돈 관리 세계는 세 계정만 남겼다
 
-막상 첫 실험을 돌리자 모델보다 Observer와 실행 환경에서 먼저 문제가 발견됐다. 모델이 맞게 행동했는데 로그가 빠지기도 했고, runtime 오류가 났는데 harness가 정상 종료처럼 보이기도 했다. 이후 evaluator의 판정 경계나 서비스 복원 시점에서도 비슷한 문제가 나타났다.
+실험용 금융 세계도 최대한 작게 만들었다. 계정은 세 개다.
 
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/04-failure-ownership.svg" alt="관찰된 실패를 의미 판단, 실행 표현, runtime, harness capture, evaluator 실패로 나누는 구조" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+| 계정 | 생활에서의 의미 | 주요 역할 |
+|---|---|---|
+| 현금 | 지갑 속 현금 | 직접 지출, EasyCard 충전 |
+| 교통카드 | EasyCard 같은 선불 교통카드 | 교통·소액 결제 |
+| 은행카드 | 체크카드/현금 인출 원천 | 직접 결제, ATM 인출 |
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/01-basic-system.svg" alt="현금, EasyCard, 은행카드가 지출과 충전, ATM 인출로 연결되는 기본 계정 구조" />
 </figure>
 
-모델이 틀린 것과 실험 장치가 틀린 것을 섞어버리면 이후 비교가 전부 흔들린다.
+거래도 크게 두 종류면 충분했다.
 
-그래서 v0.1에서 얻은 가장 중요한 결과는 특정 모델의 점수가 아니었다.
+- **지출**: 돈이 시스템 밖으로 나간다.
+- **이체**: 돈이 세 계정 사이에서 이동한다.
+
+예를 들어:
+
+```text
+현금으로 점심 120원
+→ 현금 지출
+
+은행카드에서 현금 2000원 인출
+→ 은행카드 → 현금 이체
+
+현금에서 이지카드 500원 충전
+→ 현금 → EasyCard 이체
+```
+
+작은 세계지만 필요한 문제는 거의 다 들어 있다.
+
+- 어느 계정인지 판단해야 한다.
+- 지출과 이체를 구분해야 한다.
+- 금액을 읽어야 한다.
+- `카드`처럼 애매하면 물어봐야 한다.
+- 계정이 빠졌을 때 기본값을 써도 되는지 판단해야 한다.
+- 거래 뒤 잔액이 일관되어야 한다.
+
+즉 **작지만 agent의 여러 능력을 분리해서 보기 좋은 세계**였다.
+
+---
+
+## 5. Pi Finance Observer에서 실제로 본 것
+
+이후 실험은 버전 번호보다 질문이 어떻게 바뀌었는지로 보는 편이 이해하기 쉽다.
+
+### 5.1 먼저 Observer를 믿을 수 있는가 — v0.1
+
+첫 번째로 확인한 것은 모델 성능이 아니었다.
+
+실제 run을 돌리자 모델이 아니라 실험 장치에서 먼저 문제가 나왔다. runtime 오류가 정상 종료처럼 보이기도 했고, 모델은 파일을 제대로 고쳤는데 capture에서 일부 변화가 빠지기도 했다.
+
+그래서 가장 먼저 분리한 것은 이것이었다.
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/04-failure-ownership.svg" alt="모델 의미 판단, 실행 표현, runtime, harness capture, evaluator 실패를 구분하는 구조" />
+</figure>
+
+이때 얻은 원칙은 단순하다.
 
 > **에이전트를 평가하려면 먼저 Observer를 믿을 수 있어야 한다.**
 
-Observer 자신도 사실상 관찰 대상이었다.
+그리고 최종 결과와 과정도 분리해야 했다.
 
----
+처음부터 정확하게 수행한 것과, validator의 실패 신호를 보고 고친 뒤 최종적으로 맞은 것은 같은 성공이 아니다.
 
-## 5. 두 번째로 분리하고 싶었던 것: “이해” vs “인터페이스 수행”
+**독립 수행 능력 ≠ 도움을 받았을 때의 회복 능력 ≠ 최종 결과**
 
-다음 질문은 이랬다.
+이 구분은 이후 실험 전체의 기반이 됐다.
 
-> 모델이 거래 의미를 알고 있는데도 장부를 틀리게 쓸 수 있을까?
+### 5.2 모델이 이해한 것과 인터페이스를 잘 수행한 것은 같은가 — v0.2
 
-그럴 수 있었다.
+다음으로 보고 싶었던 것은 **의미 이해와 인터페이스 수행의 차이**였다.
 
-사용자의 뜻을 이해하는 것과 내부 enum 이름을 맞추고, ID 규칙을 지키고, CSV/JSON 형식을 만들고, 여러 파일의 상태를 동기화하는 것은 같은 능력이 아니었다.
+사용자의 말을 정확히 이해했다고 해도 모델은 내부 enum 이름, ID 규칙, CSV/JSON 형식, 여러 파일의 동기화까지 함께 맞춰야 할 수 있다.
 
-v0.2에서 같은 모델을 두고 specification과 representation만 바꿔보니 이 차이가 선명해졌다. 경제적 거래 의미와 잔액은 맞으면서도 구조화된 첫 write에서 오류가 날 수 있었고, 공개 구조 규칙을 명시해주자 같은 의미 판단이 훨씬 안정적으로 실행됐다.
+v0.2에서는 같은 Gemma/Pi 환경에서 specification과 representation을 바꿔봤다.
 
-여기서 이후 프로젝트를 끌고 간 질문이 생겼다.
+관찰 가능한 mutation에서는 경제적 거래 의미와 잔액이 모두 정확했지만, 첫 구조화 write는 조건에 따라 크게 달라졌다. 특히 public structural specification을 충분히 알려주자 pre-feedback first-pass 성공이 `2/9 → 9/9`로 바뀌었다.
 
-> **모델이 정말 못하는 걸까? 아니면 내가 모델에게 쓸데없이 많은 내부 규칙을 떠넘긴 걸까?**
+이때부터 중요한 질문이 생겼다.
 
-이 질문 때문에 이후 실험은 “더 좋은 모델 찾기”보다 “모델에게 맡긴 책임을 한 겹씩 벗겨보기” 쪽으로 움직였다.
+> 모델이 정말 못하는 걸까?
+>
+> 아니면 내가 모델에게 내부 형식의 책임까지 너무 많이 맡긴 걸까?
 
----
+이 질문이 이후 실험의 방향을 바꿨다.
 
-## 6. 모델 비교도 “누가 더 좋나”보다 “어디서 다르게 실패하나”로 봤다
+### 5.3 모델마다 어디서 다르게 실패하는가 — v0.3 ~ v0.4
 
-그 다음에야 서로 다른 모델을 같은 업무에서 비교했다.
+그 다음에야 서로 다른 모델을 비교했다.
 
-초기 복합 workflow에서는 Gemma 4 26B-A4B와 Qwen3 30B-A3B 사이의 결과 차이가 컸다. 하지만 그것을 바로 모델 서열로 읽기보다, 나는 **실패의 모양**을 보고 싶었다.
+초기 복합 workflow에서는 Gemma 4 26B-A4B가 안정적이었고 Qwen3 30B-A3B는 더 많이 흔들렸다. 하지만 이걸 곧바로 “Gemma가 좋고 Qwen이 나쁘다”로 읽으면 무엇이 원인인지 알 수 없었다.
 
-이 exact finance workflow에서 Qwen은 명확한 실행 문제를 빠르고 짧게 처리했다. 반면 `카드`처럼 모호한 표현, 빠진 계좌, 상대 날짜 같은 입력에서는 빈칸을 채워서라도 행동하려는 패턴이 반복됐다.
+그래서 interface 부담을 하나씩 줄이면서 다시 봤다.
 
-Gemma 26B는 상대적으로 사용자의 의미가 충분히 정해졌는지를 더 신경 쓰는 쪽이었다. 모호하면 질문하고, 정보가 빠지면 멈추려는 경향이 더 강했다.
+그 결과 Qwen은 **명확한 explicit action**에서는 빠르고 안정적이었다. 현금 지출, EasyCard 지출, 입금, 충전, ATM 인출 같은 명확한 요청은 잘 처리했다.
 
-아주 거칠게 말하면 내가 관찰한 차이는 이랬다.
+하지만 다음 같은 입력에서는 반복적으로 행동 방향이 달랐다.
+
+```text
+카드로 점심 150원
+커피 95원 결제했어
+어제 저녁 현금 180원
+```
+
+Qwen은 빈 정보를 채워서라도 실행 가능한 action으로 가려는 경향이 강했고, Gemma 26B는 상대적으로 “지금 충분히 이해했는가?”를 더 따지는 쪽이었다.
+
+아주 거칠게 말하면 내가 본 차이는 이랬다.
 
 - Qwen: **“무슨 작업을 실행하면 되지?”**에 빨리 수렴한다.
 - Gemma 26B: **“사용자가 무슨 뜻으로 말했지?”**를 조금 더 오래 붙잡는다.
 
-이건 모델 family의 학습 철학을 단정하는 이야기가 아니다. 이 작은 workflow에서 관찰된 행동 차이를 설명한 것이다.
+이건 모델 family 전체의 본질을 단정하는 이야기가 아니다. 이 작은 finance workflow에서 관찰된 행동 차이다.
 
-개인적으로는 이 실험을 통해 왜 Gemma와 대화할 때 내가 편하다고 느꼈는지도 조금 이해하게 됐다. 나는 AI에게 항상 완성된 명령을 즉시 처리하는 비서 역할만 원하는 것이 아니다. 생각 중인 것을 던지고, 아직 정하지 않은 것은 정하지 않은 상태로 남겨두면서 같이 경계를 찾는 경우가 많다.
+그리고 이 실험을 통해 왜 내가 Gemma와 대화할 때 상대적으로 편하다고 느꼈는지도 조금 이해했다. 나는 AI에게 완성된 명령만 던지는 것이 아니라, 생각 중인 것을 던지고 아직 정하지 않은 부분은 정하지 않은 채로 같이 경계를 찾는 경우가 많다.
 
-그래서 내 사용 방식에서는 **성급하게 빈칸을 채우는 오류보다 잠깐 멈추고 확인하는 오류가 덜 불편했다.**
+내 사용 방식에서는 **성급하게 빈칸을 채우는 오류보다 잠깐 멈추고 확인하는 오류가 덜 불편했다.**
 
----
+같은 Gemma 계열의 더 작은 E4B도 별도로 봤다. validator 지원 아래에서는 최종 성공으로 복구할 수 있었지만, interface 부담을 줄여도 semantic wrong-action이 남았다. 그래서 `Gemma라는 family는 이렇다`라고 단순화하기보다 **family × capacity × interface × 외부 지원**을 함께 봐야 했다.
 
-## 7. 모델 규모도 따로 봐야 했다
+### 5.4 실패를 보다 보니 “모델이 잘하는 일만 맡기는 편이 낫겠다”로 바뀌었다 — v0.4 ~ v0.5
 
-같은 Gemma 계열 안에서도 더 작은 E4B는 다른 모습을 보였다.
+처음에는 하나의 LLM이 자연어 해석부터 내부 코드 변환, 계산, 파일 수정, 검증까지 전부 하는 모습을 생각했다.
 
-처음에는 validator 도움을 받으면 최종 결과를 잘 복구해서 “의미는 알고 형식만 약한 것 아닐까?”라고 생각할 수 있었다. 하지만 인터페이스 부담을 줄여 다시 보자 semantic wrong-action도 나타났다.
+그런데 실패 위치를 하나씩 분리해서 보다 보니, 이 일들이 모두 같은 종류의 능력을 요구하는 것은 아니라는 게 보였다.
 
-그래서 `Gemma라는 family는 이렇다`처럼 단순화하기 어렵다는 것도 확인했다.
-
-모델 행동은 적어도 다음이 함께 작용한다.
-
-- model family
-- model capacity
-- 주어진 interface
-- 외부 validator와 recovery support
-
-즉 같은 family 안에서도 규모와 역할 배치가 달라지면 failure profile이 달라질 수 있다.
-
----
-
-## 8. Fresh phase에서 계속 한 일: “에이전트 성공”을 쪼개기
-
-돌아보면 v0.1~v0.7에서 내가 한 일은 하나의 `agent success`라는 덩어리를 계속 분해하는 일이었다.
-
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/06-capability-decomposition.svg" alt="에이전트 성공을 의미 판단, 인터페이스 수행, 상태 변화, 복구와 종료로 분해한 다이어그램" style="display:block; width:1000px; max-width:none; height:auto; margin:0 auto;" />
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/06-capability-decomposition.svg" alt="하나의 agent success를 의미 판단, 인터페이스 수행, 상태 변화, 복구, 종료 능력으로 나누는 구조" />
 </figure>
 
-그리고 이 바깥에도 별도의 층이 있었다.
+자연어의 뜻을 읽고, 애매함을 감지하고, 질문할지 판단하는 일은 모델이 잘하는 편이었다.
 
-**Agent capability ≠ Harness integrity ≠ Observer integrity ≠ Evaluator correctness**
+반면 다음은 규칙이 명확했다.
 
-이것들을 분리하지 않았다면 결국 “이 모델은 잘했다/못했다” 정도의 결론밖에 얻지 못했을 것이다.
+- 내부 account code로 바꾸기
+- 금액 계산
+- 잔액 계산
+- schema 맞추기
+- state mutation
+- validation
 
----
+이런 일은 deterministic code가 더 안정적이었다.
 
-## 9. 점점 모델에게서 일을 빼기 시작했다
+그래서 방향은 **“모델이 하는 일을 줄이자”가 아니라 “각자 잘하는 일을 맡기자”**로 바뀌었다.
 
-처음에는 자연어 해석부터 형식화, 계산, 파일 수정, 검증, 종료까지 한 LLM에게 맡기는 그림에 가까웠다.
+> **모델을 덜 쓰는 구조를 찾은 것이 아니라, 모델이 잘하는 곳에만 쓰는 구조를 찾았다.**
 
-그런데 각 실패를 분리해서 보다 보니 자연스럽게 질문이 생겼다.
+이 관점으로 보니 이전에 “모델이 실패했다”고 생각했던 것 중 일부는 사실 잘못된 interface responsibility에서 생긴 문제였다.
 
-> **이 단계들 중 정말 LLM이어야 하는 것은 몇 개나 될까?**
+### 5.5 Tiny model도 필요한가 — v0.5 ~ v0.7
 
-그래서 하나씩 책임을 코드로 옮겼다.
+한때는 큰 모델 뒤에 작은 executor를 붙이는 구조를 생각했다.
 
-- 자연어 의미 판단 → LLM 후보
-- 내부 enum 변환 → 코드
-- 금액 계산 → 코드
-- 계좌 잔액 계산 → 코드
-- schema → 코드
-- validation → 코드
-- state mutation → 코드
+`Gemma 26B → resolved work order → Tiny executor → finance core`
 
-그 결과 모델이 갑자기 더 똑똑해진 것처럼 보이는 순간들이 있었다. 하지만 모델 자체가 변한 것이 아니라 **모델에게 잘못 맡겼던 책임을 제거한 것**이었다.
+그런데 의미가 이미 해결된 작업지시는 deterministic mapper만으로 정확하게 실행할 수 있었다. 이 경우 Tiny LLM은 도움이 되기보다 이미 정해진 의미를 바꿀 가능성을 하나 더 추가한다.
 
-이게 Fresh phase에서 얻은 가장 중요한 교훈 중 하나다.
+그래서 Tiny executor를 뒤에서 뺐다.
 
----
+그 다음에는 앞쪽에 Tiny model을 두는 구조를 생각했다.
 
-## 10. “작은 실행 모델”도 정말 필요한지 다시 물었다
+`입력 → gate → Tiny → 필요하면 Gemma 26B`
 
-한때는 큰 모델이 의미를 판단하고, Tiny LLM이 싸고 빠르게 실제 tool call만 하는 구조를 생각했다.
+하지만 여기서도 같은 일이 생겼다. gate가 “이 입력은 안전하고 명확하다”고 판단할 수 있을 정도라면, 그 입력은 이미 deterministic parser로 처리할 수 있었다.
 
-그런데 의미가 이미 해결된 작업지시는 deterministic mapper가 완전히 처리할 수 있었다. 이미 결정된 의미를 다시 LLM에게 넘기면 오히려 그 의미를 변경하거나 누락할 가능성이 생긴다.
+결국 Fresh phase의 현재 구조는 다음처럼 수렴했다.
 
-이때 생긴 개념이 `semantic authority`였다.
-
-- 의미를 결정할 권한은 semantic controller에게 있다.
-- executor나 코드는 이미 결정된 의미를 그대로 실행한다.
-- executor가 이미 결정된 사실을 변경·누락·발명하면 `SEMANTIC_AUTHORITY_VIOLATION`으로 본다.
-
-결국 **26B 뒤의 Tiny executor는 필요성이 입증되지 않았다.**
-
----
-
-## 11. 그러면 26B 앞에서는 작은 모델이 필요할까?
-
-이번에는 반대로 “명확한 요청은 작은 모델에게 보내고, 애매한 요청만 26B로 보내면 어떨까?”를 생각했다.
-
-그런데 안전한 입력을 가려내는 deterministic gate를 만들고 보니, gate가 통과시킨 좁고 명확한 입력은 모델 없이도 deterministic parser가 처리할 수 있었다.
-
-예를 들어 `현금 점심 85원`, `이지카드 버스 25원`, `은행카드에서 현금 2000원 인출` 같은 입력은 코드만으로 충분했다.
-
-반대로 `카드로 점심 150원`, `커피 95원 결제했어`, `어제 저녁 현금 180원`, `지난번처럼 해줘` 같은 표현은 애매함·누락·문맥·상대시간 때문에 semantic controller로 보내는 편이 안전했다.
-
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/05-final-architecture.svg" alt="명확한 요청은 deterministic fast path로, 애매한 요청은 Gemma 26B semantic controller로 보내는 Fresh phase 최종 구조" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/05-final-architecture.svg" alt="명확한 입력은 deterministic fast path로, 애매한 입력은 Gemma 26B semantic controller로 보내는 최종 구조" />
 </figure>
 
-현재의 좁은 fast-path surface에서는 Tiny SLM을 굳이 넣을 이유가 보이지 않았다.
+- **명확하고 닫힌 입력** → deterministic code
+- **애매하거나 빠진 정보가 있는 입력** → Gemma 26B
+- **계산·잔액·검증·상태 변경** → deterministic finance core
+
+현재의 좁은 finance surface에서는 이것이 가장 단순했다.
 
 ---
 
-## 12. 결국 내가 찾은 것은 “좋은 모델”보다 책임의 경계였다
+## 6. Fresh phase에서 얻은 것
 
-처음에는 “Gemma가 더 좋은가?”, “Qwen이 더 좋은가?”, “작은 모델도 가능한가?” 같은 질문이었다.
+돌아보면 이 실험에서 가장 크게 바뀐 것은 모델 선택보다 **문제를 보는 방식**이었다.
 
-Fresh phase 끝에서는 질문이 이렇게 바뀌었다.
+처음 질문은 이런 것이었다.
 
-> **이 문제는 누가 책임지는 것이 가장 좋은가?**
+> Gemma가 더 좋은가?
+>
+> Qwen이 더 좋은가?
+>
+> 작은 모델도 가능한가?
 
-현재 내 답은 비교적 단순하다.
+지금 질문은 조금 다르다.
 
-사람의 말이 애매하거나, 정보가 빠져 있거나, 문맥과 상대 날짜를 해석해야 하거나, 질문해야 할지를 결정해야 하는 구간은 Gemma 26B 같은 semantic controller의 역할이다.
+> **이 일은 누가 맡기는 것이 가장 자연스러운가?**
 
-이미 의미가 명확한 뒤의 계산, 계좌 이동, schema, 잔액, validation, state mutation은 deterministic code의 역할이다.
+사람의 말이 애매한지, 질문이 필요한지, 상대 날짜나 문맥을 어떻게 해석할지는 모델이 잘하는 영역이다.
 
-모델은 모든 것을 하는 주인공이라기보다 **코드만으로 확실하게 해결하기 어려운 인간 언어의 경계**를 담당한다.
+반대로 계산, schema, account mapping, balance, validation, state mutation처럼 규칙이 분명한 일은 코드가 잘한다.
 
----
+그래서 현재 구조는 LLM 하나가 모든 일을 자유롭게 결정하는 시스템보다는 **deterministic workflow 안에 semantic model이 필요한 지점만 들어가는 hybrid agentic workflow**에 가깝다.
 
-## 13. 그래서 이건 에이전틱 워크플로우인가?
-
-현재 구조는 LLM 하나가 모든 행동을 자유롭게 결정하는 형태와는 거리가 있다. 오히려 deterministic workflow 안에 semantic 판단이 필요한 구간만 LLM에게 넘기는 hybrid 구조다.
-
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/07-hybrid-agentic-workflow.svg" alt="deterministic workflow, semantic LLM, state와 tool로 이어지는 hybrid agentic workflow" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/07-hybrid-agentic-workflow.svg" alt="deterministic workflow 안에서 판단이 필요한 곳만 semantic LLM이 맡는 hybrid agentic workflow" />
 </figure>
 
-나는 지금은 이것을 꽤 자연스럽게 **agentic workflow**라고 부를 수 있다고 생각한다.
+Fresh phase에서 얻은 가장 큰 결과는 특정 모델의 승패가 아니었다.
 
-바퀴를 완전히 새로 만든 것도 아니다. router, validation, state machine, tool execution 같은 구성요소는 이미 흔하다.
+**어떤 문제를 모델에게 맡기고, 어떤 문제를 코드에게 맡길지에 대한 지도가 생긴 것**이 가장 컸다.
 
-다만 프레임워크가 대신 정해주지 못하는 것이 있었다.
+Observer도 처음에는 모델을 감시하는 도구처럼 보였지만, 지금은 조금 다르게 느껴진다.
 
-> **내 실제 업무에서는 어디까지가 code의 영역이고, 어디부터 model의 판단이 필요한가?**
+Observer가 묻는 것은 사실 이런 것이다.
 
-이번 작업은 바퀴를 새로 발명했다기보다, 여러 바퀴를 분해해 보고 내 차에 어느 바퀴를 어느 자리에 달아야 하는지 직접 주행시험한 것에 더 가깝다.
-
----
-
-## 14. Fresh 다음에는 Persistent State를 본다
-
-지금까지는 대부분 fresh session이었다. 한 입력을 받아 무슨 거래인지 판단하고, 안전하게 기록할 수 있는지를 보는 문제였다.
-
-하지만 실제로 내가 원하는 장부는 하루만 쓰고 버리는 것이 아니다. 거래가 쌓이면서 상태가 이어져야 한다.
-
-어제의 closing balance가 오늘의 opening balance가 되고, 오늘 거래를 반영한 closing balance가 다시 내일로 넘어가야 한다.
-
-특히 현금과 교통카드는 생활 도중에 떨어지면 바로 불편해진다. 그래서 앞으로는 거래를 하나 기록할 때마다 관련 잔액을 즉시 보여주고 싶다.
-
-예를 들어 현금 지출 뒤 잔액이 기준 이하로 내려가면 `LOW_CASH`, EasyCard가 기준 이하로 내려가면 `LOW_EASYCARD`를 코드가 판단하고 다음 외출이나 이동 전에 준비할 것을 알려주는 식이다.
-
-이 판단은 LLM보다 deterministic state logic이 담당하는 편이 맞다.
+```text
+어디서 실패했나?
+왜 실패했나?
+그건 모델이 맡아야 할 일이었나?
+코드가 더 잘할 수 있는 일이었나?
+그래도 모델이 필요한 지점은 어디인가?
+```
 
 ---
 
-## 15. 앞으로의 세 층: Capture → State → Insight
+## 7. 다음은 Persistent Finance다
 
-지금은 전체 시스템을 세 층으로 보고 있다.
+Fresh phase에서는 대부분 한 요청을 fresh session에서 보고, 그 입력이 어떤 거래인지 정확하게 처리할 수 있는지를 관찰했다.
 
-<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:auto;">
-  <img src="/assets/pi-finance-observer/08-next-phases.svg" alt="Capture에서 State를 거쳐 Insight로 이어지는 Pi Finance Observer의 다음 단계" style="display:block; width:980px; max-width:none; height:auto; margin:0 auto;" />
+하지만 실제로 내가 원하는 것은 하루 쓰고 버리는 synthetic ledger가 아니다.
+
+이제 다시 처음의 생활 문제로 돌아갈 차례다.
+
+다음에는 거래가 쌓이고, 상태가 이어져야 한다.
+
+- 어제의 closing balance가 오늘 opening balance가 된다.
+- 오늘 거래를 반영해 현재 잔액을 계산한다.
+- 현금과 EasyCard가 너무 낮으면 바로 알려준다.
+- 하루가 끝나면 다음 날로 상태를 넘긴다.
+- 일정 기간이 지나면 주간·월간 분석을 만든다.
+- 나중에는 “이번 달 편의점에서 얼마 썼지?” 같은 질문도 장부를 조회해 답한다.
+
+전체를 세 층으로 보면 다음과 같다.
+
+<figure style="margin:2rem 0; padding:1rem; background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow-x:hidden;">
+  <img src="/assets/pi-finance-observer/08-next-phases.svg" alt="Capture, State, Insight 세 단계로 확장되는 앞으로의 Pi Finance 구조" />
 </figure>
 
-**Capture**는 “지금 무슨 거래를 말한 거지?”를 다룬다. Fresh phase에서 주로 본 부분이다.
+여기에서도 원칙은 같다.
 
-**State**는 “그래서 지금 얼마 남았지?”를 다룬다. 거래가 계좌 잔액을 정확하게 바꾸고, 하루가 바뀌어도 상태가 이어지고, 현금이나 EasyCard가 부족할 때 즉시 알려주는 단계다.
+- **Capture**: “지금 무슨 거래를 말한 거지?” — fast path + semantic controller
+- **State**: “그래서 지금 얼마가 남았지?” — deterministic balance / carry-forward / alert
+- **Insight**: “최근 어디에 많이 썼지?” — deterministic aggregation + LLM explanation
 
-**Insight**는 “최근에 어디에 많이 썼지?”를 다룬다. 여기서는 코드를 통해 먼저 카테고리별·기간별 통계를 계산하고, LLM은 계산된 결과를 설명하는 역할을 맡길 수 있다.
+처음에는 자연어로 돈을 기록하고 싶었을 뿐이었다.
 
-더 발전하면 “이번 달 편의점에서 얼마나 썼지?”, “이번 주 식비가 지난주보다 늘었나?” 같은 질문도 할 수 있을 것이다.
+그런데 그 작은 문제를 제대로 해보려다 보니, 결국 내가 알고 싶었던 것은 **로컬 모델에게 무엇을 시키면 편하고, 무엇은 굳이 시키지 않는 편이 좋은가**였다.
 
-여기서도 원칙은 같다.
+Fresh phase는 그 경계를 찾는 작업이었다.
 
-> **모델이 모든 데이터를 기억하는 것이 아니라, 필요할 때 장부를 읽고 의미를 연결한다.**
-
----
-
-## 16. Fresh phase를 끝내며
-
-처음에 내가 상상한 개인 회계 에이전트는 “사용자 → 똑똑한 LLM → 알아서 장부 관리”에 가까웠다.
-
-지금은 훨씬 다르게 본다.
-
-명확한 입력은 코드가 처리하고, 애매한 입력만 semantic controller가 해석한다. 그 뒤의 상태 변화와 잔액, 검증은 다시 deterministic core가 책임진다.
-
-Fresh phase에서 얻은 가장 중요한 산출물은 특정 모델의 승패가 아니었다.
-
-**어떤 문제를 모델에게 맡기고, 어떤 문제는 모델에게 맡기지 말아야 하는지에 대한 지도**가 생긴 것이 가장 컸다.
-
-그리고 Observer의 역할도 조금 달라 보이기 시작했다. 처음에는 모델을 감시하는 도구라고 생각했지만, 지금은 오히려 다음 질문을 반복해서 던지는 도구에 가깝다.
-
-- 어디서 실패했는가?
-- 왜 실패했는가?
-- 그 실패는 모델의 책임인가?
-- 인터페이스나 실험 장치의 책임인가?
-- 코드로 옮길 수 있는가?
-- 그래도 모델이 필요한 것은 무엇인가?
-
-그래서 다음 Persistent phase에서도 목표는 “더 많은 것을 에이전트에게 맡기기”가 아니다.
-
-오히려 반대다.
-
-> **상태가 이어지는 실제 생활 workflow에서도, 모델이 꼭 필요한 지점을 계속 좁혀가는 것.**
-
-Fresh session 실험은 여기서 일단 닫는다.
+다음 Persistent phase에서는 그 경계가 실제 생활의 연속된 상태에서도 유지되는지를 확인해볼 생각이다.
