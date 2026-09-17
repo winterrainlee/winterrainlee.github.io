@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 670" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="30">다음 단계</text>
+<text class="title" x="20" y="51">Capture → State → Insight</text>
+<text class="tiny" x="20" y="72">Fresh 이후에는 상태가 이어지는가를 본다</text>
+<rect class="accent" x="40" y="105" width="280" height="115" rx="14"/>
+<text class="label" x="180" y="135" text-anchor="middle">1. CAPTURE</text>
+<text class="body" x="180" y="163" text-anchor="middle">지금 무슨 거래를 말한 거지?</text>
+<text class="body" x="180" y="189" text-anchor="middle">fast path + semantic controller</text>
+<line class="arrow" x1="180" y1="205" x2="180" y2="240"/>
+<rect class="green" x="40" y="255" width="280" height="115" rx="14"/>
+<text class="label" x="180" y="285" text-anchor="middle">2. STATE</text>
+<text class="body" x="180" y="313" text-anchor="middle">그래서 지금 얼마 남았지?</text>
+<text class="body" x="180" y="339" text-anchor="middle">balance · carry-forward · alert</text>
+<line class="arrow" x1="180" y1="355" x2="180" y2="390"/>
+<rect class="amber" x="40" y="405" width="280" height="115" rx="14"/>
+<text class="label" x="180" y="435" text-anchor="middle">3. INSIGHT</text>
+<text class="body" x="180" y="463" text-anchor="middle">최근에 어디에 많이 썼지?</text>
+<text class="body" x="180" y="489" text-anchor="middle">aggregation · summary · Q&amp;A</text>
+<rect class="box" x="40" y="555" width="280" height="80" rx="14"/>
+<text class="label" x="180" y="585" text-anchor="middle">먼저 검증할 것</text>
+<text class="body" x="180" y="610" text-anchor="middle">거래 → 잔액 → 즉시 피드백 → 하루 마감</text>
+</svg>

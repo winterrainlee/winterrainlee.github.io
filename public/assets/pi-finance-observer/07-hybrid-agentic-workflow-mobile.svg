@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 620" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="32">Hybrid agentic workflow</text>
+<text class="tiny" x="20" y="54">LLM이 모든 것을 자유롭게 결정하지 않는다</text>
+<rect class="green" x="55" y="90" width="250" height="95" rx="14"/>
+<text class="label" x="180" y="120" text-anchor="middle">Deterministic Workflow</text>
+<text class="body" x="180" y="145" text-anchor="middle">확실한 규칙 · routing · state</text>
+<line class="arrow" x1="180" y1="185" x2="180" y2="235"/>
+<text class="tiny" x="195" y="218" text-anchor="start">판단이 필요한 곳</text>
+<rect class="rose" x="55" y="235" width="250" height="100" rx="14"/>
+<text class="label" x="180" y="265" text-anchor="middle">Semantic LLM Controller</text>
+<text class="body" x="180" y="290" text-anchor="middle">애매함 · 문맥 · clarification</text>
+<text class="body" x="180" y="312" text-anchor="middle">사람 말의 경계를 담당</text>
+<line class="arrow" x1="180" y1="335" x2="180" y2="385"/>
+<rect class="amber" x="55" y="385" width="250" height="95" rx="14"/>
+<text class="label" x="180" y="415" text-anchor="middle">Deterministic State / Tools</text>
+<text class="body" x="180" y="440" text-anchor="middle">계산 · commit · validation</text>
+<line class="arrow" x1="180" y1="480" x2="180" y2="525"/>
+<rect class="box" x="45" y="525" width="270" height="65" rx="14"/>
+<text class="label" x="180" y="555" text-anchor="middle">핵심은 “모델을 어디에 넣을까?”</text>
+<text class="body" x="180" y="578" text-anchor="middle">가 아니라 “누가 무엇을 책임질까?”</text>
+</svg>

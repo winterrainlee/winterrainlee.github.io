@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="32">“Agent Success”를 쪼개기</text>
+<text class="tiny" x="20" y="54">하나의 점수 대신 실패 위치 보기</text>
+<rect class="accent" x="65" y="80" width="230" height="70" rx="14"/>
+<text class="label" x="180" y="120" text-anchor="middle">AGENT SUCCESS</text>
+<line class="arrow" x1="180" y1="150" x2="180" y2="190"/>
+<rect class="green" x="45" y="190" width="270" height="105" rx="14"/>
+<text class="label" x="180" y="220" text-anchor="middle">의미 판단</text>
+<text class="body" x="180" y="247" text-anchor="middle">ambiguity · missing info · clarification</text>
+<line class="arrow" x1="180" y1="295" x2="180" y2="320"/>
+<rect class="amber" x="45" y="320" width="270" height="105" rx="14"/>
+<text class="label" x="180" y="350" text-anchor="middle">인터페이스 수행</text>
+<text class="body" x="180" y="377" text-anchor="middle">representation · serialization · tool schema</text>
+<line class="arrow" x1="180" y1="425" x2="180" y2="450"/>
+<rect class="rose" x="45" y="450" width="270" height="105" rx="14"/>
+<text class="label" x="180" y="480" text-anchor="middle">상태 변화</text>
+<text class="body" x="180" y="507" text-anchor="middle">arithmetic · balance · mutation</text>
+<line class="arrow" x1="180" y1="555" x2="180" y2="580"/>
+<rect class="box" x="45" y="580" width="270" height="90" rx="14"/>
+<text class="label" x="180" y="610" text-anchor="middle">그 뒤에도 따로 본다</text>
+<text class="body" x="180" y="635" text-anchor="middle">recovery · termination</text>
+<rect class="box" x="45" y="685" width="270" height="55" rx="14"/>
+<text class="body" x="180" y="718" text-anchor="middle">Harness / Observer / Evaluator도 별도</text>
+</svg>

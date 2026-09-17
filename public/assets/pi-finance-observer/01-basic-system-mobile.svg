@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 650" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="32">기본 생활비 시스템</text>
+<text class="tiny" x="20" y="54">세 계좌와 생활 속 돈의 흐름</text>
+<rect class="amber" x="55" y="85" width="250" height="95" rx="14"/>
+<text class="label" x="180" y="115" text-anchor="middle">은행카드 / 여행카드</text>
+<text class="body" x="180" y="140" text-anchor="middle">ATM 인출 원천 · 직접 결제</text>
+<line class="arrow" x1="180" y1="180" x2="180" y2="225"/>
+<text class="tiny" x="196" y="205" text-anchor="start">ATM 인출</text>
+<rect class="green" x="55" y="225" width="250" height="105" rx="14"/>
+<text class="label" x="180" y="255" text-anchor="middle">현금</text>
+<text class="body" x="180" y="280" text-anchor="middle">직접 지출 · EasyCard 충전</text>
+<text class="body" x="180" y="300" text-anchor="middle">부족하면 바로 생활이 불편</text>
+<line class="arrow" x1="180" y1="330" x2="180" y2="375"/>
+<text class="tiny" x="196" y="355" text-anchor="start">현금으로 충전</text>
+<rect class="accent" x="55" y="375" width="250" height="105" rx="14"/>
+<text class="label" x="180" y="405" text-anchor="middle">교통카드 / EasyCard</text>
+<text class="body" x="180" y="430" text-anchor="middle">버스·지하철·소액 결제</text>
+<text class="body" x="180" y="450" text-anchor="middle">잔액 부족 시 이동이 곤란</text>
+<line class="arrow" x1="180" y1="480" x2="180" y2="525"/>
+<rect class="rose" x="40" y="525" width="280" height="85" rx="14"/>
+<text class="label" x="180" y="555" text-anchor="middle">왜 잔액 피드백이 중요한가?</text>
+<text class="body" x="180" y="580" text-anchor="middle">현금과 EasyCard는 도중에 없으면</text>
+<text class="body" x="180" y="600" text-anchor="middle">즉시 행동이 필요해진다.</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 760" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="32">무엇을 분리해서 보고 싶었나</text>
+<text class="tiny" x="20" y="54">최종 성공 하나로 묶지 않기</text>
+<rect class="accent" x="55" y="85" width="250" height="90" rx="14"/>
+<text class="label" x="180" y="115" text-anchor="middle">사용자 입력</text>
+<text class="body" x="180" y="140" text-anchor="middle">자연어 요청</text>
+<line class="arrow" x1="180" y1="175" x2="180" y2="210"/>
+<rect class="green" x="55" y="210" width="250" height="115" rx="14"/>
+<text class="label" x="180" y="240" text-anchor="middle">의미 판단</text>
+<text class="body" x="180" y="265" text-anchor="middle">무슨 거래인가?</text>
+<text class="body" x="180" y="285" text-anchor="middle">정보가 충분한가?</text>
+<text class="body" x="180" y="305" text-anchor="middle">질문이 필요한가?</text>
+<line class="arrow" x1="180" y1="325" x2="180" y2="360"/>
+<rect class="amber" x="55" y="360" width="250" height="115" rx="14"/>
+<text class="label" x="180" y="390" text-anchor="middle">실행 / 표현</text>
+<text class="body" x="180" y="415" text-anchor="middle">tool 선택</text>
+<text class="body" x="180" y="435" text-anchor="middle">필드·형식·serialization</text>
+<line class="arrow" x1="180" y1="475" x2="180" y2="510"/>
+<rect class="rose" x="55" y="510" width="250" height="115" rx="14"/>
+<text class="label" x="180" y="540" text-anchor="middle">상태 변화</text>
+<text class="body" x="180" y="565" text-anchor="middle">잔액 반영</text>
+<text class="body" x="180" y="585" text-anchor="middle">append · invariant 유지</text>
+<rect class="box" x="35" y="610" width="290" height="115" rx="14"/>
+<text class="label" x="180" y="640" text-anchor="middle">Observer가 따로 보는 실패</text>
+<text class="body" x="180" y="665" text-anchor="middle">semantic · interface · state</text>
+<text class="body" x="180" y="686" text-anchor="middle">recovery · termination</text>
+<text class="body" x="180" y="708" text-anchor="middle">“왜 실패했는가”를 남긴다</text>
+</svg>

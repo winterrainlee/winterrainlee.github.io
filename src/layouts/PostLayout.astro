@@ -35,3 +35,47 @@ const footer = postFooterDate(post);
     </footer>
   </article>
 </BaseLayout>
+
+<style is:global>
+  .prose img[src*="/assets/pi-finance-observer/"] {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-inline: auto;
+  }
+
+  .prose figure:has(> img[src*="/assets/pi-finance-observer/"]) {
+    overflow-x: hidden !important;
+  }
+
+  @media (max-width: 720px) {
+    .prose figure:has(> img[src*="/assets/pi-finance-observer/"]) {
+      margin-block: 1.5rem !important;
+      padding: 0.75rem !important;
+    }
+  }
+</style>
+
+<script>
+  const media = window.matchMedia('(max-width: 720px)');
+  const diagrams = Array.from(document.querySelectorAll('img[src*="/assets/pi-finance-observer/"]'));
+
+  const syncPiFinanceDiagrams = () => {
+    diagrams.forEach((image) => {
+      const img = image;
+      const current = img.getAttribute('src');
+      if (!current) return;
+
+      const desktop = img.dataset.desktopSrc ?? current.replace('-mobile.svg', '.svg');
+      img.dataset.desktopSrc = desktop;
+      const mobile = desktop.replace(/\.svg$/, '-mobile.svg');
+      const next = media.matches ? mobile : desktop;
+
+      if (img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  };
+
+  syncPiFinanceDiagrams();
+  media.addEventListener('change', syncPiFinanceDiagrams);
+</script>

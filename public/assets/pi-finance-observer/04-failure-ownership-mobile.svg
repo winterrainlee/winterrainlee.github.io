@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 720" role="img">
+
+<style>
+  .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .label{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#111827}
+  .body{font:500 13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#374151}
+  .tiny{font:500 12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#4B5563}
+  .box{fill:#F9FAFB;stroke:#D1D5DB;stroke-width:1.4}
+  .accent{fill:#EEF2FF;stroke:#818CF8;stroke-width:1.6}
+  .green{fill:#ECFDF5;stroke:#34D399;stroke-width:1.6}
+  .amber{fill:#FFFBEB;stroke:#F59E0B;stroke-width:1.6}
+  .rose{fill:#FFF1F2;stroke:#FB7185;stroke-width:1.6}
+  .arrow{stroke:#6B7280;stroke-width:2;fill:none;marker-end:url(#arrow)}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6B7280"/></marker></defs>
+<text class="title" x="20" y="32">실패가 나면 먼저 소유자를 나눈다</text>
+<text class="tiny" x="20" y="54">모델 실패와 실험 장치 실패를 섞지 않기</text>
+<rect class="rose" x="70" y="85" width="220" height="70" rx="14"/>
+<text class="label" x="180" y="125" text-anchor="middle">관찰된 실패</text>
+<line class="arrow" x1="180" y1="155" x2="180" y2="200"/>
+<rect class="green" x="45" y="200" width="270" height="78" rx="14"/>
+<text class="label" x="180" y="230" text-anchor="middle">모델 의미 판단</text>
+<text class="body" x="180" y="254" text-anchor="middle">의도·모호성·누락 정보</text>
+<line class="arrow" x1="180" y1="278" x2="180" y2="298"/>
+<rect class="amber" x="45" y="298" width="270" height="78" rx="14"/>
+<text class="label" x="180" y="328" text-anchor="middle">모델 실행 / 표현</text>
+<text class="body" x="180" y="352" text-anchor="middle">tool·schema·serialization</text>
+<line class="arrow" x1="180" y1="376" x2="180" y2="396"/>
+<rect class="box" x="45" y="396" width="270" height="78" rx="14"/>
+<text class="label" x="180" y="426" text-anchor="middle">Runtime</text>
+<text class="body" x="180" y="450" text-anchor="middle">timeout · OOM · process</text>
+<line class="arrow" x1="180" y1="474" x2="180" y2="494"/>
+<rect class="box" x="45" y="494" width="270" height="78" rx="14"/>
+<text class="label" x="180" y="524" text-anchor="middle">Harness / Capture</text>
+<text class="body" x="180" y="548" text-anchor="middle">trace 누락 · 상태 수집</text>
+<line class="arrow" x1="180" y1="572" x2="180" y2="592"/>
+<rect class="box" x="45" y="592" width="270" height="78" rx="14"/>
+<text class="label" x="180" y="622" text-anchor="middle">Evaluator</text>
+<text class="body" x="180" y="646" text-anchor="middle">판정 경계 · denominator</text>
+<text class="label" x="180" y="695" text-anchor="middle">Observer 자신도 검증 대상이다</text>
+</svg>
