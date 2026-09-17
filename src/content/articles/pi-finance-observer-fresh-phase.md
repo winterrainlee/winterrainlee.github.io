@@ -1,7 +1,8 @@
 ---
 title: Pi Finance Observer — Fresh Session Final Report
-description: v0.1부터 v0.7까지, 모델을 비교하던 실험이 deterministic fast path와 semantic controller의 경계를 찾는 과정으로 바뀐 기록
+description: 개인 지출 기록이라는 작은 문제를 통해, 에이전트에게 무엇을 맡기고 무엇을 코드로 분리할지 관찰한 기록
 date: 2026-09-17
+updated: 2026-09-17
 tags:
   - AI
   - agentic
@@ -10,793 +11,831 @@ tags:
 draft: false
 ---
 
-Pi Finance Observer의 Fresh phase는 처음에는 단순한 질문에서 출발했다.
+**참고: 다른 글과 다르게 이 글은 내 지시를 받아 gpt 5.6 sol 매우 높음 조건으로 작성되었다.**
 
-> 로컬 LLM 에이전트에게 개인 지출 기록 업무를 맡겼을 때 어떤 모델이 더 잘 수행하는가?
+Pi Finance Observer를 시작할 때 내가 만들고 싶었던 것은 거창한 금융 에이전트가 아니었다. 매일 내가 쓴 돈을 간단히 기록하고, 현금·교통카드·은행카드의 잔액을 이어서 관리하는 아주 작은 개인 장부였다.
 
-그런데 v0.1부터 v0.7까지 실험을 진행하면서 질문 자체가 바뀌었다.
+그런데 실제로 만들어 보기 시작하니 내가 궁금했던 것은 가계부 자체보다 다른 쪽에 더 가까웠다.
 
-> 이 업무의 어느 부분이 정말 LLM을 필요로 하며, 어느 부분은 deterministic code가 더 적합한가?
+> **LLM 에이전트는 어디까지 스스로 맡겨도 되고, 어디부터는 코드가 책임져야 할까?**
 
-결국 Fresh phase의 가장 중요한 산출물은 특정 모델의 승패가 아니었다. **어떤 문제를 모델에게 맡겨야 하는지에 대한 지도**가 남았다.
+그리고 한 단계 더 들어가면 질문은 이렇게 바뀌었다.
 
-현재까지의 결론을 먼저 쓰면 다음과 같다.
+> **에이전트가 실패했을 때, 대체 어디서부터 잘못된 걸까?**
 
-```text
-User input
-   ↓
-Deterministic Eligibility Gate
-   ├─ explicit / closed / complete
-   │      ↓
-   │  Deterministic Fast-Path Parser
-   │      ↓
-   │  Deterministic Normalizer / Finance Core
-   │
-   └─ ambiguous / incomplete / contextual / free-form
-          ↓
-      Gemma 4 26B-A4B
-      Semantic Controller Candidate
-          ↓
-      Deterministic Finance Core
-```
-
-Tiny SLM을 붙이는 구조도 검토했지만, 현재 Fresh fast path에서는 **작은 모델보다 코드가 더 적합했다.**
-
-이 글은 이 결론에 어떻게 도달했는지, 그리고 다음 Persistent phase에서 무엇을 확인할지를 정리한 기록이다.
+이 글은 v0.1부터 v0.7까지의 실험 결과를 숫자 순서대로 나열하기보다, 그 과정에서 내가 무엇을 보고 싶었고 무엇을 분리하려고 했는지를 중심으로 정리한 글이다.
 
 ---
 
-## v0.1 — 모델보다 Observer를 먼저 믿을 수 있어야 했다
+## 1. 시작점: 아주 작은 생활비 시스템
 
-v0.1의 핵심은 모델 성능 수치가 아니라 **무엇을 관찰할 것인가**를 정의하는 일이었다.
+실험에 사용한 세계는 일부러 작게 만들었다. 계정은 세 개뿐이다.
 
-처음부터 다음을 분리했다.
-
-```text
-Agent execution
-   ↓
-Passive trace capture
-   ↓
-Visible validator
-   ↓
-Hidden deterministic evaluator
-   ↓
-Earliest observable divergence
-   ↓
-Recovery / termination
-```
-
-synthetic mini-world를 사용하고, agent에게 hidden expected result를 노출하지 않았다. 각 run은 fresh workspace에서 시작하고, 최종 파일만 보는 대신 tool trajectory와 file mutation을 보존했다.
-
-또 성공 여부만 기록하지 않고 **최초로 관찰 가능한 이탈**과 **그 뒤의 복구 여부**를 보려고 했다.
-
-이 설계는 live canary에서 바로 필요해졌다. 모델 자체와 무관한 문제가 먼저 나타났기 때문이다.
-
-- runtime OOM으로 decode가 중단될 수 있었다.
-- model error가 있어도 process exit가 정상처럼 보일 수 있었다.
-- streaming capture와 file-change 기록 사이에 gap이 생길 수 있었다.
-
-이런 문제를 고치고 나서야 모델 결과를 capability evidence로 사용할 수 있었다.
-
-primary 10건에서는 최종 task success가 9/10이었지만 transaction과 balance state 자체는 10/10 정확했다. 반면 mutation case의 first-pass 성공은 2/8에 불과했고 validator feedback 뒤 복구가 반복적으로 나타났다.
-
-이때부터 프로젝트의 기본 원칙이 생겼다.
-
-> **모델 실패와 Observer 실패를 분리해야 한다.**
-
-> **최종적으로 맞았다는 것과 처음부터 독립적으로 맞았다는 것은 다른 정보다.**
-
-> **관측이 깨진 run은 모델이 맞았더라도 capability evidence로 사용하지 않는다.**
-
----
-
-## v0.2 — Semantic competence와 interface execution은 다르다
-
-v0.2에서는 같은 Gemma/Pi 환경에서 specification과 ledger representation만 바꾼 36-run first study를 진행했다.
-
-가장 중요한 결과는 **경제 의미 능력과 interface 실행 능력이 분리된다**는 것이었다.
-
-관찰 가능한 mutation 25건의 transaction과 balance는 25/25 정확했고 semantic divergence는 0이었다.
-
-그런데 independent first-pass execution은 specification에 따라 크게 달라졌다.
-
-```text
-VALIDATOR_GUIDED
-pre-feedback structural PASS: 2/9
-
-FULL_SPEC
-pre-feedback structural PASS: 9/9
-```
-
-두 조건에서 경제 의미는 모두 9/9 정확했지만, public structural specification을 충분히 주느냐에 따라 첫 실행 성공이 `2/9 → 9/9`로 바뀌었다.
-
-여기서 이후 프로젝트를 계속 끌고 간 질문이 생겼다.
-
-> 모델이 의미를 몰라서 실패한 것인가?
-
-> 아니면 우리가 모델에게 불필요하거나 불완전한 interface responsibility를 준 것인가?
-
-Representation 비교에서도 비슷했다. CSV 조건이 workflow cost 측면에서 더 유리한 신호를 보였지만 Markdown 자체의 observed structural divergence는 0이었다. 차이에는 validation timing, process cost, runtime censor가 함께 작용했다.
-
-그래서 “Markdown이라서 나쁘다” 같은 식으로 성급하게 해석하지 않았다.
-
-또 temperature 0과 고정 seed도 local trajectory를 완전히 고정하지 않았다. 이후의 반복 실험들은 이 경험에서 출발했다.
-
-그리고 evaluator 자체의 freshness boundary defect도 발견했다. 기존 결과를 소급 수정하지 않고 historical evidence로 보존한 채 새 version에서 교정했다.
-
-**Observer 자신도 관찰 대상**이라는 사실을 여기서 배웠다.
-
----
-
-## v0.3 — 모델 비교보다 failure topology가 더 중요했다
-
-v0.3에서는 Gemma 4 26B-A4B와 Qwen3 30B-A3B를 같은 복합 finance agent workflow에서 비교했다.
-
-### Gemma 4 26B-A4B
-
-- final PASS: 12/12
-- semantic transaction exactness: 9/9
-- representation first-pass: 9/9
-- clarification: 3/3
-- state consistency: 9/9
-- termination: 12/12
-
-### Qwen3 30B-A3B
-
-- PASS 4
-- FAIL 7
-- runtime-censored 1
-- semantic exactness: 4/7 observed
-- representation first-pass: 3/8
-- clarification: 1/3
-- termination: 7/11
-
-겉으로 보면 “Gemma가 좋고 Qwen이 나쁘다”라고 끝낼 수 있었다.
-
-하지만 Qwen의 failure에는 semantic decision, representation, protected write, validator interaction, recovery loop, termination이 뒤섞여 있었다.
-
-그래서 더 중요한 질문은 이것이었다.
-
-> **Qwen이 finance semantics를 이해하지 못하는가, 아니면 복합 agent harness와 잘 맞지 않는가?**
-
-이 질문이 이후 responsibility reduction으로 이어졌다.
-
----
-
-## v0.3.1 — Final success와 독립 수행은 다르다
-
-Gemma E4B scale probe는 또 다른 분리를 보여주었다.
-
-- final PASS: 12/12
-- semantic exactness: 9/9
-- state consistency: 9/9
-- representation first-pass: 0/9
-
-9개 mutation path가 validator-assisted recovery를 필요로 했다.
-
-즉 다음은 서로 다른 능력이다.
-
-```text
-무엇을 해야 하는지 안다
-≠
-혼자 정확하게 실행한다
-≠
-지원이 있으면 최종적으로 완료한다
-```
-
-Final success 하나로는 독립 수행과 scaffolded recovery를 구분할 수 없다.
-
----
-
-## v0.4 — 모델에게 맡긴 책임을 하나씩 덜어내다
-
-v0.4 계열에서는 모델에게 맡긴 responsibility를 하나씩 제거했다.
-
-가설은 간단했다.
-
-> LLM은 의미 판단을 하고, low-level accounting/state/serialization은 deterministic code가 맡으면 더 안정적이지 않을까?
-
-### 작은 interface도 잘못 설계하면 어렵다
-
-v0.4.1에서는 Minimal Action interface를 만들었지만 모델에게 내부 enum/codebook normalization까지 맡겼다. 26B조차 크게 흔들렸다.
-
-즉 interface가 작다는 것만으로 충분하지 않았다.
-
-**사용자 표현을 내부 canonical code로 번역하는 일 자체가 별도의 책임**이었다.
-
-### Normalization을 코드로 옮기다
-
-v0.4.2에서는 localized surface alias를 deterministic normalizer가 canonical account/category/currency/date로 바꾸게 했다.
-
-그 결과 26B의 explicit critical action은 `0/6 → 6/6`으로 회복됐다.
-
-이때 architecture 원칙이 선명해졌다.
-
-> **모델은 의미를 판단하고, 내부 표현은 코드가 책임진다.**
-
-### 올바른 결론과 실제 행동도 다르다
-
-Missing-account 반복에서는 26B가 5회 중 4회 올바르게 clarification했고, 한 번은 active-generation runaway가 나타났다.
-
-흥미로운 점은 runaway에서도 모델이 이미 “계좌를 물어봐야 한다”는 결론에는 도달했다는 것이다.
-
-실패는 그 결론을 tool call로 넘기는 구간에서 발생했다.
-
-> **올바른 결론에 도달하는 것과 그 결론을 실제 행동으로 전환하는 것도 서로 다른 능력이다.**
-
----
-
-## v0.4.3 — E4B의 한계는 representation만이 아니었다
-
-surface-semantic interface에서 E4B를 다시 평가했다.
-
-- first-pass semantic success: 12/24
-- explicit critical exact: 12/18
-- clarification true positive: 0/6
-- semantic wrong-action: 9/24
-- timeout: 0
-
-이 결과는 “E4B는 의미는 알지만 표현만 약하다”는 앞선 해석을 수정하게 했다.
-
-Representation 부담을 없앤 뒤에도 semantic wrong-action이 반복됐다.
-
----
-
-## v0.4.4 / v0.4.4.1 — Qwen 패자부활전
-
-Qwen을 같은 surface-semantic interface에서 다시 평가했다.
-
-Primary campaign은 모든 inference가 끝난 뒤 postflight runtime readiness 문제로 integrity-stop되었기 때문에, 결과를 억지로 primary로 승격시키지 않았다. 대신 이미 보존된 trace를 별도의 zero-model-call secondary analysis에서 사용했다.
-
-결과는 꽤 흥미로웠다.
-
-- first-pass semantic success: 15/24
-- explicit semantic exact: 15/18
-- C01–C05 explicit transactions: 15/15
-- clarification: 0/6
-- relative-date failure: 3/3
-- timeout/runaway: 0
-
-Qwen은 cash expense, EasyCard expense, income, EasyCard top-up, ATM withdrawal처럼 **답이 명확한 explicit action**에서 강했다.
-
-특히 ATM withdrawal도 정확히 `travel_card → cash` transfer로 처리했다.
-
-반대로 다음과 같은 경계에서 세 repeat 모두 같은 방향으로 실패했다.
-
-### Ambiguity
-
-```text
-카드로 점심 150원
-```
-
-→ 물어보지 않고 transaction을 만들었다.
-
-### Missing information
-
-```text
-커피 95원 결제했어
-```
-
-→ 계좌가 없는데도 transaction을 완성하려 했다.
-
-### Relative date
-
-```text
-어제 저녁 현금 180원
-```
-
-→ `어제`를 제대로 변환하지 못했다.
-
-이 결과를 보고 Qwen의 성격을 이렇게 정리했다.
-
-> **답이 명확한 실행 문제에는 빠르고 강하지만, “지금 행동해도 되는가?”를 판단하는 abstention/clarification boundary가 약하다.**
-
-v0.3에서 보였던 Qwen의 총체적 실패 중 상당 부분은 모델 자체의 semantic incapability라기보다 **complex workflow와의 interaction**이었다는 것도 알게 됐다.
-
----
-
-## v0.5 — Tiny Executor가 정말 필요한가?
-
-다음 구조를 잠시 생각했다.
-
-```text
-Gemma 26B
-→ resolved work order
-→ Tiny Executor
-→ deterministic core
-```
-
-그런데 no-LLM baseline에서 deterministic mapper만으로 W0/W1 valid 12/12, invalid rejection 10/10, action/argument/sequence fidelity 12/12, semantic authority violation 0을 달성했다.
-
-결론은 단순했다.
-
-> **26B가 이미 의미를 해결한 뒤 Tiny LLM을 붙일 이유는 없다.**
-
-이미 resolved된 work order를 작은 모델에게 다시 주면 Tiny는 사실상 stochastic serializer가 된다.
-
-이 단계에서 `SEMANTIC_AUTHORITY_VIOLATION`이라는 개념도 추가했다.
-
-Upstream controller가 이미 확정한 의미를 executor가 변경·누락·발명·재정렬하면, 단순히 “틀렸다”뿐 아니라 **자기 책임 범위를 넘어섰다**고 별도로 기록할 수 있게 했다.
-
----
-
-## v0.6 — Tiny가 있다면 controller 앞이어야 했다
-
-Tiny model의 가능한 위치를 controller 뒤가 아니라 controller 앞 fast path로 옮겼다.
-
-```text
-User
-  ↓
-Deterministic Gate
-   ├─ safe → Fast-path candidate
-   └─ uncertain → Gemma 26B
-```
-
-새 minimal-pair corpus 46건에서:
-
-- false accept: 0
-- false reject: 1
-- true accept: 22
-- true reject: 23
-- safe precision: 100%
-- recall: 95.65%
-
-을 얻었다.
-
-Qwen의 기존 24-run evidence를 offline replay했더니:
-
-- gate accepted: 12
-- accepted Qwen exact: 12/12
-- historical failures intercepted: 9/9
-- historical success retained: 12/15
-
-이었다.
-
-즉 deterministic gate는 **Qwen이 잘하는 입력만 골라내는 것**까지 가능했다.
-
-그런데 여기서 또 질문이 생겼다.
-
-> Gate가 이미 action과 필요한 semantic fact를 확인했는데 Tiny model이 정말 필요한가?
-
----
-
-## v0.7 — 결국 fast path에서도 모델이 빠졌다
-
-마지막으로 다음 Architecture C를 직접 시험했다.
-
-```text
-User
-→ deterministic gate
-→ deterministic parser
-→ deterministic normalizer
-→ finance core
-```
-
-### Frozen Set A
-
-v0.6 accepted corpus 22건은 canonical exact 22/22, 3-repeat byte identity 22/22였다.
-
-### Fresh Set B
-
-Parser 구현 전에 동결한 새 표현 24건도 canonical exact 24/24였다.
-
-- expense: 5/5
-- income: 4/4
-- transfer: 6/6
-- refund: 4/4
-- correction: 5/5
-
-### Shadow Set C
-
-Controller가 필요한 minimal pair 24건은 모두 parser 실행 전에 차단됐다.
-
-- blocked before parser: 24/24
-- parser false accept: 0
-
-Parser를 위해 새 semantic engine을 만들 필요도 없었다.
-
-- frozen gate: 377 executable LOC
-- parser: +156 LOC
-- new lexical table: 0
-- duplicated rule: 0
-- unique parser semantic rule: 0
-- fixture-specific exception: 0
-- fuzzy matching / embedding / LLM-like ranking: 0
-
-결론은 **Case C1 — Deterministic Fast Path Sufficient**였다.
-
-현재 accepted closed surface에서는 Tiny SLM의 incremental value가 없다.
-
----
-
-# Fresh phase의 최종 architecture
-
-현재 evidence에서 가장 단순하고 근거가 강한 구조는 다음이다.
-
-```text
-                    User Input
-                        |
-                        v
-          Deterministic Eligibility Gate
-                /                 \
-             ACCEPT              REJECT
-                |                  |
-                v                  v
-      Deterministic Parser    Gemma 4 26B-A4B
-                |             Semantic Controller
-                |                  |
-                +--------+---------+
-                         |
-                         v
-              Deterministic Normalizer
-                         |
-                         v
-                 Finance State Core
-```
-
-### Code가 맡는 것
-
-- exact alias resolution
-- known closed-surface action
-- amount extraction
-- account/category mapping
-- transfer projection
-- normalization
-- schema validation
-- arithmetic
-- state transition
-- replay와 invariant validation
-
-### Gemma 26B가 맡는 것
-
-- 자유로운 사용자 자연어
-- ambiguity
-- missing information
-- clarification
-- relative/contextual time
-- dialogue context
-- contradiction
-- free-form/unsupported request interpretation
-
-### Tiny SLM
-
-현재 fast path에서는 **필요 없음**.
-
-실제 사용에서 필요한 표현을 넓히는 과정에서 deterministic gate/parser가 지나치게 복잡해질 때 다시 후보로 검토하면 된다.
-
----
-
-# Fresh phase에서 얻은 몇 가지 교훈
-
-## 복잡한 task가 semantic workflow 분석에 꼭 필요한 것은 아니었다
-
-작은 contrast가 오히려 boundary를 더 선명하게 보여주었다.
-
-```text
-이지카드로 점심 150원
-vs
-카드로 점심 150원
-```
-
-이 작은 차이만으로 `account extraction`과 `ambiguity detection`을 분리할 수 있었다.
-
-앞으로도 **한 fixture에서 가능한 한 하나의 semantic decision만 흔드는 것**이 좋은 원칙이 될 것 같다.
-
-## Final success보다 failure location이 중요했다
-
-다음은 서로 다른 능력이다.
-
-```text
-이해한다
-독립적으로 실행한다
-지원이 있으면 복구한다
-정확하게 종료한다
-```
-
-하나의 PASS/FAIL에 다 집어넣으면 중요한 정보가 사라진다.
-
-## 모델의 실패 방향도 실용성의 일부였다
-
-Qwen은 빈칸이 있어도 실행 가능한 action을 완성하려는 쪽이었고, Gemma 26B는 의미가 충분하지 않을 때 질문하거나 행동을 늦추는 쪽이 상대적으로 강했다.
-
-단순 정확도 외에 **어떤 방향으로 실패하는가**가 실제 사용자 경험에 중요하다는 신호였다.
-
-## Scaling이 responsibility separation을 대신하지는 않았다
-
-Gemma 26B는 현재 가장 강한 controller 후보지만 완벽하지 않다.
-
-그래서 다음 구조는 계속 유지해야 한다.
-
-```text
-26B judgment
-→ deterministic validation
-→ deterministic state mutation
-```
-
-큰 모델이 있다고 해서 상태 변경과 invariant를 모델에게 넘길 이유는 없다.
-
-## 모델을 쓰는 것 자체가 목표가 아니었다
-
-Tiny executor를 찾으려 했는데 오히려 Tiny model보다 code가 더 적합한 영역을 발견했다.
-
-Observer는 모델을 더 많이 넣기 위한 도구가 아니라 **모델이 필요한 경계를 찾는 도구**가 되었다.
-
-## Observer 자신도 관찰 대상이었다
-
-capture 문제, evaluator defect, runtime readiness race 같은 사건들은 모두 같은 교훈을 반복했다.
-
-> **모델 결과와 실험 장치의 결과를 분리해야 한다.**
-
-Evidence custody와 fail-closed protocol은 부가 기능이 아니라 실험 결과의 일부였다.
-
----
-
-# 아직 모르는 것
-
-Fresh phase에서 다음은 아직 확인하지 않았다.
-
-- 실제 사용자 입력 중 deterministic fast-path 비율
-- 장기간 workload distribution
-- persistent account state
-- daily balance carry-forward
-- 실제 correction/reconciliation
-- periodic analytics
-- ledger-backed Q&A
-- 모든 fallback case에서의 26B 안정성
-- 모든 finance action의 실제 persistent commit
-- production deployment
-
-특히 diagnostic corpus의 fast-path 비율을 실제 사용자 요청 비율로 해석해서는 안 된다.
-
----
-
-# 다음 단계 — Persistent State
-
-다음 phase에서 persistent는 “모델 대화 context를 오래 유지한다”는 뜻이 아니다.
-
-Persistent하게 유지해야 할 것은 **장부의 world state**다.
-
-초기에는 기존 CSV/JSON 구조를 유지한다.
-
-```text
-ledger.csv + balances.json
-        ↓
-deterministic state transition / replay
-        ↓
-current account state
-```
-
-당장 DB migration을 할 이유는 없다. 우선 필요한 것은 stable transaction identity, reproducible state transition, replay 가능성, correction semantics, day boundary consistency다.
-
----
-
-## v0.8 — Transaction → Balance Propagation
-
-첫 Persistent milestone은 transaction commit이 기존 account state를 정확하게 바꾸는지 확인하는 것이다.
-
-- expense → 해당 account 감소
-- income → 해당 account 증가
-- transfer → source 감소 + target 증가
-- refund → 정의된 reverse effect
-- correction → intended state만 변경
-- rejected action → state mutation 0
-- duplicate commit 방지
-- replay 결과 동일
-
-새 failure taxonomy 후보는 다음과 같다.
-
-```text
-BALANCE_PROPAGATION_ERROR
-SOURCE_BALANCE_ERROR
-TARGET_BALANCE_ERROR
-DOUBLE_COMMIT
-FAILED_ACTION_STATE_MUTATION
-STATE_REPLAY_MISMATCH
-```
-
----
-
-## v0.9 — Immediate Balance Feedback
-
-현금과 EasyCard는 도중에 부족하면 실제 생활에서 바로 문제가 된다.
-
-따라서 transaction commit 직후 잔액을 알려주는 편이 자연스럽다.
-
-```text
-점심 120원 현금
-→ 기록 완료
-→ 현금 잔액 380 TWD
-→ LOW_CASH
-```
-
-```text
-버스 25원 이지카드
-→ 기록 완료
-→ 이지카드 잔액 72 TWD
-→ LOW_EASYCARD
-```
-
-Transfer에서는 관련된 두 계좌를 모두 보여준다.
-
-```text
-현금 → EasyCard 500
-
-현금: 1200 → 700
-이지카드: 60 → 560
-```
-
-이 계산과 threshold alert는 LLM보다 deterministic code의 책임에 가깝다.
-
----
-
-## v0.10 — Daily Close / Carry Forward
-
-하루 lifecycle을 도입한다.
-
-```text
-Yesterday Closing Balance
-        ↓
-Today Opening Balance
-        +
-Today Transactions
-        ↓
-Today Closing Balance
-```
-
-핵심 invariant는 단순하다.
-
-```text
-D-1 closing == D opening
-```
-
-Daily close에서는 opening balance, transactions, closing balance, threshold alert, next-day action을 만든다.
-
-예를 들어 현금이 기준 이하라면 다음 외출 전에 인출해야 한다는 정보를 줄 수 있다.
-
-v0.8~v0.10까지 끝나면 실제 생활에서 다음 질문에 답할 수 있는 최소 시스템이 만들어진다.
-
-> 오늘 무엇을 썼는가?
-
-> 지금 현금과 EasyCard가 얼마 남았는가?
-
-> 다음 외출 전에 무엇을 준비해야 하는가?
-
----
-
-## v0.11 — Historical Correction / Reconciliation
-
-그 다음부터 다시 LLM semantic workflow가 중요해진다.
-
-> 어제 저녁 현금 180원이 아니라 160원이었어.
-
-```text
-User request
- ↓
-26B semantic interpretation
- ↓
-ledger query
- ↓
-candidate transaction(s)
- ↓
-unique?
- ├─ yes → correction proposal
- └─ no  → clarification
- ↓
-deterministic commit
-```
-
-Fresh ambiguity가 “현재 입력 자체가 충분한가?”였다면 Persistent ambiguity는 다음과 같다.
-
-> **입력과 기존 ledger state를 합쳐 target transaction이 유일한가?**
-
----
-
-## v0.12 — Periodic Aggregation and Summary
-
-주간·월간 지출 분석은 먼저 코드가 집계하고, 모델은 그 결과를 설명하는 식으로 나누는 것이 자연스럽다.
-
-```text
-total spending
-category totals
-account totals
-week-over-week delta
-month-over-month delta
-largest categories
-largest changes
-```
-
-Observer는 `Aggregation correctness`와 `Narrative faithfulness`를 분리해서 볼 수 있다.
-
-예를 들어 숫자에는 식비가 340 TWD 늘었다는 정보만 있는데 모델이 “외식을 많이 해서 늘었다”고 단정하면 unsupported analytic claim이다.
-
----
-
-## v0.13 — Ledger-backed Q&A
-
-마지막 단계에서는 자유 질의를 지원한다.
-
-> 이번 달 편의점에서 얼마 썼어?
-
-```text
-Question
- ↓
-26B query interpretation
- ↓
-Deterministic ledger query
- ↓
-Structured result
- ↓
-26B response
-```
-
-모델이 장부 전체를 장기 context에 보관하는 것이 아니라, **필요한 state를 tool/query로 읽는 방식**을 기본으로 한다.
-
----
-
-# 앞으로의 Observer 구조
-
-Pi Finance Observer는 앞으로 세 층으로 정리할 수 있다.
-
-| Layer | 핵심 질문 | 주 책임 |
+| 계정 | 생활에서의 의미 | 주요 역할 |
 |---|---|---|
-| Capture | 이 요청은 무슨 거래인가? | deterministic fast path + Gemma 26B fallback |
-| State | 그래서 지금 계좌 상태는 무엇인가? | deterministic finance core |
-| Insight | 이 기록은 무엇을 의미하는가? | deterministic aggregation + Gemma 26B explanation |
+| 현금 | 지갑 속 현금 | 직접 지출, 교통카드 충전 |
+| 교통카드 | EasyCard 같은 선불 교통카드 | 교통·소액 결제, 현금에서 충전 |
+| 은행카드 | 체크카드/현금 인출 원천 | 직접 결제, ATM에서 현금 인출 |
 
-다음 순서는 이렇게 잡는다.
+생활 속 돈의 흐름은 대략 이렇다.
 
 ```text
-v0.8  Transaction → Balance
-  ↓
-v0.9  Immediate Balance + Threshold Alert
-  ↓
-v0.10 Daily Close + Carry Forward
-  ↓
-v0.11 Historical Reconciliation
-  ↓
-v0.12 Periodic Analytics
-  ↓
-v0.13 Ledger-backed Q&A
+                 ┌───────────────┐
+                 │   은행카드     │
+                 └───────┬───────┘
+                         │ ATM 인출
+                         ▼
+┌───────────────┐   현금 이동   ┌───────────────┐
+│    현금        │ ───────────▶ │   교통카드     │
+└───────┬───────┘    충전       └───────┬───────┘
+        │                               │
+        │ 직접 지출                    │ 교통/소액 결제
+        ▼                               ▼
+     생활비 지출                      생활비 지출
+
+은행카드 자체로도 직접 결제 가능
 ```
+
+예를 들면 이런 입력을 받는다.
+
+```text
+점심 현금 120원
+버스 이지카드 25원
+은행카드에서 현금 2000원 인출
+현금에서 이지카드 500원 충전
+```
+
+처음에는 꽤 단순해 보였다.
+
+```text
+사용자 입력
+   ↓
+LLM 에이전트
+   ↓
+장부 수정
+```
+
+하지만 실제로 돌려보니 이 한 줄 안에 너무 많은 능력이 한꺼번에 섞여 있었다.
 
 ---
 
-# Fresh phase closing
+## 2. 내가 정말 보고 싶었던 것: “성공했나?”가 아니었다
 
-처음에는 대략 이런 그림을 생각했다.
-
-```text
-LLM Agent
-→ tools
-→ ledger
-```
-
-실험을 거친 뒤에는 책임을 더 단순하게 나눌 수 있게 됐다.
+에이전트 평가를 할 때 가장 쉬운 질문은 이것이다.
 
 ```text
-Code가 확실히 아는 것
-→ Code
-
-사람의 표현이 애매한 것
-→ Gemma 4 26B-A4B
-
-상태와 계산
-→ Code
-
-설명과 문맥 판단
-→ Gemma 4 26B-A4B
+성공 / 실패
 ```
 
-아주 좁은 finance domain이지만, 코드가 잘하는 일을 코드에게 넘기고 의미적으로 애매한 경계를 모델에게 남겨두면 Gemma 4 26B-A4B 정도의 로컬 모델도 꽤 실용적인 semantic-controller candidate가 될 수 있다는 가능성이 보였다.
+하지만 내가 알고 싶었던 것은 그보다 더 세분화된 것이었다.
 
-반대로 Qwen과 Tiny SLM을 뜯어본 과정은 **모델이 필요하지 않은 곳을 찾는 데** 큰 역할을 했다.
+```text
+사용자의 말을 이해했는가?
+        ↓
+무슨 거래인지 올바르게 결정했는가?
+        ↓
+그 결정을 올바른 형식으로 표현했는가?
+        ↓
+실제로 장부를 정확히 바꿨는가?
+        ↓
+중간에 오류를 발견했는가?
+        ↓
+발견했다면 복구했는가?
+        ↓
+끝났을 때 제대로 멈췄는가?
+```
 
-Fresh phase의 결론은 그래서 특정 모델의 승패가 아니다.
+최종 파일만 보면 이 단계들이 전부 사라진다.
 
-> **모델이 필요한 곳과 필요하지 않은 곳의 경계를 직접 관찰하고 분리할 수 있었다.**
+예를 들어 최종 장부가 맞더라도 실제 과정은 이럴 수 있다.
 
-이제 다음 질문은 하나다.
+```text
+잘못 기록
+   ↓
+validator FAIL
+   ↓
+오류 발견
+   ↓
+수정
+   ↓
+최종 PASS
+```
 
-> **이 구조 위에서 상태가 하루에서 다음 날로 정확히 이어지는가?**
+이 결과를 단순히 `성공`이라고만 적으면, 이 모델이 처음부터 독립적으로 잘한 것인지 아니면 외부 피드백을 받아 복구한 것인지 알 수 없다.
 
-Persistent phase의 첫 milestone은 **Transaction → Balance → Immediate Feedback → Daily Close**다.
+그래서 처음부터 나는 이것들을 분리해서 보고 싶었다.
+
+```text
+독립 수행 능력
+      ≠
+도움을 받았을 때의 회복 능력
+      ≠
+최종 결과
+```
+
+이 구분은 나중에 모델 규모나 인터페이스를 비교할 때 꽤 중요해졌다.
+
+---
+
+## 3. 그래서 Observer를 에이전트 밖에 두었다
+
+처음 생각했던 Observer의 모습은 일종의 외주 감리 회사에 가까웠다.
+
+```text
+                 ┌──────────────────────┐
+사용자 요청 ───▶ │      에이전트         │
+                 │ 원래 업무만 수행      │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                       실제 행동
+                            │
+             ┌──────────────┴──────────────┐
+             ▼                             ▼
+       장부 / 파일 상태                tool trajectory
+             │                             │
+             └──────────────┬──────────────┘
+                            ▼
+                 ┌──────────────────────┐
+                 │      Observer        │
+                 │ 행동을 복사해 기록    │
+                 │ 사후에 판정           │
+                 └──────────────────────┘
+```
+
+중요한 것은 에이전트에게 따로 보고서를 쓰라고 시키지 않는 것이었다.
+
+```text
+X  "지금 네 판단 과정을 표로 보고해"
+X  "실패했는지 스스로 분류해"
+X  "무슨 능력을 사용했는지 설명해"
+```
+
+이런 요구는 관찰이 아니라 추가 업무다. 모델의 행동 자체를 바꿀 수 있다.
+
+내가 원했던 것은 오히려 이쪽이었다.
+
+```text
+에이전트는 원래 하던 일을 한다
+              ↓
+Observer는 실제 행동만 조용히 기록한다
+              ↓
+판정은 나중에 외부에서 한다
+```
+
+이 원칙은 프로젝트 전체에서 계속 유지됐다.
+
+---
+
+## 4. 첫 번째로 분리해야 했던 것: 모델 실패 vs 실험 장치 실패
+
+막상 첫 실험을 돌리자 재미있는 일이 생겼다. 모델보다 Observer와 실행 환경 쪽에서 먼저 문제가 발견됐다.
+
+어떤 run은 모델이 맞게 행동했는데 로그가 빠졌고, 어떤 run은 runtime 오류가 났는데 harness가 정상 종료처럼 보이기도 했다. 이후 evaluator의 판정 경계나 서비스 복원 시점에서도 비슷한 문제가 나타났다.
+
+이 경험 때문에 가장 먼저 생긴 원칙은 이것이었다.
+
+```text
+실패 발생
+   ↓
+┌─────────────────────────────┐
+│ 이게 누구의 실패인가?       │
+└─────────────────────────────┘
+   │
+   ├─ 모델의 의미 판단 실패
+   ├─ 모델의 실행/표현 실패
+   ├─ runtime 실패
+   ├─ harness 실패
+   ├─ capture 실패
+   └─ evaluator 실패
+```
+
+모델이 틀린 것과 실험 장치가 틀린 것을 섞어버리면 이후 비교가 전부 흔들린다.
+
+그래서 Pi Finance Observer에서 Observer 자신도 사실상 관찰 대상이 됐다.
+
+```text
+에이전트를 평가하려면
+      ↓
+먼저 Observer를 믿을 수 있어야 한다
+```
+
+v0.1의 가장 큰 결과는 특정 모델의 점수가 아니라 이 원칙을 실제 실행 환경에서 확인한 것이었다.
+
+---
+
+## 5. 두 번째로 분리하고 싶었던 것: “이해” vs “인터페이스 수행”
+
+다음으로 궁금했던 것은 이런 경우였다.
+
+> 모델이 거래 의미를 알고 있는데도 장부를 틀리게 쓸 수 있을까?
+
+결론부터 말하면 그렇다.
+
+예를 들어 모델이 사용자의 말을 정확히 이해했다고 해도, 내부적으로는 이런 것까지 요구받을 수 있다.
+
+```text
+사용자 말 이해
+   ↓
+정확한 거래 유형 선택
+   ↓
+내부 enum 이름 기억
+   ↓
+필드 이름 기억
+   ↓
+ID 규칙 준수
+   ↓
+CSV/JSON 형식 준수
+   ↓
+파일 간 상태 동기화
+```
+
+이걸 전부 한 번에 “에이전트 능력”이라고 부르면 무엇 때문에 실패했는지 알 수 없다.
+
+그래서 v0.2에서는 같은 모델을 두고 specification과 representation만 바꿔보았다.
+
+결과를 보면서 내가 얻게 된 핵심 관점은 이것이었다.
+
+```text
+경제적 의미를 이해한다
+        ≠
+내부 인터페이스를 독립적으로 정확히 수행한다
+```
+
+어떤 조건에서는 거래 의미와 잔액 계산은 맞으면서도 첫 구조화 write에서 계속 오류가 났고, 구조 규칙을 명시해주자 같은 의미 판단이 훨씬 안정적으로 실행됐다.
+
+이때부터 질문이 바뀌었다.
+
+> 모델이 정말 못하는 걸까?
+>
+> 아니면 내가 모델에게 쓸데없이 많은 내부 규칙을 떠넘긴 걸까?
+
+이 질문은 이후 전체 실험의 방향을 결정했다.
+
+---
+
+## 6. 모델 비교도 “누가 더 좋나”보다 “어디서 다르게 실패하나”로 봤다
+
+그 다음에야 서로 다른 모델을 같은 업무에서 비교했다.
+
+처음에는 Gemma 4 26B-A4B와 Qwen3 30B-A3B 사이의 성공률 차이가 꽤 컸다. 하지만 나는 그걸 바로 모델 서열로 읽고 싶지 않았다.
+
+보고 싶었던 것은 failure topology였다.
+
+```text
+                    사용자 입력
+                        │
+            ┌───────────┴───────────┐
+            ▼                       ▼
+        의미 판단                 실행 성향
+            │                       │
+     ┌──────┴──────┐        ┌──────┴──────┐
+     ▼             ▼        ▼             ▼
+ 애매함 감지    의미 확정   빠른 행동     멈춤/질문
+```
+
+실험에서 Qwen은 명확한 실행 문제를 매우 빠르고 짧게 처리했다. 반면 모호한 `카드`, 빠진 계좌, 상대 날짜 같은 입력에서는 빈칸을 채워서라도 행동하려는 패턴이 반복됐다.
+
+Gemma 26B는 상대적으로 사용자의 의미가 충분히 정해졌는지를 더 신경 쓰는 쪽이었다. 모호하면 질문하고, 정보가 빠지면 멈추려는 경향이 더 강했다.
+
+이를 아주 거칠게 표현하면 내가 본 차이는 이런 느낌이었다.
+
+```text
+Qwen
+"무슨 작업을 실행하면 되지?"
+        ↓
+가능한 빨리 실행 가능한 형태로 만든다
+
+Gemma 26B
+"사용자가 무슨 뜻으로 말했지?"
+        ↓
+뜻이 충분한지 확인한 뒤 행동한다
+```
+
+이건 모델의 학습 철학을 단정하는 이야기가 아니다. 이 작은 finance workflow에서 실제로 관찰된 행동 차이를 설명한 것이다.
+
+그리고 개인적으로는 이 실험을 통해 왜 Gemma 계열과 대화할 때 내가 편하다고 느꼈는지도 조금 이해하게 됐다.
+
+내가 AI에게 원하는 것은 항상 완성된 명령을 즉시 처리하는 비서가 아니다. 생각 중인 것을 던지고, 아직 정하지 않은 부분은 정하지 않은 상태로 남겨두면서 같이 경계를 찾는 경우가 많다.
+
+그래서 내 사용 방식에서는
+
+```text
+성급하게 빈칸을 채우는 오류
+            보다
+잠깐 멈추고 확인하는 오류
+```
+
+가 덜 불편한 편이었다.
+
+---
+
+## 7. 모델 규모도 따로 봐야 했다
+
+같은 Gemma 계열 안에서도 더 작은 E4B는 다른 모습을 보였다.
+
+처음에는 validator 도움을 받으면 최종 결과를 잘 복구해서, 단순히 “의미는 알지만 형식에 약하다”고 생각할 수도 있었다.
+
+하지만 인터페이스 부담을 줄여 다시 보자 semantic wrong-action도 나타났다.
+
+이 경험은 또 다른 분리를 만들었다.
+
+```text
+모델 family
+    ×
+모델 capacity
+    ×
+주어진 interface
+    ×
+외부 지원
+```
+
+즉 `Gemma라는 family는 이렇다`라고 단순화하는 것 역시 위험했다.
+
+---
+
+## 8. 점점 모델에게서 일을 빼기 시작했다
+
+여기서부터 프로젝트가 재미있는 방향으로 갔다.
+
+처음의 구조는 대략 이랬다.
+
+```text
+사용자
+  ↓
+LLM
+  ↓
+해석
+  ↓
+형식화
+  ↓
+계산
+  ↓
+파일 수정
+  ↓
+검증
+  ↓
+종료
+```
+
+그런데 각 실패를 분리해서 보다 보니 질문이 생겼다.
+
+> **이 단계들 중 정말 LLM이어야 하는 것은 몇 개나 될까?**
+
+그래서 하나씩 책임을 코드로 옮겼다.
+
+```text
+[자연어 의미 판단]        → LLM 후보
+[내부 enum 변환]          → 코드
+[금액 계산]               → 코드
+[계좌 잔액 계산]          → 코드
+[파일 schema]             → 코드
+[validation]              → 코드
+[state mutation]          → 코드
+```
+
+그 결과 모델이 갑자기 더 똑똑해진 것처럼 보이는 순간들이 있었다.
+
+하지만 사실 모델 자체가 변한 것은 아니다.
+
+```text
+모델 능력 향상 X
+
+모델에게 잘못 맡겼던 책임 제거 O
+```
+
+이게 Fresh phase에서 내가 얻은 가장 큰 교훈 중 하나다.
+
+---
+
+## 9. “작은 실행 모델”도 정말 필요한지 다시 물었다
+
+한때는 이런 구조를 생각했다.
+
+```text
+사용자
+  ↓
+Gemma 26B
+  ↓
+의미가 해결된 작업지시
+  ↓
+Tiny LLM Executor
+  ↓
+장부
+```
+
+큰 모델은 의미를 판단하고, 작은 모델은 싸고 빠르게 실제 tool call만 하면 좋지 않을까 생각했다.
+
+그런데 막상 실험해보니 의미가 이미 다 해결된 작업지시는 deterministic mapper가 완전히 처리할 수 있었다.
+
+```text
+resolved work order
+       ↓
+┌──────────────────────┐
+│ deterministic mapper │
+└──────────────────────┘
+       ↓
+ exact tool call
+```
+
+여기에 다시 LLM을 넣으면 오히려 이미 결정된 의미를 바꾸거나 누락할 가능성이 생긴다.
+
+그래서 새로 생긴 개념이 `semantic authority`였다.
+
+```text
+의미를 결정할 권한: semantic controller
+
+실행만 할 권한: executor / code
+
+executor가 이미 결정된 의미를
+변경·누락·발명하면
+        ↓
+SEMANTIC AUTHORITY VIOLATION
+```
+
+결국 26B 뒤의 Tiny executor는 사라졌다.
+
+---
+
+## 10. 그러면 26B 앞에서는 작은 모델이 필요할까?
+
+다음으로 생각한 것은 반대 위치였다.
+
+```text
+사용자 입력
+   ↓
+안전하고 명확한가?
+   ├─ yes → 작은 모델
+   └─ no  → Gemma 26B
+```
+
+그런데 여기서도 비슷한 일이 생겼다.
+
+안전한 입력을 구분하기 위한 deterministic gate가 이미 꽤 많은 정보를 알고 있었다.
+
+예를 들어 다음처럼 명확한 입력은:
+
+```text
+현금 점심 85원
+이지카드 버스 25원
+은행카드에서 현금 2000원 인출
+```
+
+모델 없이도 처리 가능했다.
+
+반대로 다음 입력은 gate에서 멈추면 됐다.
+
+```text
+카드로 점심 150원
+커피 95원 결제했어
+어제 저녁 현금 180원
+지난번처럼 해줘
+```
+
+그래서 현재 Fresh phase의 구조는 아주 단순해졌다.
+
+```text
+                         사용자 입력
+                             │
+                             ▼
+                 ┌─────────────────────┐
+                 │ deterministic gate  │
+                 └─────────┬───────────┘
+                       명확함│애매함
+                 ┌─────────┴─────────┐
+                 ▼                   ▼
+       deterministic parser      Gemma 26B
+                 │             semantic controller
+                 │                   │
+                 └─────────┬─────────┘
+                           ▼
+                deterministic finance core
+```
+
+현재의 좁은 fast-path surface에서는 Tiny SLM이 굳이 필요하지 않았다.
+
+---
+
+## 11. 결국 내가 찾은 것은 “좋은 모델”보다 책임의 경계였다
+
+처음에는 이런 질문이었다.
+
+```text
+Gemma가 더 좋은가?
+Qwen이 더 좋은가?
+작은 모델도 가능한가?
+```
+
+Fresh phase 끝에서는 질문이 이렇게 바뀌었다.
+
+```text
+이 문제는 누가 책임지는 것이 가장 좋은가?
+```
+
+현재 기준으로는 이렇게 정리할 수 있다.
+
+```text
+┌───────────────────────────────┐
+│ 사람이 한 말의 의미가 애매함 │
+│ 빠진 정보가 있음              │
+│ 문맥/상대 날짜가 필요함       │
+│ 질문해야 할지 판단해야 함     │
+└──────────────┬────────────────┘
+               ▼
+         Gemma 26B 후보
+
+
+┌───────────────────────────────┐
+│ 이미 의미가 명확함            │
+│ 계산                           │
+│ 계좌 이동                      │
+│ schema                         │
+│ 잔액                           │
+│ validation                     │
+│ state mutation                 │
+└──────────────┬────────────────┘
+               ▼
+        deterministic code
+```
+
+이 구조에서 모델은 모든 것을 하는 주인공이 아니다.
+
+오히려 **코드로 확실히 해결할 수 없는 인간 언어의 경계**를 담당한다.
+
+---
+
+## 12. Fresh phase에서 분리한 것들
+
+돌아보면 v0.1~v0.7에서 내가 계속 한 일은 하나의 “에이전트 성능”이라는 덩어리를 조금씩 쪼개는 일이었다.
+
+```text
+                    AGENT SUCCESS
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+   의미 판단          인터페이스 수행       상태 변화
+        │                 │                 │
+   ambiguity          representation      arithmetic
+   missing info       serialization       balance
+   clarification      tool schema         mutation
+        │                 │                 │
+        └──────────┬──────┴──────┬──────────┘
+                   ▼             ▼
+                recovery      termination
+```
+
+그리고 이 바깥에는 또 다른 층이 있다.
+
+```text
+Agent capability
+      ≠
+Harness integrity
+      ≠
+Observer integrity
+      ≠
+Evaluator correctness
+```
+
+이것들을 분리하지 않았다면 “모델이 잘했다/못했다” 정도의 결론밖에 얻지 못했을 것이다.
+
+---
+
+## 13. 그래서 이건 에이전틱 워크플로우인가?
+
+현재 구조는 LLM 하나가 모든 행동을 자유롭게 결정하는 형태와는 거리가 있다.
+
+오히려 다음과 같은 hybrid workflow다.
+
+```text
+              ┌──────────────────┐
+              │ deterministic    │
+              │ workflow         │
+              └────────┬─────────┘
+                       │
+                판단이 필요한 곳
+                       ▼
+              ┌──────────────────┐
+              │ semantic LLM     │
+              │ controller       │
+              └────────┬─────────┘
+                       │
+                다시 deterministic
+                       ▼
+              ┌──────────────────┐
+              │ state / tools    │
+              └──────────────────┘
+```
+
+나는 지금은 이것을 꽤 자연스럽게 **agentic workflow**라고 부를 수 있다고 생각한다.
+
+바퀴를 완전히 새로 만든 것도 아니다. router, validation, state machine, tool execution 같은 구성요소는 이미 흔하다.
+
+다만 내가 직접 알고 싶었던 것은 이런 것이었다.
+
+> **내 실제 업무에서는 어디까지가 code의 영역이고, 어디부터 model의 판단이 필요한가?**
+
+이 경계는 프레임워크가 대신 정해주지 않는다.
+
+그래서 이번 작업은 바퀴를 새로 발명했다기보다, 여러 바퀴를 분해해 보고 내 차에 어느 바퀴를 어느 자리에 달아야 하는지 직접 주행시험한 것에 더 가깝다.
+
+---
+
+## 14. Fresh 다음에는 Persistent State를 본다
+
+지금까지는 대부분 fresh session이었다.
+
+```text
+한 입력
+  ↓
+무슨 거래인가?
+  ↓
+안전하게 기록할 수 있는가?
+```
+
+하지만 실제로 내가 원하는 장부는 하루만 쓰고 버리는 것이 아니다.
+
+다음에는 거래가 쌓이면서 상태가 이어져야 한다.
+
+```text
+어제 closing balance
+        │
+        ▼
+오늘 opening balance
+        │
+        + 오늘 거래들
+        │
+        ▼
+오늘 closing balance
+        │
+        └─ 내일로 carry forward
+```
+
+특히 현금과 교통카드는 생활 중간에 떨어지면 바로 불편해진다.
+
+그래서 앞으로는 거래 하나를 기록할 때마다 이런 피드백을 주고 싶다.
+
+```text
+점심 현금 120원
+      ↓
+거래 기록
+      ↓
+현금 잔액 380 TWD
+      ↓
+LOW_CASH
+      ↓
+"다음 외출 전 현금 인출 필요"
+```
+
+교통카드도 같다.
+
+```text
+버스 이지카드 25원
+      ↓
+이지카드 잔액 42 TWD
+      ↓
+LOW_EASYCARD
+      ↓
+"다음 이동 전에 충전 필요"
+```
+
+이 부분은 LLM이 아니라 deterministic state logic이 담당하는 편이 맞다.
+
+---
+
+## 15. 앞으로의 세 층
+
+지금은 전체 시스템을 세 층으로 보고 있다.
+
+```text
+┌─────────────────────────────────────┐
+│ 1. CAPTURE                          │
+│ "지금 무슨 거래를 말한 거지?"       │
+│                                     │
+│ fast path + semantic controller     │
+└──────────────────┬──────────────────┘
+                   ▼
+┌─────────────────────────────────────┐
+│ 2. STATE                            │
+│ "그래서 지금 얼마 남았지?"          │
+│                                     │
+│ balance / carry-forward / alert     │
+└──────────────────┬──────────────────┘
+                   ▼
+┌─────────────────────────────────────┐
+│ 3. INSIGHT                          │
+│ "최근에 어디에 많이 썼지?"          │
+│                                     │
+│ aggregation / summary / Q&A         │
+└─────────────────────────────────────┘
+```
+
+다음 단계는 먼저 State다.
+
+```text
+거래
+ ↓
+잔액 변화
+ ↓
+즉시 피드백
+ ↓
+하루 마감
+ ↓
+다음 날로 이어짐
+```
+
+그 다음에는 일정 주기마다 지출을 집계하고, 모델은 이미 계산된 숫자를 바탕으로 설명만 하게 할 수 있다.
+
+```text
+누적 장부
+   ↓
+코드가 집계
+   ↓
+카테고리별 / 기간별 변화
+   ↓
+Gemma 26B가 설명
+```
+
+더 발전하면 장부에 질문도 할 수 있을 것이다.
+
+```text
+"이번 달 편의점에서 얼마나 썼지?"
+             ↓
+       query interpretation
+             ↓
+     deterministic ledger query
+             ↓
+        structured result
+             ↓
+          자연어 답변
+```
+
+여기서도 원칙은 같다.
+
+> **모델이 모든 데이터를 기억하는 것이 아니라, 필요할 때 장부를 읽고 의미를 연결한다.**
+
+---
+
+## 16. Fresh phase를 끝내며
+
+처음에 내가 상상한 개인 회계 에이전트는 이랬다.
+
+```text
+사용자
+  ↓
+똑똑한 LLM
+  ↓
+알아서 장부 관리
+```
+
+지금은 오히려 이렇게 생각한다.
+
+```text
+                 사용자
+                   │
+                   ▼
+        "이 말의 뜻이 충분히 명확한가?"
+                   │
+      ┌────────────┴────────────┐
+      ▼                         ▼
+    명확함                    애매함
+      │                         │
+      ▼                         ▼
+    코드                     Gemma 26B
+      │                         │
+      └────────────┬────────────┘
+                   ▼
+          deterministic state
+                   │
+                   ▼
+               개인 장부
+```
+
+Fresh phase에서 얻은 가장 중요한 산출물은 특정 모델의 승패가 아니었다.
+
+**어떤 문제를 모델에게 맡기고, 어떤 문제는 모델에게 맡기지 말아야 하는지에 대한 지도**가 생긴 것이 가장 컸다.
+
+그리고 Observer의 역할도 조금 달라 보이기 시작했다.
+
+처음에는 모델을 감시하는 도구라고 생각했지만, 지금은 오히려 이런 질문에 답하는 도구에 가깝다.
+
+```text
+어디서 실패했는가?
+       ↓
+왜 실패했는가?
+       ↓
+그 실패는 모델의 책임인가?
+       ↓
+인터페이스의 책임인가?
+       ↓
+코드로 옮길 수 있는가?
+       ↓
+그래도 모델이 필요한 것은 무엇인가?
+```
+
+그래서 다음 Persistent phase에서도 목표는 “더 많은 것을 에이전트에게 맡기기”가 아니다.
+
+오히려 반대다.
+
+> **상태가 이어지는 실제 생활 workflow에서도, 모델이 꼭 필요한 지점을 계속 좁혀가는 것.**
+
+Fresh session 실험은 여기서 일단 닫는다.
